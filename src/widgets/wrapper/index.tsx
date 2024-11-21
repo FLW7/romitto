@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { AdAppModalDynamic } from '../modal/ad-app-modal/ad-app-modal-dynamic';
 import CartModal from '../modal/cart-modal/cart-modal';
 import { ChoosingCityDynamic } from '../modal/choosing-city/choosing-city.dynamic';
-import DetailMealModal from '../modal/detail-meal/detail-meal-modal';
 import { SidebarCatalogDynamic } from '../modal/sidebar-catalog-modal/sidebar-catalog.dynamic';
 
 import useMediaQuery from '@/shared/hooks/use-media-query';
@@ -21,6 +20,7 @@ import { BookTableDynamic } from '@/widgets/modal/book-table/book-table.dynamic'
 import { BookTableDatePickerDynamic } from '@/widgets/modal/book-table-date-picker/book-table-date-picker.dynamic';
 import { CallbackDynamic } from '@/widgets/modal/callback/callback.dynamic';
 import { ChoosingMyLocationDynamic } from '@/widgets/modal/choosing-my-location/choosing-my-location.dynamic';
+import { DetailMealDynamic } from '@/widgets/modal/detail-meal/detail-meal.dynamic';
 import { LoginDynamic } from '@/widgets/modal/login/login.dynamic';
 import { OrderRejectDynamic } from '@/widgets/modal/order-reject/order-reject.dynamic';
 import { OrderSuccessDynamic } from '@/widgets/modal/order-success/order-success.dynamic';
@@ -92,7 +92,7 @@ export const Wrapper = ({ children, site }: Props) => {
           <PayFrame />
           {/* <PDFMenuDynamic /> */}
           <ChoosingCityDynamic />
-          <DetailMealModal />
+          <DetailMealDynamic />
           <AdAppModalDynamic />
         </>
       )}
