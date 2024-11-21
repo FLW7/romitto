@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { AdAppModalDynamic } from '../modal/ad-app-modal/ad-app-modal-dynamic';
 import CartModal from '../modal/cart-modal/cart-modal';
 import { ChoosingCityDynamic } from '../modal/choosing-city/choosing-city.dynamic';
+import DetailMealModal from '../modal/detail-meal/detail-meal-modal';
 import { SidebarCatalogDynamic } from '../modal/sidebar-catalog-modal/sidebar-catalog.dynamic';
 
-import { DetailMeal } from '@/feature/detail-meal';
 import useMediaQuery from '@/shared/hooks/use-media-query';
 import { useTimer } from '@/shared/hooks/use-timer';
 import {
@@ -92,7 +92,7 @@ export const Wrapper = ({ children, site }: Props) => {
           <PayFrame />
           {/* <PDFMenuDynamic /> */}
           <ChoosingCityDynamic />
-          <DetailMeal />
+          <DetailMealModal />
           <AdAppModalDynamic />
         </>
       )}
