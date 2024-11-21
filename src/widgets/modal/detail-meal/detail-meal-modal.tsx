@@ -19,6 +19,7 @@ const DetailMealModal = () => {
     if (window && isOpen) {
       setTimeout(() => {
         setVh(window.innerHeight * 0.01);
+        console.log(window.innerHeight);
       }, 300);
     }
   }, [window.innerHeight, isOpen]);
