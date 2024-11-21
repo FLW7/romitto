@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { DetailMeal } from '@/feature/detail-meal';
 import { Dialog, DialogContent } from '@/shared/components/dialog';
 import { Drawer, DrawerContent } from '@/shared/components/drawer';
@@ -11,9 +13,11 @@ const DetailMealModal = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { isOpen, type, onClose } = useModal();
   const isModalOpen = isOpen && type === 'detailMeal';
-  const vh = window.innerHeight * 0.01;
+  const [vh, setVh] = useState(window.innerHeight * 0.01);
 
-  console.log('vh:', vh);
+  useEffect(() => {
+    setVh(window.innerHeight * 0.01);
+  }, [window.innerHeight]);
 
   if (isMobile) {
     return (
