@@ -17,6 +17,7 @@ const DetailMealModal = () => {
 
   useEffect(() => {
     setVh(window.innerHeight * 0.01);
+    console.log(1);
   }, [window.innerHeight, isOpen]);
 
   if (isMobile) {
