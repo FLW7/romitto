@@ -32,11 +32,9 @@ const AddressNotSpecified = () => {
           isModalOpen && onClose();
         }}
       >
-        <DrawerContent className={'z-[51] bg-bgMain px-4 pb-8'}>
+        <DrawerContent className={'z-[51] px-4 pb-8'}>
           <DrawerHeader className={'mb-4'}>
-            <DrawerTitle className={'text-center text-primary'}>
-              Какой у вас адрес?
-            </DrawerTitle>
+            <DrawerTitle className={'text-center'}>Какой у вас адрес?</DrawerTitle>
             <DrawerDescription className={'text-center text-secondary'}>
               Адрес сохраним для будущих заказов.
             </DrawerDescription>
@@ -50,13 +48,11 @@ const AddressNotSpecified = () => {
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent
-        className={'z-[52] mx-auto max-w-lg overflow-hidden bg-bgMain p-0 text-black'}
+        className={'z-[52] mx-auto max-w-lg overflow-hidden bg-white p-0 text-black'}
         classNameOverlay='z-[51]'
       >
         <DialogHeader className={'mb-7'}>
-          <DialogTitle className={'text-center text-primary'}>
-            Какой у вас адрес?
-          </DialogTitle>
+          <DialogTitle className={'text-center'}>Какой у вас адрес?</DialogTitle>
           <DialogDescription className={'text-secondary'}>
             Адрес сохраним для будущих заказов.
           </DialogDescription>

@@ -53,7 +53,7 @@ const PromoSlider = () => {
               className={`flex justify-center gap-1 ${isSmallScreen ? 'h-[140px]' : 'ml-[10px] mr-[10px] lg:max-w-[1024px] xl:max-w-[1304px] 2xl:max-w-[1480px]'}`}
             >
               <div
-                className={`flex justify-center object-cover ${isSmallScreen ? 'max-h-[140px] max-w-[375px] rounded-xl' : 'rounded-xl lg:max-w-[1024px] xl:max-w-[1304px] 2xl:max-w-[1480px]'}`}
+                className={`flex justify-center object-cover ${isSmallScreen ? 'max-h-[140px] max-w-[375px] rounded-[12px]' : 'rounded-[12px] lg:max-w-[1024px] xl:max-w-[1304px] 2xl:max-w-[1480px]'}`}
               >
                 <Image
                   priority={true}
@@ -61,7 +61,7 @@ const PromoSlider = () => {
                   alt={image}
                   width={isSmallScreen ? 343 : 1480}
                   height={isSmallScreen ? 140 : 400}
-                  className={`rounded-xl object-fill lg:max-w-[1024px] xl:max-w-[1304px] 2xl:max-w-[1500px] ${isSmallScreen && 'h-[140px] max-w-[375px] rounded-xl'}`}
+                  className={`rounded-[12px] object-fill lg:max-w-[1024px] xl:max-w-[1304px] 2xl:max-w-[1500px] ${isSmallScreen && 'h-[140px] max-w-[375px] rounded-[12px]'}`}
                 />
               </div>
             </CarouselItem>

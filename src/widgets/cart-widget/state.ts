@@ -13,9 +13,6 @@ import type {
   TCartPlateModifiers,
 } from './config';
 
-import { trackAddToCart } from '@/shared/lib/add-plate-metrik';
-import { trackDeleteFromCart } from '@/shared/lib/delete-plate-metrik';
-
 interface CartOpenStore {
   isOpen: boolean;
   onOpen: () => void;
@@ -39,18 +36,6 @@ interface TAdditionalTable {
   countFree: number;
 }
 
-interface IPromosItem {
-  plateIds: string;
-  gift_ids: string;
-  SalePrice: number;
-  categoryId: string;
-  SalePercent: number;
-  PromocodeType: string;
-  discountIikoId: string;
-  cashbackPercent: number;
-  subCategory: string;
-}
-
 interface IPromocodeData {
   GiftName: string;
   MinCartPrice: string;
@@ -65,11 +50,6 @@ interface IPromocodeData {
   description: string;
   gifts?: IPromoGift[];
   usesLeft?: number;
-  canSumWithBonuses?: '1' | '0';
-  canSumWithGifts?: '1' | '0';
-  canSumWithOtherPromos?: '1' | '0';
-  isCombinedPromos: '1' | '0';
-  promos: IPromosItem[];
 }
 
 export interface IPromoGift {
@@ -103,17 +83,10 @@ interface ICartStore extends ICartData {
   bonusPaymentMax: number;
   GiftName?: string;
   PromocodeType?: '' | '1' | '2' | '3' | '4' | '5' | '6';
-  canSumWithBonuses?: '1' | '0';
-  canSumWithOtherPromos?: 1 | 0;
-  canSumWithGifts?: '1' | '0';
   promocode?: string;
   promocodeDescription?: string;
   PromoGifts?: IPromoGift[];
   AddedPromoGifts: IPromoGiftAdd[];
-  promoIsCombined: '1' | '0';
-  PromoCominedSalePercent: number[];
-  PromoCominedSalePrice: number[];
-  promos: IPromosItem[];
   PromoGiftsAvailiable?: number;
   PromoUsesLeft?: number;
   SalePercent?: number;
@@ -188,21 +161,20 @@ const ordersItemsAction = (
 
   for (const [key, item] of newOrders.entries()) {
     const itemMods = item?.modifiers?.flatMap((item) =>
-      item.items.map((subItem) => Number(subItem.id)),
+      item.items.map((subItem) => subItem.id),
     );
 
     if (
       (originMods === undefined || originMods.length === 0) &&
-      String(mass) === String(item.values[0].mass)
+      mass === item.values[0].mass
     ) {
-      if (Number(item.id) === Number(id) && itemMods === undefined) {
+      if (item.id === id && itemMods === undefined) {
         return key;
       }
     } else {
-      const sameId = Number(item.id) === Number(id);
+      const sameId = item.id === id;
       const sameLength = itemMods?.length === originMods?.length;
-
-      const sameMods = originMods?.every((item) => itemMods?.includes(Number(item)));
+      const sameMods = originMods?.every((item) => itemMods?.includes(item));
       const sameMass = mass === item.values[0].mass;
 
       if (sameLength && sameMods && sameId && sameMass) {
@@ -232,9 +204,6 @@ export const useCart = create<ICartStore>()(
         additionalTable: [],
         additivesPrice: 0,
         cutleriesPrice: 0,
-        canSumWithBonuses: '1',
-        canSumWithGifts: '1',
-        canSumWithOtherPromos: 1,
         bonus: 0,
         decreaseBonus: 0,
         bonusGetMax: 0,
@@ -255,10 +224,6 @@ export const useCart = create<ICartStore>()(
         PromocodeType: '',
         PromoCategoryId: '',
         PromoPlateId: '',
-        promoIsCombined: '0',
-        PromoCominedSalePercent: [],
-        PromoCominedSalePrice: [],
-        promos: [],
         cashbackPercent: 0,
         SalePercent: 0,
         SalePrice: 0,
@@ -430,7 +395,6 @@ export const useCart = create<ICartStore>()(
             set({
               orders: [...get().orders, { ...item, countInCart: item.countInCart || 1 }],
             });
-            trackAddToCart(item);
           } else {
             const newOrders = [...get().orders];
             const newItem = {
@@ -443,7 +407,6 @@ export const useCart = create<ICartStore>()(
             set({
               orders: newOrders,
             });
-            trackAddToCart(item);
           }
 
           get().setRecommendations(get().orders);
@@ -456,7 +419,6 @@ export const useCart = create<ICartStore>()(
 
           if (findedKey !== null) {
             newOrders.splice(findedKey, 1);
-            trackDeleteFromCart();
           }
           newOrders.length === 0 && get().clearCart();
           set({ orders: newOrders });
@@ -636,27 +598,17 @@ export const useCart = create<ICartStore>()(
           set({ PromoCategoryId: data.categoryId });
           set({ PromoPlateId: data.plateId });
           set({ promocodeDescription: data.description });
-          set({ gifts: [] });
-          set({ promocodeDescription: data.description });
-          set({ promoIsCombined: data.isCombinedPromos });
-          set({ promos: data.promos });
-          set({ canSumWithBonuses: data?.canSumWithBonuses ?? '1' });
-          set({ canSumWithGifts: data?.canSumWithGifts ?? '1' });
-
           switch (data?.PromocodeType) {
             case '1': {
               set({ SalePrice: Number.parseInt(data.SalePrice) ?? 0 });
-              set({ decreaseBonus: 0 });
               break;
             }
             case '2': {
-              set({ SalePercent: Number(data.SalePercent) });
-              set({ decreaseBonus: 0 });
+              set({ SalePercent: Number(data.SalePercent) * 100 });
               break;
             }
             case '3': {
-              data?.gifts && set({ PromoGifts: data?.gifts });
-              set({ decreaseBonus: 0 });
+              set({ GiftName: data.GiftName });
               break;
             }
             case '4': {
@@ -665,13 +617,11 @@ export const useCart = create<ICartStore>()(
             }
             case '5': {
               set({ SalePercent: Number(data.SalePercent) });
-              set({ decreaseBonus: 0 });
               break;
             }
             case '6': {
               data?.gifts && set({ PromoGifts: data?.gifts });
               data?.usesLeft && set({ PromoUsesLeft: data?.usesLeft });
-              set({ decreaseBonus: 0 });
               break;
             }
           }
@@ -692,12 +642,6 @@ export const useCart = create<ICartStore>()(
           set({ AddedPromoGifts: [] });
           set({ PromoUsesLeft: 0 });
           set({ PromoGiftsAvailiable: 0 });
-          set({ PromoCominedSalePercent: [] });
-          set({ PromoCominedSalePrice: [] });
-          set({ promoIsCombined: '0' });
-          set({ promos: [] });
-          set({ canSumWithBonuses: '1' });
-          set({ canSumWithGifts: '1' });
           get().calculateSum();
         },
         setDecreaseBonus: (value) => {

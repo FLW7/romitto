@@ -17,7 +17,6 @@ import Typography from '@/shared/components/typography';
 import { toast } from '@/shared/components/use-toast';
 import { useGetCatalog } from '@/shared/hooks/query/use-get-catalog';
 import useMediaQuery from '@/shared/hooks/use-media-query';
-import { findOrder } from '@/shared/lib/find-order';
 import { priceFormatter } from '@/shared/lib/price';
 import { cn } from '@/shared/lib/utils';
 import { useAddress } from '@/shared/state/address';
@@ -41,23 +40,20 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
   const isLastAddress = !!address?.LastAddressID || !!address?.LastAddressOrgID;
   // const { data } = useGetFavourites();
   const [selectedSize, setSelectedSize] = useState('0');
-  const [itemCount, setItemCount] = useState(0);
-
-  const plateItem = { ...item };
 
   const hasRequiredItem =
-    plateItem.modifierBundles &&
-    plateItem.modifierBundles.some((bundle) => Number(bundle.minAmount) > 0);
+    item.modifierBundles &&
+    item.modifierBundles.some((bundle) => Number(bundle.minAmount) > 0);
 
   const addPlateHandler = () => {
     // eslint-disable-next-line unicorn/consistent-function-scoping
-    const addPlateCond = (plate: ICartOrderItem) => {
+    const addPlateCond = (item: ICartOrderItem) => {
       if (hasRequiredItem) {
-        handleOpenModal(plate);
+        handleOpenModal(item);
       } else {
-        addPlate({ ...plate, price: Number(plate.values[0]?.price), countInCart: 1 });
+        addPlate({ ...item, price: Number(item.values[0]?.price) });
         toast({
-          title: `Вы добавили "${plate.name}" в свою корзину.`,
+          title: `Вы добавили "${item.name}" в свою корзину.`,
           description: (
             <Button
               variant={'link'}
@@ -75,17 +71,11 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
     };
 
     if (isLastAddress) {
-      addPlateCond(plateItem);
+      addPlateCond(item);
     } else if (hasRequiredItem) {
       onOpen('addressNotSpecified');
     } else {
-      onOpen('addressNotSpecified', {
-        addPlate: {
-          ...plateItem,
-          price: Number(plateItem.values[0]?.price),
-          countInCart: 1,
-        },
-      });
+      onOpen('addressNotSpecified', { addPlate: item });
     }
   };
 
@@ -95,14 +85,14 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
         handleOpenModal(item);
       } else {
         addPlate({
-          ...plateItem,
-          ...plateItem.sizes[Number(selectedSize)],
-          price: Number(plateItem.sizes[Number(selectedSize)].price),
-          id: Number(plateItem.sizes[Number(selectedSize)].plateID),
+          ...item,
+          ...item.sizes[Number(selectedSize)],
+          price: Number(item.sizes[Number(selectedSize)].price),
+          id: Number(item.sizes[Number(selectedSize)].plateID),
           countInCart: 1,
         });
         toast({
-          title: `Вы добавили "${plateItem.name}" в свою корзину.`,
+          title: `Вы добавили "${item.name}" в свою корзину.`,
           description: (
             <Button
               variant={'link'}
@@ -120,35 +110,27 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
     } else if (hasRequiredItem) {
       onOpen('addressNotSpecified');
     } else {
-      onOpen('addressNotSpecified', {
-        addPlate: {
-          ...plateItem,
-          ...plateItem.sizes[Number(selectedSize)],
-          price: Number(plateItem.sizes[Number(selectedSize)].price),
-          id: Number(plateItem.sizes[Number(selectedSize)].plateID),
-          countInCart: 1,
-        },
-      });
+      onOpen('addressNotSpecified', { addPlate: item });
     }
   };
 
   const countHandler = (value: number) => {
     if (value === 0) {
-      deletePlate(plateItem.id, undefined, item.values[0].mass);
+      deletePlate(item.id, undefined, item.values[0].mass);
     }
 
-    changePlateCount(plateItem.id, value, undefined, plateItem.values[0].mass);
+    changePlateCount(item.id, value, undefined, item.values[0].mass);
   };
 
-  const tabsSizeList: Tab[] = plateItem?.sizes?.map((i) => ({
+  const tabsSizeList: Tab[] = item?.sizes?.map((i) => ({
     title: i.size,
-    value: plateItem?.sizes?.findIndex((el) => el.id === i.id).toString(),
+    value: item?.sizes?.findIndex((el) => el.id === i.id).toString(),
   }));
 
   useEffect(() => {
-    if (plateItem?.sizes?.length > 1) {
-      const defaultSize = plateItem?.sizes?.findIndex(
-        (el) => el?.plateID === plateItem?.values?.[0]?.id,
+    if (item?.sizes?.length > 1) {
+      const defaultSize = item?.sizes?.findIndex(
+        (el) => el?.plateID === item?.values?.[0]?.id,
       );
 
       setSelectedSize(String(defaultSize >= 0 ? defaultSize : 0));
@@ -158,30 +140,11 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
   const { data: catalog } = useGetCatalog();
   let price: string | null = null;
 
-  plateItem?.tags?.forEach((tagID) => {
+  item?.tags?.forEach((tagID) => {
     if (catalog?.tagsInfo?.[Number(tagID)]?.title?.includes('₽')) {
       price = catalog?.tagsInfo?.[Number(tagID)].title;
     }
   });
-
-  useEffect(() => {
-    plateItem.id = Number(plateItem?.sizes[Number(selectedSize ?? 0)]?.id);
-  }, [selectedSize]);
-
-  useEffect(() => {
-    const el = findOrder(
-      Number(plateItem?.id),
-      orders,
-      plateItem.modifiers,
-      plateItem?.values?.[0].mass,
-    );
-
-    if (el?.countInCart) {
-      setItemCount(el?.countInCart ?? 1);
-    } else {
-      setItemCount(0);
-    }
-  }, [orders]);
 
   const imageRef = useRef<HTMLImageElement | null>(null);
 
@@ -189,31 +152,31 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
     <div
       className={cn(
         className,
-        'group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl bg-bgSecondary shadow-productCart transition-all duration-500 max-[900px]:shadow-mobProductCart max-sm:h-full',
+        'group flex h-full cursor-pointer flex-col overflow-hidden rounded-xl bg-white shadow-productCart transition-all duration-500 max-[900px]:shadow-mobProductCart max-sm:h-full',
       )}
       onClick={() => {
-        handleOpenModal && handleOpenModal({ ...plateItem });
+        handleOpenModal && handleOpenModal({ ...item });
       }}
     >
       <div className='flex h-full flex-col'>
         <div
           className={`relative mb-1.5 aspect-productCard w-full overflow-hidden sm:mb-2`}
         >
-          {plateItem?.tags && (
+          {item?.tags && (
             <div
               className={cn(
                 'group/tags absolute left-0 top-0 z-[1] flex h-fit w-fit flex-wrap max-md:p-2 md:ml-3 md:mt-3',
               )}
             >
-              {plateItem?.tags?.map((tagID, key) => {
+              {item?.tags?.map((tagID, key) => {
                 const tag = catalog?.tagsInfo?.[Number(tagID)];
 
                 return (
                   <TagPlate
                     key={key}
                     indx={key}
-                    plateId={plateItem.id}
-                    platePrice={Number(plateItem?.values?.[0]?.price ?? 0)}
+                    plateId={item.id}
+                    platePrice={Number(item?.values?.[0]?.price ?? 0)}
                     tag={tag}
                   />
                 );
@@ -221,18 +184,17 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
             </div>
           )}
 
-          {plateItem?.thumbnailPicture ? (
+          {item?.thumbnailPicture ? (
             <Image
               ref={imageRef}
               src={
-                plateItem.thumbnailPicture +
+                item.thumbnailPicture +
                 `&width=${(imageRef.current?.clientWidth ?? 0) + 200}&height=${(imageRef.current?.clientHeight ?? 0) + 200}`
               }
-              quality={100}
-              className='absolute inset-0 max-h-full max-w-full bg-primary/5 object-cover transition-transform duration-1000 group-hover:scale-110'
+              className='absolute inset-0 max-h-full max-w-full bg-black/5 object-cover transition-transform duration-1000 group-hover:scale-110'
               fill
               placeholder='blur'
-              blurDataURL={plateItem.thumbnailPicture}
+              blurDataURL={item.thumbnailPicture}
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               alt='Picture of the author'
             />
@@ -247,41 +209,37 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
                 variant='desc'
                 className='line-clamp-2 !text-sm text-primary group-hover:text-main sm:!text-lg sm:font-semibold'
               >
-                {plateItem?.sizes?.[Number(selectedSize)]?.name ?? plateItem?.name}
+                {item?.sizes?.[Number(selectedSize)]?.name ?? item?.name}
               </Typography>
-              {(plateItem?.sizes?.[Number(selectedSize)]?.mass ??
-                plateItem?.values?.[0]?.mass) && (
+              {(item?.sizes?.[Number(selectedSize)]?.mass ?? item?.values?.[0]?.mass) && (
                 <Typography
                   variant='desc'
-                  className='hidden whitespace-nowrap rounded-full border-2 border-primary/10 px-[11px] py-1 !text-sm font-normal text-secondary sm:block'
+                  className='hidden whitespace-nowrap rounded-full border-2 border-lightGray px-[11px] py-1 !text-sm font-normal text-secondary sm:block'
                 >
-                  {plateItem?.sizes?.[Number(selectedSize)]?.mass ??
-                    plateItem?.values?.[0]?.mass}
+                  {item?.sizes?.[Number(selectedSize)]?.mass ?? item?.values?.[0]?.mass}
                 </Typography>
               )}
             </div>
-            {plateItem?.sizes?.length <= 1 &&
-              (plateItem?.sizes?.[Number(selectedSize)]?.composition ??
-                plateItem?.composition) && (
+            {item?.sizes?.length <= 1 &&
+              (item?.sizes?.[Number(selectedSize)]?.composition ?? item?.composition) && (
                 <Typography
                   variant='desc'
                   className='!line-clamp-2 !overflow-hidden !text-ellipsis !text-sm text-secondary max-md:!hidden'
                 >
-                  {plateItem?.sizes?.[Number(selectedSize)]?.composition ??
-                    plateItem?.composition}
+                  {item?.sizes?.[Number(selectedSize)]?.composition ?? item?.composition}
                 </Typography>
               )}
           </div>
         </div>
       </div>
-      {plateItem?.sizes?.length > 1 && (
+      {item?.sizes?.length > 1 && (
         <div
           className='mb-[14px] px-3 max-md:hidden'
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
-          {plateItem?.useSizesDropdown === '0' ? (
+          {item?.useSizesDropdown === '0' ? (
             <Tabs
               defaultValue='0'
               value={selectedSize}
@@ -289,8 +247,8 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
                 setSelectedSize(val);
               }}
             >
-              <TabsList className='h-[34px] bg-counterBg'>
-                {plateItem?.sizes?.map((size, key) => {
+              <TabsList className='h-[34px]'>
+                {item?.sizes?.map((size, key) => {
                   return (
                     <TabsTrigger
                       className='h-[28px] text-xs'
@@ -335,31 +293,29 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
               className={cn(
                 'text-base font-semibold text-primary md:text-lg',
                 (orders?.find(
-                  (i) =>
-                    i.id === plateItem?.id && (!i.modifiers || i.modifiers?.length === 0),
+                  (i) => i.id === item?.id && (!i.modifiers || i.modifiers?.length === 0),
                 )?.countInCart ?? 0) > 0 && '!text-main',
               )}
             >
-              {plateItem?.sizes?.length > 1
-                ? priceFormatter(plateItem?.sizes?.[Number(selectedSize)]?.price)
-                : priceFormatter(plateItem?.price ?? plateItem.values[0]?.price)}
+              {item?.sizes?.length > 1
+                ? priceFormatter(item?.sizes?.[Number(selectedSize)]?.price)
+                : priceFormatter(item?.price ?? item.values[0]?.price)}
             </Typography>
-            {plateItem?.sizes?.length > 1
-              ? (Number(plateItem?.sizes?.[Number(selectedSize)]?.salePrice) ?? 0) >
-                  0 && (
+            {item?.sizes?.length > 1
+              ? (Number(item?.sizes?.[Number(selectedSize)]?.salePrice) ?? 0) > 0 && (
                   <Typography
                     variant='desc'
                     className='text-sm text-secondary line-through max-sm:text-xs'
                   >
-                    {priceFormatter(plateItem?.sizes?.[Number(selectedSize)]?.salePrice)}
+                    {priceFormatter(item?.sizes?.[Number(selectedSize)]?.salePrice)}
                   </Typography>
                 )
-              : Number(plateItem.values[0]?.salePrice ?? 0) > 0 && (
+              : Number(item.values[0]?.salePrice ?? 0) > 0 && (
                   <Typography
                     variant='desc'
                     className='text-sm text-secondary line-through max-sm:text-xs'
                   >
-                    {priceFormatter(plateItem.values[0]?.salePrice)}
+                    {priceFormatter(item.values[0]?.salePrice)}
                   </Typography>
                 )}
           </div>
@@ -371,13 +327,15 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
             e.stopPropagation();
           }}
         >
-          {itemCount > 0 && plateItem?.sizes?.length <= 1 ? (
+          {(orders?.find(
+            (i) => i.id === item?.id && (!i.modifiers || i.modifiers?.length === 0),
+          )?.countInCart ?? 0) > 0 ? (
             <div className='w-full'>
               <Counter
                 // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-                value={itemCount ?? 1}
+                value={orders.find((i) => i.id === item?.id)?.countInCart ?? 0}
                 minValue={0}
-                maxValue={plateItem.maxCount}
+                maxValue={item.maxCount}
                 callBack={countHandler}
                 className={
                   'mx-auto !h-9 min-w-full px-2 max-sm:mt-1.5 md:!h-10 md:!w-[120px]'
@@ -391,16 +349,14 @@ export const ProductCard = ({ className, handleOpenModal, item }: Props) => {
                 variant='desc'
                 className='whitespace-nowrap !text-xs text-secondary sm:hidden'
               >
-                {plateItem?.values[0]?.mass}
+                {item?.values[0]?.mass}
               </Typography>
               <PlusButton className={'sm:hidden'} onClick={addPlateHandler} />
               <Button
                 variant={'outline'}
                 size={'sm'}
-                className='hidden h-[40px] w-[120px] from-main  to-gradient hover:border-opacity-0 group-hover:border-none group-hover:bg-gradient-to-l group-hover:text-white sm:block'
-                onClick={
-                  plateItem?.sizes?.length <= 1 ? addPlateHandler : addPlateWithSizes
-                }
+                className='hidden h-[40px] w-[120px]  hover:border-opacity-0 group-hover:bg-main  group-hover:text-white sm:block'
+                onClick={item?.sizes?.length <= 1 ? addPlateHandler : addPlateWithSizes}
               >
                 Выбрать
               </Button>

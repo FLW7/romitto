@@ -1,5 +1,8 @@
 'use client';
 
+import { ChevronLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
 import QuestionCardsImage from '@/assets/icons/question-cards.svg';
 import AccordionQuestions from '@/entities/accordion-qustions/accordion-questions';
 import { Breadcrumbs } from '@/entities/breadcrumbs';
@@ -15,6 +18,7 @@ const Home = () => {
   ];
 
   const { data } = useGetBonusesProgram();
+  const router = useRouter();
 
   return (
     <main className='max-md:h-auto md:min-h-[calc(100vh-178px)]'>
@@ -23,14 +27,19 @@ const Home = () => {
           <Breadcrumbs breadcrumbs={breadcrumbs} />
         </div>
         <div className='mb-[120px] max-md:mb-[80px]'>
-          <Typography variant='h1' className='px-4 max-md:text-xl md:mt-6 md:px-4'>
-            Бонусная программа
-          </Typography>
-          <BonusCarousel
-            data={data?.data
-              ?.slice(0, 8)
-              .filter((item: any) => item.title && item.text !== '<p><br></p>')}
-          />
+          <div className='flex items-center gap-3 px-4'>
+            <ChevronLeft
+              size={24}
+              className='md:hidden'
+              onClick={() => {
+                router.back();
+              }}
+            />
+            <Typography variant='h1' className='max-md:text-xl md:mt-6 '>
+              Бонусная программа
+            </Typography>
+          </div>
+          <BonusCarousel data={data?.data?.slice(0, 8)} />
         </div>
       </div>
       <div className='mb-[120px] max-md:mb-[100px]'>

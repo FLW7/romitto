@@ -59,7 +59,7 @@ export const SweeperSecond = () => {
               ARR.map((el) => (
                 <CarouselItem key={el} className={'mr-2 sm:mr-[20px]'}>
                   <CardContent className='relative h-[196px] w-[165px] md:h-[350px] md:w-[280px] '>
-                    <div className='h-full w-full animate-pulse rounded-3xl bg-black/5' />
+                    <div className='h-full w-full animate-pulse rounded-[22px] bg-black/5' />
                   </CardContent>
                 </CarouselItem>
               ))}
@@ -73,7 +73,7 @@ export const SweeperSecond = () => {
                     'max-w-[305px] basis-1/4 pl-0 max-md:ml-3 max-md:w-[132px] max-md:basis-auto max-md:first:ml-4 md:mr-5'
                   }
                 >
-                  <CardContent className='group relative aspect-[305/382] overflow-hidden rounded-[20px] max-md:rounded-xl'>
+                  <CardContent className='group relative aspect-[305/382] overflow-hidden rounded-[20px] max-md:rounded-[12px]'>
                     <Link href={el?.url ?? ''} className={''}>
                       <Image
                         ref={imageRef}

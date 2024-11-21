@@ -32,7 +32,7 @@ const TimePickerPoup: React.FC<TimePickerPoupProps> = ({
       open={timePickerOpen}
       onClose={closeTimePicker}
       classNameOverlay='z-[100]'
-      className='min-w-auto z-[102] bg-bgMain md:min-w-[450px]'
+      className='min-w-auto z-[102] md:min-w-[450px]'
     >
       <div className='px-[55px] pt-[54px] max-md:pt-4 md:pb-[60px]'>
         <TimePickerWrap

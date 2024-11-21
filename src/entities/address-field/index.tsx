@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import BasketIcon from '@/assets/icons/basket.svg';
 import EditIcon from '@/assets/icons/edit.svg';
-import LocationIcon from '@/assets/icons/header/location.svg';
+import LocationIcon from '@/assets/icons/location.svg';
 import Typography from '@/shared/components/typography';
 import { cn } from '@/shared/lib/utils';
 interface AddressProperties {
@@ -51,15 +51,15 @@ export function AddressField({
       tabIndex={0}
       role={'button'}
       className={cn(
-        isActive ? 'border-main bg-main/5' : 'border-primary/10',
-        'flex  min-h-[65px] w-full  flex-col overflow-hidden  rounded-xl border px-3',
+        isActive ? 'border-main bg-[#FFFBFB]' : 'border-black/10',
+        'flex  min-h-[65px] w-full  flex-col overflow-hidden  rounded-[12px] border px-3',
         className,
       )}
       onClick={onClick}
     >
       <div className={'flex w-full grow flex-col py-2'}>
         <div className='flex grow items-center justify-between '>
-          <div className={'flex max-w-full items-center gap-2'}>
+          <div className={'flex max-w-full items-start gap-1'}>
             <LocationIcon
               width={24}
               height={24}
@@ -68,7 +68,7 @@ export function AddressField({
             <div>
               <Typography
                 variant={'p'}
-                className={'line-clamp-2 !text-base font-semibold max-md:!text-sm'}
+                className={'line-clamp-2 !text-lg font-semibold max-md:!text-sm'}
               >
                 {address}
               </Typography>

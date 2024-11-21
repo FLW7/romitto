@@ -4,12 +4,16 @@ import { DetailMeal } from '@/feature/detail-meal';
 import { Dialog, DialogContent } from '@/shared/components/dialog';
 import { Drawer, DrawerContent } from '@/shared/components/drawer';
 import useMediaQuery from '@/shared/hooks/use-media-query';
+import { cn } from '@/shared/lib/utils';
 import { useModal } from '@/shared/state/modal';
 
 const DetailMealModal = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { isOpen, type, onClose } = useModal();
   const isModalOpen = isOpen && type === 'detailMeal';
+  const vh = window.innerHeight * 0.01;
+
+  console.log('vh:', vh);
 
   if (isMobile) {
     return (
@@ -20,9 +24,8 @@ const DetailMealModal = () => {
         }}
       >
         <DrawerContent
-          className={
-            'scrollbar-thin max-h-[85vh] overflow-hidden rounded-t-3xl !bg-cartBg p-0'
-          }
+          className={cn('scrollbar-thin overflow-hidden rounded-t-[22px] p-0')}
+          style={{ maxHeight: `calc(${vh * 95}px)` }}
         >
           <DetailMeal />
         </DrawerContent>
@@ -32,7 +35,7 @@ const DetailMealModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className={'max-h-[620px] max-w-[1010px] bg-cartBg !p-0'}>
+      <DialogContent className={'max-h-[620px] max-w-[1010px] bg-white !p-0'}>
         <DetailMeal />
       </DialogContent>
     </Dialog>

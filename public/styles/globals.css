@@ -19,7 +19,7 @@
 .no-scroll {
   overflow: hidden !important;
 }
-/* 
+
 @media (min-width: 768px) {
   .no-scroll--normal {
     padding-right: 10px !important;
@@ -29,7 +29,7 @@
   .no-scroll--thin {
     padding-right: 5px;
   }
-} */
+}
 @layer base {
   :root {
     --sidebar-background: 0 0% 98%;

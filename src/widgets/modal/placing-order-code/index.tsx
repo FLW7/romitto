@@ -15,7 +15,7 @@ const PlacuingOrderCode: React.FC<{
       open={open}
       onClose={onClose}
       classNameOverlay='z-[100]'
-      className='z-[101] bg-bgMain md:w-[600px]'
+      className='z-[101] md:w-[600px]'
     >
       <div className='p-10'>
         <FormOrderCode

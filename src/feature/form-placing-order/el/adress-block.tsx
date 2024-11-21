@@ -39,12 +39,12 @@ const AdressBlock: React.FC<AdressBlockProps> = ({
       className={cn(
         className,
         styles.adressBlock,
-        formState.errors.date ? '!border-main' : 'border-primary/10',
+        formState.errors.date ? '!border-main' : 'border-lightGray',
       )}
     >
       <TooltipCustom id='address-tooltip' offset={20} defaultIsOpen closeOnScroll />
       <div
-        className={`flex cursor-pointer items-center justify-between border-b border-primary/10 pb-[14px]`}
+        className={`flex cursor-pointer items-center justify-between border-b border-lightGray pb-[14px]`}
         data-tooltip-id='address-tooltip'
         data-tooltip-content={tooltipTitle ?? 'Не забудьте проверить адрес доставки'}
         onClick={onClickAddress}

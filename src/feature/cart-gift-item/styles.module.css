@@ -3,7 +3,7 @@
 }
 
 .giftItem {
-  @apply relative flex h-[150px] w-[361px] rounded-2xl bg-bgSecondary p-[12px] shadow-cardLk max-md:h-[103px] max-md:w-[290px] max-[640px]:w-full;
+  @apply relative flex h-[150px] w-[361px] rounded-2xl bg-white p-[12px] shadow-cardLk max-md:h-[103px] max-md:w-[290px] max-[640px]:w-full;
 }
 
 .giftItem__title {

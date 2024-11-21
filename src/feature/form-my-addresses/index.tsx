@@ -47,7 +47,7 @@ export const FormMyAddresses = () => {
         <div className={'scrollbar-thin max-h-[20rem] space-y-3 overflow-auto pr-2 '}>
           {isLoading &&
             [1, 2, 3].map((item) => (
-              <Skeleton key={item} className={'h-12 rounded-xl'} />
+              <Skeleton key={item} className={'h-12 rounded-[12px]'} />
             ))}
 
           {data?.map((address) => (

@@ -15,7 +15,7 @@ const DetailRestModal = () => {
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent
         className={
-          'h-full overflow-y-auto bg-bgMain !p-0 text-black sm:h-auto sm:overflow-visible'
+          'h-full overflow-y-auto bg-white !p-0 text-black sm:h-auto sm:overflow-visible'
         }
         hideCloseButton={isMobile}
       >

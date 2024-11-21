@@ -21,7 +21,7 @@ const HoverButton: React.FC<{ sidebarOpen?: boolean; onClick: () => void }> = ({
     return (
       <Button
         onClick={onClick}
-        className='flex cursor-pointer select-none items-center gap-x-[10px] rounded-full px-4 py-[10px] max-lg:hidden'
+        className='flex cursor-pointer select-none items-center gap-x-[10px] rounded-full px-4 py-[10px]'
       >
         <div className='flex items-center gap-1'>
           <ShopIcon className={'h-6 w-6'} />
@@ -56,7 +56,7 @@ const HoverButton: React.FC<{ sidebarOpen?: boolean; onClick: () => void }> = ({
         side={'bottom'}
         align='end'
         sideOffset={10}
-        className='flex h-[418px] w-[419px] flex-col gap-y-4 rounded-xl border-none bg-bgDark px-0 py-[22px]'
+        className='flex h-[418px] w-[419px] flex-col gap-y-4 rounded-xl border-none bg-white px-0 py-[22px]'
       >
         <div className='px-[22px]'>
           <CartHeader />

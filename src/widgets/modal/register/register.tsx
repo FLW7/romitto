@@ -24,7 +24,7 @@ const Register = () => {
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent
-        className={'mx-auto max-w-md overflow-hidden bg-bgMain !px-9 text-primary'}
+        className={'mx-auto max-w-md overflow-hidden bg-white !px-9 text-black'}
       >
         <FormRegister />
       </DialogContent>

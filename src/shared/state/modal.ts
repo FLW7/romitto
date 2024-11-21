@@ -51,10 +51,6 @@ export const useModal = create<ModalStore>()(
     data: {},
     onOpen: (type, data, nextType) => {
       set({ isOpen: true, type, data, nextType });
-      if (get().isOpen) {
-        document.body.classList.add('no-scroll');
-        document.body.classList.add('no-scroll--normal');
-      }
     },
     clearState: () => {
       set({
@@ -69,8 +65,6 @@ export const useModal = create<ModalStore>()(
       });
       setTimeout(() => {
         set({ data: {} });
-        document.body.classList.remove('no-scroll');
-        document.body.classList.remove('no-scroll--normal');
       }, 250);
     },
   })),

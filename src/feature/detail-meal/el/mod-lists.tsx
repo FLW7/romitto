@@ -24,7 +24,7 @@ export const ModLists = ({
   const somePicture: boolean = items.modifiers.some((item) => !!item.pictureUrl);
 
   return (
-    <div className={'border-b border-primary/10 last:border-none'}>
+    <div className={'border-b border-black/10 last:border-none'}>
       <div
         className={cn(
           items.modifiers.some((item) => !!item.pictureUrl)

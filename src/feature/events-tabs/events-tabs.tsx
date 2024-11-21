@@ -49,7 +49,7 @@ const EventsTabs: React.FC<{ data?: IEvents[] }> = ({ data }) => {
       >
         <TabsList
           className={
-            'flex h-fit w-[480px] flex-col items-start justify-start overflow-hidden rounded-xl border border-primary/10 bg-none p-0'
+            'flex h-fit w-[480px] flex-col items-start justify-start overflow-hidden rounded-xl border border-grey bg-none p-0'
           }
         >
           {Object.values(data)?.map((item) => {
@@ -78,7 +78,7 @@ const EventsTabs: React.FC<{ data?: IEvents[] }> = ({ data }) => {
           >
             <div className='relative'>
               <TabsList
-                className={`flex items-start justify-start gap-x-6 rounded-none bg-bgMain !px-0 py-0`}
+                className={`flex items-start justify-start gap-x-6 rounded-none bg-white px-6 py-0`}
               >
                 <TabsTrigger
                   value={'all'}

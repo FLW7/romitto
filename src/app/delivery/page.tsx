@@ -4,6 +4,9 @@
 
 import { useEffect } from 'react';
 
+import { ChevronLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
 import AccordionQuestions from '@/entities/accordion-qustions/accordion-questions';
 import { Breadcrumbs } from '@/entities/breadcrumbs';
 import DeliveryCardsList from '@/feature/delivary-cards-list';
@@ -22,13 +25,11 @@ export default function Home() {
 
   const { data } = useGetShiping();
   const { setStep } = useDelivery();
+  const router = useRouter();
 
   useEffect(() => {
     setStep('rest');
   }, []);
-  const scheduleData = data?.data
-    ?.slice(9, -1)
-    .filter((item: any) => item.text !== '<p><br></p>');
 
   return (
     data?.data && (
@@ -38,18 +39,25 @@ export default function Home() {
         </div>
         <div className='mt-6 min-h-[calc(100vh-178px)] '>
           <div className='mx-auto max-w-[1304px] p-4  md:px-4'>
-            <Typography variant='h1'>Доставка и оплата</Typography>
+            <div className='flex items-center gap-3'>
+              <ChevronLeft
+                size={24}
+                className='md:hidden'
+                onClick={() => {
+                  router.back();
+                }}
+              />
+              <Typography variant='h1'>Доставка и оплата</Typography>
+            </div>
             <DeliveryCardsList
               data={[...data?.data?.slice(0, 3), ...data?.data?.slice(4, 5)]}
             />
             <DeliveryInfoCardsList data={data?.data?.slice(5, 9)} />
           </div>
           <div className='mx-auto mb-[120px] mt-[50px] flex max-w-[1304px] gap-[110px] px-4 max-lg:flex-col-reverse max-lg:gap-[50px] max-md:mb-[100px] md:px-4'>
-            {scheduleData?.length > 0 && (
-              <div className='p-4'>
-                <DeliveryScheduleList data={scheduleData} />
-              </div>
-            )}
+            <div className='p-4'>
+              <DeliveryScheduleList data={data?.data?.slice(9, -1)} />
+            </div>
             <div className='bg-gray-300 grid h-[600px] w-full'>
               <YandexMap zoom={10} defaultStep={'rest'} />
             </div>

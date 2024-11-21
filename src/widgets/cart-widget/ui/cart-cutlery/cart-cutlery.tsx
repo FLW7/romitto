@@ -12,7 +12,7 @@ const CartCutlery: React.FC = () => {
   };
 
   return (
-    <div className='rounded-xl bg-bgMain px-4 py-[18px] shadow-cartBlockShadow'>
+    <div className='rounded-xl bg-white px-4 py-[18px] shadow-cartBlockShadow'>
       <div className={'relative'}>
         <ul className='flex flex-col gap-[12px]'>
           {cutlery.map((item, key) => (

@@ -90,7 +90,7 @@ export const FormModalChoosePickup = ({ desc, title, addPlateItem }: Props) => {
   return (
     <div
       className={
-        ' relative flex h-full grow flex-col overflow-hidden sm:justify-between sm:gap-4'
+        ' relative flex h-full grow flex-col overflow-hidden sm:justify-between sm:gap-8'
       }
     >
       <div className={'mb-4 sm:mb-0'}>
@@ -103,7 +103,7 @@ export const FormModalChoosePickup = ({ desc, title, addPlateItem }: Props) => {
       </div>
       <div
         className={
-          'scrollbar-thin h-[calc(600px-20px-28px-44px-72px-20px-48px)] grow overflow-auto pb-20 max-md:h-[300px] sm:space-y-4'
+          'scrollbar-thin max-h-[calc(39vh)] grow overflow-auto pb-16 sm:max-h-[360px] sm:space-y-4'
         }
       >
         <div className={'flex flex-col space-y-4 pr-4'} ref={ref}>
@@ -130,7 +130,7 @@ export const FormModalChoosePickup = ({ desc, title, addPlateItem }: Props) => {
       </div>
       <div
         className={
-          'gap-2 max-sm:absolute max-sm:bottom-[0px] max-sm:left-0 max-sm:w-full max-sm:pt-3 sm:mt-auto'
+          'gap-2 bg-white max-sm:absolute max-sm:bottom-[0px] max-sm:left-0 max-sm:w-full max-sm:pt-3 sm:mt-auto'
         }
       >
         <Button

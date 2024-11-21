@@ -21,7 +21,7 @@ const PlusButton: React.FC<IPlugButtonProps> = ({
   return (
     <Button
       variant={'ghost'}
-      className={`h-[36px] w-[36px] rounded-full p-0 ${checked ? 'bg-gradient-to-l from-main to-gradient' : 'bg-main/10'} ${className}`}
+      className={`h-[36px] w-[36px] rounded-full p-0 ${checked ? 'bg-main' : 'bg-main/10'} ${className}`}
       onClick={(e) => {
         e.stopPropagation();
         onClick && onClick();

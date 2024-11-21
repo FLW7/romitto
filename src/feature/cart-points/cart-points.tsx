@@ -27,8 +27,6 @@ const CartPoints: React.FC = () => {
     PromoCategoryId,
     orders,
     promocode,
-    promoIsCombined,
-    promos,
   } = useCart();
   const { data: primeHillData } = useGetPrimeHill();
   const [maxValue, setMaxValue] = useState(0);
@@ -48,43 +46,18 @@ const CartPoints: React.FC = () => {
   const [orderPrice, setOrderPrice] = useState(0);
 
   useEffect(() => {
-    if (promoIsCombined === '0') {
-      const { summary } = calculateValues(
-        PromocodeType,
-        SalePrice,
-        SalePercent,
-        orderSum,
-        delivery?.localOrderSale,
-        PromoPlateId,
-        PromoCategoryId,
-        '',
-        orders,
-      );
+    const { summary } = calculateValues(
+      PromocodeType,
+      SalePrice,
+      SalePercent,
+      orderSum,
+      delivery?.localOrderSale,
+      PromoPlateId,
+      PromoCategoryId,
+      orders,
+    );
 
-      setOrderPrice(Number(summary));
-    } else {
-      let allSale = 0;
-
-      for (const item of promos) {
-        const { saleNum } = calculateValues(
-          String(item.PromocodeType),
-          item.SalePrice,
-          item.SalePercent,
-          orderSum,
-          delivery?.localOrderSale,
-          item.plateIds,
-          item.categoryId,
-          item.subCategory,
-          orders,
-        );
-
-        if (saleNum) {
-          allSale += saleNum;
-        }
-      }
-
-      setOrderPrice(Number(orderSum) - Number(allSale));
-    }
+    setOrderPrice(Number(summary));
   }, [
     PromocodeType,
     SalePrice,
@@ -94,9 +67,6 @@ const CartPoints: React.FC = () => {
     PromoPlateId,
     PromoCategoryId,
     orders,
-    promocode,
-    promoIsCombined,
-    promos,
   ]);
 
   useEffect(() => {
@@ -116,29 +86,30 @@ const CartPoints: React.FC = () => {
 
   return (
     Number(primeHillData?.bonuses ?? 0) > 0 &&
-    maxValue > 0 && (
-      <div className='max-w-[100%] rounded-xl bg-bgMain px-4 py-[18px] shadow-cartBlockShadow lg:mx-[22px]'>
-        <div className='w-[100%]'>
-          <div className='flex items-center justify-between'>
-            <Typography variant='p' className='!text-base font-semibold'>
-              Потратить {Number(decreaseBonus / bonusPercentMax).toFixed(0)} баллов
-            </Typography>
-            <Typography variant='desc' className='!text-xs text-secondary'>
-              Максимум {maxValue}
-            </Typography>
-          </div>
-          <Slider
-            className='mt-[16px] h-[32px]'
-            defaultValue={[Number(Number(decreaseBonus / bonusPercentMax).toFixed(0))]}
-            value={[Number(Number(decreaseBonus / bonusPercentMax).toFixed(0))]}
-            max={maxValue}
-            onValueChange={handleChangeValue}
-            classNameTrack='bg-lightGray'
-            classNameRange='bg-main'
-            classNameThumb={styles.sliderThumb}
-            disabled={!!promocode}
-          />
+    maxValue > 0 &&
+    !promocode && (
+      <div className='w-[100%]'>
+        <div className='flex items-center justify-between'>
+          <Typography variant='p' className='text-base font-semibold max-md:text-sm'>
+            Потратить {Number(decreaseBonus / bonusPercentMax).toFixed(0)} баллов
+          </Typography>
+          <Typography
+            variant='p'
+            className='text-sm font-medium text-secondary max-md:text-xs'
+          >
+            Максимум {maxValue}
+          </Typography>
         </div>
+        <Slider
+          className='mt-[16px] h-[32px]'
+          defaultValue={[Number(Number(decreaseBonus / bonusPercentMax).toFixed(0))]}
+          value={[Number(Number(decreaseBonus / bonusPercentMax).toFixed(0))]}
+          max={maxValue}
+          onValueChange={handleChangeValue}
+          classNameTrack='bg-lightGray'
+          classNameRange='bg-main'
+          classNameThumb={styles.sliderThumb}
+        />
       </div>
     )
   );

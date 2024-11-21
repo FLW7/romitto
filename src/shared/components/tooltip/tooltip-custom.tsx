@@ -7,7 +7,7 @@ import { cn } from '@/shared/lib/utils';
 const TooltipCustom: React.FC<ITooltip> = ({ className, ...props }) => {
   return (
     <div className={styles.tooltipContainer}>
-      <Tooltip {...props} className={cn(styles.tooltip, className)} delayShow={200} />
+      <Tooltip {...props} className={cn(styles.tooltip, className)} />
     </div>
   );
 };

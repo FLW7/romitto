@@ -2,9 +2,7 @@ import type { Metadata } from 'next';
 
 import { inter } from '../../public/font/font';
 
-import YandexMetrikaContainer from './metrika';
-
-import { COMPANY_NAME, META_DESCRIPTION, YMERIKA_ID } from '@/global-config';
+import { COMPANY_NAME, META_DESCRIPTION } from '@/global-config';
 import { getSiteAccessibility } from '@/shared/api/get-site-accessibility';
 import { Toaster } from '@/shared/components/toaster';
 import { cn } from '@/shared/lib/utils';
@@ -38,10 +36,19 @@ export default async function RootLayout({
 
   return (
     <html lang='en'>
+      <head>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+        />
+
+        {/* <Script src='//code.jivo.ru/widget/DtNxZF503q' strategy='lazyOnload' /> */}
+      </head>
+
       <body
         className={cn(
           inter.className,
-          'scrollbar-none min-h-screen scroll-smooth bg-bgMain',
+          'scrollbar-none min-h-screen scroll-smooth bg-white',
         )}
       >
         <Provider>
@@ -51,7 +58,6 @@ export default async function RootLayout({
         <Toaster />
       </body>
       <div id='modal-root' />
-      <YandexMetrikaContainer enabled={false} ymIds={YMERIKA_ID} />
     </html>
   );
 }

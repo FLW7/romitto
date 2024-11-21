@@ -13,7 +13,7 @@ export const ButtonMap = ({ children, onClick, className }: ButtonProperties) =>
       type={'button'}
       className={cn(
         className,
-        'flex h-12 w-12 items-center justify-center rounded-full bg-bgTetriary shadow transition hover:shadow-lg',
+        'flex h-12 w-12 items-center justify-center rounded-full bg-white shadow transition hover:shadow-lg',
       )}
       onClick={onClick}
     >

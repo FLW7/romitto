@@ -23,7 +23,6 @@ import { ResponsiveDialog } from '@/shared/components/responsive-dialog';
 import Typography from '@/shared/components/typography';
 import { formatDate } from '@/shared/lib/format-date';
 import { getOnlyNumbers } from '@/shared/lib/phone-mask';
-import { trackPurchase } from '@/shared/lib/purchase-metrik';
 import { useAddress } from '@/shared/state/address';
 import { useAuth } from '@/shared/state/auth';
 import { useModal } from '@/shared/state/modal';
@@ -63,7 +62,7 @@ const ConfirmOrderPopup: React.FC<ConfirmOrderPoupProps> = ({
   nowText = 'Как можно быстрее',
 }) => {
   const { isAuth, login } = useAuth();
-  const { onOpen, onClose } = useModal();
+  const { onOpen } = useModal();
   const {
     cutlery,
     additives,
@@ -197,12 +196,8 @@ const ConfirmOrderPopup: React.FC<ConfirmOrderPoupProps> = ({
         onOpen('orderReject', { title: errorTitle, message: errorDescription });
       } else if (!!data.payLink) {
         // onOpen('payFrame', {payLink: data.payLink})
-        trackPurchase();
-        // window.open(data.payLink, '_blank', 'noopener,noreferrer');
-        window.location.href = data.payLink;
-        onClose();
+        window.open(data.payLink, '_blank', 'noopener,noreferrer');
       } else {
-        trackPurchase();
         onOpen('orderSuccess', { orderID: data.orderID });
       }
 
@@ -218,7 +213,7 @@ const ConfirmOrderPopup: React.FC<ConfirmOrderPoupProps> = ({
       open={confirmOrderOpen}
       onClose={closeConfirmOrder}
       classNameOverlay='z-[100]'
-      className='z-[101] bg-bgDark'
+      className='z-[101]'
     >
       <div className={styles.container}>
         <Typography variant='h1' className='text-center max-md:text-lg'>

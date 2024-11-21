@@ -6,8 +6,8 @@ interface SearchIconProps extends SVGProps<SVGSVGElement> {
 }
 
 const SearchIcon = ({
-  colorDefault = '#E31E24',
-  colorHover = '#E31E24',
+  colorDefault = '#1E1E1E',
+  colorHover = '#FBBB1F',
   ...props
 }: SearchIconProps) => {
   const [isHovered, setIsHovered] = useState(false);

@@ -31,9 +31,9 @@
 }
 
 .cafe_point {
-  @apply -translate-x-1/2 -translate-y-full bg-gradient-to-l  from-white to-white shadow-xl;
+  @apply -translate-x-1/2 -translate-y-full bg-white  shadow-xl;
   cursor: pointer;
-  --color: main;
+  --color: white;
   position: relative;
   display: block;
   padding: 10px 8px;
@@ -86,6 +86,5 @@
   height: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-top: 8px solid;
-  @apply border-t-white;
+  border-top: 8px solid white;
 }

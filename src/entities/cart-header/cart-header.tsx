@@ -22,7 +22,7 @@ const CartHeader = () => {
         <ChevronLeft
           size={24}
           strokeWidth={1.5}
-          className='stroke-primary sm:hidden'
+          className='sm:hidden'
           onClick={() => {
             router.back();
           }}

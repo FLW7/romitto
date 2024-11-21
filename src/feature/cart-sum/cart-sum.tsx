@@ -44,8 +44,6 @@ const CartSum: React.FC<{
     PromoPlateId,
     PromoCategoryId,
     orders,
-    promoIsCombined,
-    promos,
   } = useCart();
   const { onOpen } = useModal();
   const { onClose } = useCartOpen();
@@ -93,60 +91,21 @@ const CartSum: React.FC<{
   };
 
   useEffect(() => {
-    if (promoIsCombined === '0') {
-      const { sale, summary } = calculateValues(
-        PromocodeType,
-        SalePrice,
-        SalePercent,
-        orderSum,
-        localOrderSale,
-        PromoPlateId,
-        PromoCategoryId,
-        '',
-        orders,
-      );
+    const { sale, summary } = calculateValues(
+      PromocodeType,
+      SalePrice,
+      SalePercent,
+      orderSum,
+      localOrderSale,
+      PromoPlateId,
+      PromoCategoryId,
+      orders,
+    );
 
-      setSale(sale);
+    setSale(sale);
 
-      setSummary(Number(summary) - (decreaseBonus ?? 0));
-    } else {
-      let allSale = 0;
-
-      for (const item of promos) {
-        const { saleNum } = calculateValues(
-          String(item.PromocodeType),
-          item.SalePrice,
-          item.SalePercent,
-          orderSum,
-          localOrderSale,
-          item.plateIds,
-          item.categoryId,
-          item.subCategory,
-          orders,
-        );
-
-        if (saleNum) {
-          allSale += saleNum;
-        }
-      }
-
-      setSummary(Number(orderSum) - Number(allSale) - (decreaseBonus ?? 0));
-
-      setSale(String(priceFormatter(allSale)));
-    }
-  }, [
-    SalePercent,
-    orderSum,
-    SalePrice,
-    PromocodeType,
-    decreaseBonus,
-    localOrderSale,
-    PromoPlateId,
-    PromoCategoryId,
-    orders,
-    promoIsCombined,
-    promos,
-  ]);
+    setSummary(Number(summary) - (decreaseBonus ?? 0));
+  }, [SalePercent, orderSum, SalePrice, PromocodeType, decreaseBonus, localOrderSale]);
 
   return (
     <div>
@@ -181,19 +140,15 @@ const CartSum: React.FC<{
           <Typography variant='p' className='!whitespace-nowrap !text-xl !font-semibold'>
             {priceFormatter(
               Number(
-                (summary ?? 0) +
+                summary +
                   (PromocodeType === '5'
-                    ? (deliveryPrice || 0) - deliveryPrice * (SalePercent ?? 0)
-                    : deliveryPrice || 0),
+                    ? deliveryPrice - deliveryPrice * (SalePercent ?? 0)
+                    : deliveryPrice),
               ).toFixed(0),
             )}
           </Typography>
         </div>
-        <Button
-          className={styles.sumActions__button}
-          onClick={openPlacingOrderHandler}
-          disabled={orders.length <= 0}
-        >
+        <Button className={styles.sumActions__button} onClick={openPlacingOrderHandler}>
           К оформлению заказа
         </Button>
       </div>

@@ -14,7 +14,7 @@ const DetailOrderModal = () => {
   if (isMobile) {
     return (
       <Sheet open={isModalOpen} onOpenChange={onClose}>
-        <SheetContent side={'left'} className={'bg-bgMain !p-0'}>
+        <SheetContent side={'left'} className={'!p-0'}>
           <DetailOrder id={data?.id} />
         </SheetContent>
       </Sheet>
@@ -23,7 +23,7 @@ const DetailOrderModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className={'mx-auto bg-bgMain !p-0 text-primary'}>
+      <DialogContent className={'mx-auto bg-white !p-0 text-black'}>
         <DetailOrder id={data?.id} />
       </DialogContent>
     </Dialog>

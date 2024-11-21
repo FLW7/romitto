@@ -50,12 +50,14 @@ export default function Home() {
           >
             Здесь будет список избранных блюд
           </Typography>
-          <Button
-            variant={isMobile ? 'destructive' : 'outline'}
-            className='w-[225px] text-main'
-          >
-            <Link href={'/menu'}>В меню</Link>
-          </Button>
+          <Link href={ROUTES.home}>
+            <Button
+              variant={isMobile ? 'destructive' : 'outline'}
+              className='w-[225px] text-main'
+            >
+              В меню
+            </Button>
+          </Link>
         </div>
       )}
       <FavoritesLists />

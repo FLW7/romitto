@@ -35,7 +35,7 @@ export default function Home() {
 
         <div
           className={
-            'sticky top-10  hidden h-[calc(100vh-300px)] overflow-hidden rounded-xl sm:grid'
+            'sticky top-10  hidden h-[calc(100vh-300px)] overflow-hidden rounded-[12px] sm:grid'
           }
         >
           <YandexMap zoom={MAP_DEFAULT.zoom} defaultStep={'rest'} />

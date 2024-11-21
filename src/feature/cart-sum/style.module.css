@@ -1,5 +1,5 @@
 .sumList {
-  @apply flex flex-col gap-y-[9px] border-b border-primary/10 pb-[16px];
+  @apply flex flex-col gap-y-[9px] border-b border-grey pb-[16px];
 }
 
 .sumActions {

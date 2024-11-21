@@ -6,11 +6,11 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  @apply border-b-2 border-t-2 border-primary/10
+  @apply border-b-2 border-t-2 border-lightGray
     text-secondary;
 }
 .selected {
-  @apply text-main;
+  @apply text-black;
 }
 .center:before,
 .year:after {

@@ -2,20 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-import { usePathname } from 'next/navigation';
-
 import BurgerIcon from '@/assets/icons/header/burger.svg';
 import SidebarCatalog from '@/feature/sidebar-catalog';
-import { CATEGORIES_SIDEBAR } from '@/global-config';
 import { Popover, PopoverTrigger, PopoverContent } from '@/shared/components/popover';
 import useMediaQuery from '@/shared/hooks/use-media-query';
 import { useModal } from '@/shared/state/modal';
 
-export const Burger: React.FC<{ callback?: (value: boolean) => void }> = ({
-  callback,
-}) => {
+export const Burger = () => {
   const { onOpen, isOpen } = useModal();
-
   const isMobile = useMediaQuery('(max-width:769px)');
   const [popoverIsOpen, setPopoverIsOpen] = useState(false);
 
@@ -38,8 +32,6 @@ export const Burger: React.FC<{ callback?: (value: boolean) => void }> = ({
     };
   }, [popoverIsOpen]);
 
-  const pathname = usePathname();
-
   return isMobile ? (
     <button
       className={'pl-4'}
@@ -50,22 +42,17 @@ export const Burger: React.FC<{ callback?: (value: boolean) => void }> = ({
       <BurgerIcon className={'h-6 w-6'} />
     </button>
   ) : (
-    <Popover
-      onOpenChange={(value) => {
-        setPopoverIsOpen(value);
-        callback && callback(value);
-      }}
-    >
+    <Popover onOpenChange={setPopoverIsOpen}>
       <PopoverTrigger className='pl-4'>
         <BurgerIcon className={'h-6 w-6'} />
       </PopoverTrigger>
-      {popoverIsOpen && (!CATEGORIES_SIDEBAR || pathname !== '/') && (
-        <div className='fixed left-0 top-0 z-[100] h-screen w-[100vw] bg-black/50'></div>
+      {popoverIsOpen && (
+        <div className='fixed left-0 top-0 z-[70] h-screen w-[100vw] bg-black/50'></div>
       )}
       <PopoverContent
         align='end'
         side='bottom'
-        className='z-[100] min-w-[300px] overflow-hidden rounded-3xl bg-bgMain pb-[28px]'
+        className='z-[100] min-w-[300px] overflow-hidden rounded-[22px] bg-white pb-[28px]'
       >
         <SidebarCatalog />
       </PopoverContent>

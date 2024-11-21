@@ -23,7 +23,7 @@ export const UserButton = () => {
     <Button
       variant={'destructive'}
       size={'destructive'}
-      className='my-3 flex gap-1 rounded-full bg-bgSecondary px-4 py-[7px] shadow-userButtonShadow transition-shadow duration-500 hover:shadow-none active:shadow-userButtonShadow'
+      className='my-3 flex gap-1 rounded-full px-4 py-[7px] shadow-userButtonShadow transition-shadow duration-500 hover:shadow-none active:shadow-userButtonShadow'
       onClick={handleClick}
     >
       <UserDesktop className={'h-[17px] w-[18px]'} />

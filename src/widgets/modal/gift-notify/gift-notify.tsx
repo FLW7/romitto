@@ -40,7 +40,7 @@ const GiftNotify = () => {
     <ResponsiveDialog
       open={isModalOpen}
       onClose={closeModalChange}
-      className='z-[51] bg-bgMain'
+      className='z-[51]'
       classNameOverlay='z-[50]'
     >
       <div className='max-md:mt-4 max-md:px-[16px] md:px-[43px] md:py-[51px]'>

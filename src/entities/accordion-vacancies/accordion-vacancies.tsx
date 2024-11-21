@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import './style.css';
 
 import {
   Accordion,
@@ -26,12 +25,7 @@ const AccordionVacancies = () => {
                 {<div dangerouslySetInnerHTML={{ __html: item?.descr }}></div>}
               </article>
               {/* <div>{parse(item?.descr ?? '')}</div> */}
-              <Link
-                href={
-                  'https://api.whatsapp.com/send/?phone=79775933090&text&type=phone_number&app_absent=0'
-                }
-                target='_blank'
-              >
+              <Link href={'tel:79022842745'} target='_blank'>
                 <Button className='mt-11 w-[340px] max-md:mt-8 max-md:w-full'>
                   Записаться на собеседование
                 </Button>

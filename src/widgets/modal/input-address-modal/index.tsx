@@ -2,12 +2,11 @@
 
 import * as React from 'react';
 
-import { ChevronLeft } from 'lucide-react';
 import { z } from 'zod';
 
+import ArrowLeftIcon from '@/assets/icons/arrow-left.svg';
 import InputAddress from '@/feature/input-address/input-address';
 import { Sheet, SheetContent } from '@/shared/components/sheet';
-import Typography from '@/shared/components/typography';
 import type { ILocation } from '@/shared/type/map';
 
 export const FormSchema = z.object({
@@ -35,16 +34,11 @@ const InputAddressModal = ({ isActive, setIsActive, mutate }: Props) => {
 
   return (
     <Sheet open={isActive}>
-      <SheetContent side={'right'} hideCloseButton className='bg-bgMain'>
-        <div>
-          <div className='mb-6 flex items-center gap-[6px]'>
-            <button type={'button'} onClick={handleBack} className={'h-[44px]'}>
-              <ChevronLeft size={24} className='stroke-primary' />
-            </button>
-            <Typography variant='desc' className='text-lg font-semibold'>
-              Укажите адрес доставки
-            </Typography>
-          </div>
+      <SheetContent side={'right'} hideCloseButton>
+        <div className={'flex items-start gap-4 '}>
+          <button type={'button'} onClick={handleBack} className={'h-[44px]'}>
+            <ArrowLeftIcon className={'h-4 w-4 fill-secondary'} />
+          </button>
           <InputAddress mutate={mutate} setIsActive={setIsActive} />
         </div>
       </SheetContent>

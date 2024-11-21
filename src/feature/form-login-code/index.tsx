@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -27,10 +28,10 @@ const formSchema = z.object({
 
 type FormType = z.infer<typeof formSchema>;
 
-export const FormLoginCode = () => {
+export const FormLoginCode = ({ isBonus }: { isBonus: boolean }) => {
   const { seconds, setSeconds } = useTimerStore();
   const { toast } = useToast();
-
+  const rouetr = useRouter();
   const { onOpen, data } = useModal();
   const sendCode = useSendCode();
 
@@ -64,10 +65,14 @@ export const FormLoginCode = () => {
       });
   };
 
-  const onSubmit = ({ phone, code }: FormType) => {
+  const onSubmit = async ({ phone, code }: FormType) => {
     const clearNumbers = getOnlyNumbers(phone);
 
-    code && clearNumbers && sendCode.mutate({ Phone: clearNumbers, Code: code });
+    code &&
+      clearNumbers &&
+      (await sendCode.mutateAsync({ Phone: clearNumbers, Code: code }).then(() => {
+        isBonus && rouetr.push('lk');
+      }));
   };
 
   useEffect(() => {

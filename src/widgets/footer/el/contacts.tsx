@@ -2,7 +2,7 @@ import Typography from '@/shared/components/typography';
 
 const Contacts = () => {
   return (
-    <div className='border-primary/10 max-lg:border-t max-lg:py-5'>
+    <div className='border-black/10 max-lg:border-t max-lg:py-5'>
       <Typography variant='desc' className='mb-2 !text-base font-semibold'>
         ООО “Шаверно франчайзинг”
       </Typography>

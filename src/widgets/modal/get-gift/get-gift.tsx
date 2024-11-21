@@ -21,12 +21,7 @@ const GetGift = () => {
   const { availableGifts, orderSum, gifts, giftsType } = useCart();
 
   return (
-    <ResponsiveDialog
-      open={isModalOpen}
-      onClose={closeModal}
-      className='bg-bgMain'
-      classNameOverlay='z-[50]'
-    >
+    <ResponsiveDialog open={isModalOpen} onClose={closeModal} classNameOverlay='z-[50]'>
       <div className='pb-[52px] max-md:mt-4 max-md:px-4 md:px-[46px] md:pt-[30px]'>
         <div className='text-center'>
           <Typography variant='h3' className={styles.title}>

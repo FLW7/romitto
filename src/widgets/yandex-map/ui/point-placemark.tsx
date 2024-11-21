@@ -26,10 +26,10 @@ export const PointPlacemark = ({
   };
   const MyIconContentLayout = ymaps?.templateLayoutFactory.createClass(
     `
-      <button class="${variant === 'delivery' ? 'delivery_point' : 'cafe_point'} ${isActive ? 'active' : ''}" data-id="${id}"  id="placemark-${id}" >
-      ${variant === 'pickup' ? PickupIconStr : DeliveryIconStr}
-      </button>
-    `,
+              <button class="${variant === 'delivery' ? 'delivery_point' : 'cafe_point'} ${isActive ? 'active' : ''}" data-id="${id}"  id="placemark-${id}" >
+              ${variant === 'pickup' ? PickupIconStr : DeliveryIconStr}
+              </button>
+        `,
 
     {
       build: function () {

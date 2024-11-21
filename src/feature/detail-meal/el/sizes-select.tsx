@@ -21,15 +21,15 @@ const SizesSelect: React.FC<ISizesSelect> = ({ options, active, setActive }) => 
         setActive(options[Number(val)]);
       }}
     >
-      <SelectTrigger className='relative h-[34px] w-full rounded-full border border-primary/10 bg-counterBg px-6 py-3 text-primary'>
+      <SelectTrigger className='relative h-[34px] w-full rounded-full border-[2px] border-[#F5F5F5] bg-white px-6 py-3'>
         <SelectValue placeholder='Выберите размер' />
       </SelectTrigger>
       <SelectContent
         sideOffset={0}
-        className='max-w-full rounded-3xl border-[2px] border-primary/10 bg-bgTetriary'
+        className='max-w-full rounded-[22px] border-[2px] border-[#F5F5F5] bg-white'
       >
         {options?.map((item, key) => (
-          <SelectItem key={key} value={item.value} className='text-primary'>
+          <SelectItem key={key} value={item.value}>
             {item.title}
           </SelectItem>
         ))}

@@ -1,14 +1,11 @@
 'use client';
 import { useState } from 'react';
 
-import { usePathname } from 'next/navigation';
-
 import { AdAppModalDynamic } from '../modal/ad-app-modal/ad-app-modal-dynamic';
 import CartModal from '../modal/cart-modal/cart-modal';
 import { ChoosingCityDynamic } from '../modal/choosing-city/choosing-city.dynamic';
 import { SidebarCatalogDynamic } from '../modal/sidebar-catalog-modal/sidebar-catalog.dynamic';
 
-import { CATEGORIES_SIDEBAR } from '@/global-config';
 import useMediaQuery from '@/shared/hooks/use-media-query';
 import { useTimer } from '@/shared/hooks/use-timer';
 import {
@@ -40,7 +37,6 @@ interface Props {
 
 export const Wrapper = ({ children, site }: Props) => {
   useTimer();
-  // const { onOpen } = useModal();
   const [isOff, setIsOff] = useState(
     site?.ru?.siteAccessibility === SiteAccessibility.OFF,
   );
@@ -48,7 +44,6 @@ export const Wrapper = ({ children, site }: Props) => {
   // const { mutateAsync } = useMutation({ mutationFn: getCities });
 
   const isMobile = useMediaQuery('(max-width:1024px)');
-  const pathname = usePathname();
 
   // useEffect(() => {
   //   if (!getCookie('adAppShowed')) {
@@ -76,9 +71,7 @@ export const Wrapper = ({ children, site }: Props) => {
         <SiteOff ru={site?.ru} setIsOff={setIsOff} />
       ) : (
         <>
-          {(!CATEGORIES_SIDEBAR || pathname !== '/') &&
-            (isMobile ? <HeaderMobile /> : <Header />)}
-
+          {isMobile ? <HeaderMobile /> : <Header />}
           {children}
           <Footer />
 

@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import Counter from '@/entities/counter/counter';
 import Typography from '@/shared/components/typography';
 import { priceFormatter } from '@/shared/lib/price';
@@ -15,26 +13,23 @@ const CartAdditionalItem: React.FC<ICartAdditionalItemProperties> = ({
   item,
   onChange,
 }) => {
-  const { id, name, countInCart, maxCount, price, picture } = item;
+  const { id, name, countInCart, maxCount, price } = item;
   const { priceForAddition } = useCart();
 
   return (
-    <li key={id} className='flex items-center justify-between gap-3'>
-      <div className='flex items-center gap-2'>
-        {picture && (
-          <Image src={picture} width={47} height={47} alt={name} className='rounded-lg' />
-        )}
-        <Typography variant='desc' className='text-base font-medium max-md:text-sm'>
+    <li key={id} className='flex items-center justify-between'>
+      <div>
+        <Typography variant='desc' className='text-sm font-normal'>
           {name}
-          {Number(priceForAddition) === 0 && (
-            <Typography
-              variant='desc'
-              className='ml-2 inline whitespace-nowrap !text-sm font-normal text-secondary md:!text-base'
-            >
-              {priceFormatter(price ?? 0)}
-            </Typography>
-          )}
         </Typography>
+        {Number(priceForAddition) === 0 && Number(price ?? 0) > 0 && (
+          <Typography
+            variant='desc'
+            className='whitespace-nowrap !text-xs font-normal text-secondary'
+          >
+            {priceFormatter(price ?? 0)}
+          </Typography>
+        )}
       </div>
       <Counter
         value={countInCart ?? 0}

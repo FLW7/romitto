@@ -13,7 +13,6 @@ import Typography from '@/shared/components/typography';
 import { priceFormatter } from '@/shared/lib/price';
 import { cn } from '@/shared/lib/utils';
 import { useModal } from '@/shared/state/modal';
-import { type TCartGiftItem } from '@/widgets/cart-widget/config';
 import { useCart } from '@/widgets/cart-widget/state';
 
 interface CartGiftProps {
@@ -23,8 +22,7 @@ interface CartGiftProps {
 
 const CartGift: React.FC<CartGiftProps> = ({ setGiftStep, min = false }) => {
   const { onOpen } = useModal();
-  const { orderSum, giftLevelPriceArr, gifts, giftsType, availableGifts, addGift } =
-    useCart();
+  const { orderSum, giftLevelPriceArr, gifts, giftsType, availableGifts } = useCart();
 
   // const [remaining, setRemaining] = useState(0);
 
@@ -35,7 +33,6 @@ const CartGift: React.FC<CartGiftProps> = ({ setGiftStep, min = false }) => {
 
   //   setRemaining(nextGift ? nextGift - orderSum : 0);
   // }, [orderSum]);
-  const giftsWithSteps = giftsType === 2 || giftsType === 4;
 
   return (
     <div className='relative w-full rounded-xl bg-white px-[14px] py-[10px] shadow-cartBlockShadow'>
@@ -57,26 +54,10 @@ const CartGift: React.FC<CartGiftProps> = ({ setGiftStep, min = false }) => {
               key={key}
               className='flex w-full flex-col items-center bg-white'
               onClick={() => {
-                const currentItems = giftsWithSteps
-                  ? availableGifts.filter(
-                      (item: TCartGiftItem) => item.minPrice === giftLevelsArr[key],
-                    )
-                  : availableGifts;
-
-                if (!isGiftInOrder && currentItems.length === 1) {
-                  // eslint-disable-next-line @typescript-eslint/naming-convention
-                  const { id, name, picture, weight, delivery_type, minPrice } =
-                    currentItems[0];
-
-                  addGift({ id, name, picture, weight, delivery_type, minPrice });
-                } else {
-                  if (!isGiftInOrder && (giftsType === 1 || giftsType === 3)) {
-                    onOpen('getGift');
-                  } else {
-                    onOpen('chooseGift');
-                  }
-                  setGiftStep(key + 1);
-                }
+                !isGiftInOrder && (giftsType === 1 || giftsType === 3)
+                  ? onOpen('getGift')
+                  : onOpen('chooseGift');
+                setGiftStep(key + 1);
               }}
             >
               {isOrderSumGreater ? (

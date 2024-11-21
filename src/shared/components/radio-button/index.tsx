@@ -9,7 +9,7 @@ const RadioItem: React.FC<{ checked: boolean; className?: string }> = ({
   return (
     <div
       className={cn(
-        'flex aspect-square  h-[22px] w-[22px] items-center justify-center rounded-[100px] border text-primary focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+        'flex aspect-square  h-[22px] w-[22px] items-center justify-center rounded-full border text-primary focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
         checked ? 'border-main' : 'border-secondary',
         className,
       )}

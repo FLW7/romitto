@@ -15,10 +15,15 @@ import { type ICategory } from '@/widgets/wrapper-menu/types';
 
 interface ICategoriesListProps {
   isCloseSearch?: boolean;
+  isFixed?: boolean;
   onClose?: () => void;
 }
 
-const CategoriesList: React.FC<ICategoriesListProps> = ({ isCloseSearch, onClose }) => {
+const CategoriesList: React.FC<ICategoriesListProps> = ({
+  isCloseSearch,
+  onClose,
+  isFixed,
+}) => {
   const pathname = usePathname();
   const router = useRouter();
   const { activeCategory } = useActiveCategory();
@@ -37,11 +42,28 @@ const CategoriesList: React.FC<ICategoriesListProps> = ({ isCloseSearch, onClose
     return items.length > 0 ? category : null;
   });
 
-  useEffect(() => {
-    isTablet ? setSpliceCount(9) : setSpliceCount(9);
-  }, [spliceCount, isTablet]);
-
   const filteredListCategories = platesList?.filter((item: ICategory) => item !== null);
+
+  useEffect(() => {
+    if (isTablet) {
+      if (isFixed) {
+        setSpliceCount(5);
+      } else {
+        setTimeout(() => {
+          setSpliceCount(6);
+        }, 300);
+      }
+    } else {
+      if (isFixed) {
+        setSpliceCount(6);
+      } else {
+        setTimeout(() => {
+          setSpliceCount(8);
+        }, 300);
+      }
+    }
+  }, [spliceCount, isTablet, filteredListCategories]);
+
   const categoriesSpliced = filteredListCategories
     ? [...filteredListCategories]?.splice(0, spliceCount)
     : [];
@@ -50,16 +72,16 @@ const CategoriesList: React.FC<ICategoriesListProps> = ({ isCloseSearch, onClose
     : [];
 
   return (
-    <div className={`flex w-full select-none items-center gap-categoryGap duration-500`}>
+    <div className={`flex w-full select-none items-center gap-[22px] duration-500`}>
       {categoriesSpliced?.map((item: { id: string; name: string }, key: number) => {
         return (
           <div
             key={item.id}
             className={cn(
-              'flex cursor-pointer whitespace-nowrap bg-categoryButton px-categoryX py-categoryY text-base font-semibold leading-[17px] text-categoryButtonText duration-100 hover:text-categoryButtonTextActive',
+              'flex cursor-pointer whitespace-nowrap text-base font-semibold leading-[17px] text-primary duration-100 hover:text-main',
               Number(activeCategory) === Number(item.id) &&
                 pathname === '/' &&
-                'bg-categoryButtonActive !text-categoryButtonTextActive',
+                '!text-main',
             )}
             onClick={() => {
               isCloseSearch && onClose?.();

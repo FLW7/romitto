@@ -11,9 +11,9 @@ export const Links = () => {
 
   return (
     <div>
-      <Typography variant='desc' className='text-[22px] font-semibold leading-[31px]'>
+      {/* <Typography variant='desc' className='text-[22px] font-semibold leading-[31px]'>
         Меню
-      </Typography>
+      </Typography> */}
       <div className={'mt-4 flex flex-col gap-y-[18px]'}>
         {data?.data?.map(({ url, name, id }) => (
           <Button
@@ -30,7 +30,7 @@ export const Links = () => {
               </Typography>
 
               <div className={'ml-auto'}>
-                <ArrowRight className={'h-3 w-3 stroke-white'} />
+                <ArrowRight className={'h-3 w-3 stroke-black/20'} />
               </div>
             </Link>
           </Button>

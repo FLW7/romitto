@@ -14,7 +14,7 @@ const DeliveryInfoCardsList: React.FC<{
   data: Array<{ title: string; text: string }>;
 }> = ({ data }) => {
   return (
-    <div className='mt-[50px] flex gap-5 max-lg:flex-col max-lg:gap-11'>
+    <div className='mt-[50px] flex justify-between gap-5 max-lg:flex-col max-lg:gap-11'>
       {data?.map((item, key) => {
         return item?.title && item?.text ? (
           <DeliveryInfoCard key={key} item={{ ...item, icon: icons[key] }} />

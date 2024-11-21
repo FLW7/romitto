@@ -10,7 +10,7 @@ const CarouselDots: React.FC<{
 
   return (
     <div className='mx-auto w-fit'>
-      <div className='relative h-[3px] max-h-[3px] w-[150px] rounded-[8px] bg-primary/10'>
+      <div className='relative h-[3px] max-h-[3px] w-[150px] rounded-[8px] bg-lightGray'>
         <span
           className='absolute block h-[3px] rounded-[8px] bg-main !transition-all !ease-linear'
           style={{

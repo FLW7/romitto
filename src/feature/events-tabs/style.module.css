@@ -1,15 +1,15 @@
 .rightTab {
-  @apply z-[2] m-0 max-w-fit overflow-hidden rounded-none border-b-[2.5px] border-[transparent] !px-3 py-3 text-base font-normal text-primary outline-none data-[state=active]:border-main  data-[state=active]:font-semibold data-[state=active]:text-main;
+    @apply rounded-none py-3 px-0 max-w-fit z-[2] m-0 text-primary text-base font-normal data-[state=active]:font-semibold data-[state=active]:text-main border-[transparent] data-[state=active]:border-main  border-b-[2.5px] outline-none
 }
 
 .rightTabsBottomLine {
-  @apply absolute bottom-0 z-[1] block w-full border-b-[1px] border-primary/10;
+    @apply absolute bottom-0 z-[1] block w-full border-b-[1px] border-grey
 }
 
 .rightBlock {
-  @apply w-[980px] overflow-hidden rounded-xl border border-primary/10 p-0;
+    @apply w-[980px] rounded-xl border border-grey p-0
 }
 
 .tabsContentBlock {
-  @apply mt-0 flex flex-col gap-6 px-6 py-[18px] data-[state=inactive]:p-0;
+    @apply mt-0 flex flex-col gap-6 px-6 py-[18px] data-[state=inactive]:p-0
 }

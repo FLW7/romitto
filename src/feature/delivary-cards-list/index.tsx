@@ -10,7 +10,7 @@ const DeliveryCardsList: React.FC<{
   return (
     data && (
       <>
-        <div className='mt-9 flex gap-5 max-lg:grid max-lg:grid-cols-2'>
+        <div className='mt-9 flex  gap-5 max-lg:grid max-lg:grid-cols-2'>
           {data?.map((item, key) => {
             return (
               item?.title &&

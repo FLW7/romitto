@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/prefer-ternary */
+import { priceFormatter } from '@/shared/lib/price';
 import { type ICartOrderItem } from '@/widgets/cart-widget/config';
 
 export const calculateValues = (
@@ -9,59 +9,51 @@ export const calculateValues = (
   localOrderSale: string | undefined,
   PromoPlateId: string | undefined,
   PromoCategoryId: string | undefined,
-  PromoSubId: string | undefined,
   orders: ICartOrderItem[],
 ) => {
   let sale;
   let summary;
-  let saleNum = 0;
   const platesIdArr = PromoPlateId?.split(',')?.filter(
-    (item) => item !== '' && item !== ' ' && item !== '0',
+    (item) => item !== '' && item !== ' ',
   );
 
   const categoriesIdArr = PromoCategoryId?.split(',')?.filter(
-    (item) => item !== '' && item !== ' ' && item !== '0',
+    (item) => item !== '' && item !== ' ',
   );
 
-  const subIdArr = PromoSubId
-    ? PromoSubId?.split(',')?.filter(
-        (item) => item !== '' && item !== ' ' && item !== '0',
-      )
-    : [];
-
   if (platesIdArr?.length === 0 && categoriesIdArr?.length === 0) {
-    switch (String(promocodeType)) {
+    switch (promocodeType) {
       case '1': {
         if (Number(localOrderSale)) {
-          sale = `${((salePrice ?? 0) + orderSum * (Number(localOrderSale) / 100)).toFixed(0)} ₽`;
-          saleNum = orderSum * (Number(localOrderSale) / 100) - (salePrice ?? 0);
-
-          summary = Number(orderSum - (saleNum > orderSum ? orderSum : saleNum));
+          sale = priceFormatter(
+            ((salePrice ?? 0) + orderSum * (Number(localOrderSale) / 100)).toFixed(0),
+          );
+          summary = Number(
+            orderSum - orderSum * (Number(localOrderSale) / 100) - (salePrice ?? 0),
+          );
         } else {
-          sale = `${salePrice?.toFixed(0) ?? 0} ₽`;
-          let saleNum = 0;
-
-          if ((salePrice ?? 0) > orderSum) {
-            saleNum = orderSum;
-          } else {
-            saleNum = salePrice ?? 0;
-          }
-          summary = Number(orderSum - saleNum);
+          sale = priceFormatter(salePrice?.toFixed(0) ?? 0);
+          summary = Number(orderSum - (salePrice ?? 0));
         }
         break;
       }
       case '2': {
         if (Number(localOrderSale)) {
-          sale = Number(salePercent ?? 0) * 100 + Number(localOrderSale) + ' %';
+          console.log(1);
+
+          sale = Number(salePercent ?? 0) + Number(localOrderSale) + ' %';
           summary = Number(
             salePercent
-              ? orderSum - orderSum * (salePercent + Number(localOrderSale) / 100)
+              ? orderSum - orderSum * (salePercent / 100 + Number(localOrderSale) / 100)
               : orderSum,
           );
         } else {
-          if (salePercent) saleNum = orderSum * salePercent;
-          sale = (salePercent ?? 0) * 100 + ' %';
-          summary = Number(salePercent ? orderSum - orderSum * salePercent : orderSum);
+          console.log(2);
+
+          sale = (salePercent ?? 0) + ' %';
+          summary = Number(
+            salePercent ? orderSum - orderSum * (salePercent / 100) : orderSum,
+          );
         }
         break;
       }
@@ -77,194 +69,132 @@ export const calculateValues = (
         break;
       }
     }
-  } else {
-    if (platesIdArr?.length !== 0) {
-      switch (promocodeType) {
-        case '1': {
-          for (const item of orders) {
-            if (
-              platesIdArr?.includes(String(item.id)) &&
-              Number(item.canHaveSale) === 1
-            ) {
-              const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
+  } else if (platesIdArr?.length !== 0 && platesIdArr?.[0] !== '0') {
+    switch (promocodeType) {
+      case '1': {
+        let saleNum = 0;
 
-              if (ordersPrice > (salePrice ?? 0)) {
-                saleNum += salePrice ?? 0;
-              } else {
-                saleNum += ordersPrice;
-              }
+        for (const item of orders) {
+          if (platesIdArr?.includes(String(item.id)) && Number(item.canHaveSale) === 1) {
+            const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
 
-              if (Number(localOrderSale)) {
-                sale = `${(Number(saleNum ?? 0) + orderSum * (Number(localOrderSale) / 100)).toFixed(0)} ₽`;
-                summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
-              } else {
-                sale = `${saleNum ?? 0} ₽`;
-                summary = orderSum - saleNum;
-              }
+            saleNum += ordersPrice > (salePrice ?? 0) ? salePrice ?? 0 : ordersPrice;
+
+            if (Number(localOrderSale)) {
+              sale = priceFormatter(
+                (
+                  Number(saleNum ?? 0) +
+                  orderSum * (Number(localOrderSale) / 100)
+                ).toFixed(0),
+              );
+              summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
+            } else {
+              sale = priceFormatter(saleNum ?? 0);
+              summary = orderSum - saleNum;
             }
           }
-          console.log(saleNum);
-
-          break;
         }
-        case '2': {
-          for (const item of orders) {
-            if (
-              platesIdArr?.includes(String(item.id)) &&
-              Number(item.canHaveSale) === 1
-            ) {
-              const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
+        break;
+      }
+      case '2': {
+        let saleNum = 0;
 
-              saleNum += salePercent ? ordersPrice * salePercent : 0;
+        for (const item of orders) {
+          if (platesIdArr?.includes(String(item.id)) && Number(item.canHaveSale) === 1) {
+            const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
 
-              if (Number(localOrderSale)) {
-                sale = saleNum.toFixed(0) + ' ₽';
-                summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
-              } else {
-                sale = saleNum.toFixed(0) + ' ₽';
-                summary = orderSum - saleNum;
-              }
+            saleNum += salePercent ? ordersPrice * (salePercent / 100) : 0;
+
+            if (Number(localOrderSale)) {
+              sale = priceFormatter(saleNum.toFixed(0));
+              summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
+            } else {
+              sale = priceFormatter(saleNum.toFixed(0));
+              summary = orderSum - saleNum;
             }
           }
-          break;
         }
-        default: {
-          if (Number(localOrderSale)) {
-            sale = `${localOrderSale} %`;
-            summary = orderSum - orderSum * (Number(localOrderSale) / 100);
-          } else {
-            sale = undefined;
-            summary = orderSum;
-          }
-          break;
+        break;
+      }
+      default: {
+        if (Number(localOrderSale)) {
+          sale = `${localOrderSale} %`;
+          summary = orderSum - orderSum * (Number(localOrderSale) / 100);
+        } else {
+          sale = undefined;
+          summary = orderSum;
         }
+        break;
       }
     }
-    if (categoriesIdArr?.length !== 0) {
-      switch (promocodeType) {
-        case '1': {
-          for (const item of orders) {
-            if (
-              categoriesIdArr?.includes(String(item.categoryID)) &&
-              Number(item.canHaveSale) === 1
-            ) {
-              const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
+  } else if (categoriesIdArr?.length !== 0 && categoriesIdArr?.[0] !== '0') {
+    switch (promocodeType) {
+      case '1': {
+        let saleNum = 0;
 
-              if (ordersPrice > (salePrice ?? 0)) {
-                saleNum += salePrice ?? 0;
-              } else {
-                saleNum += ordersPrice;
-              }
+        for (const item of orders) {
+          if (
+            categoriesIdArr?.includes(String(item.categoryID)) &&
+            Number(item.canHaveSale) === 1
+          ) {
+            const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
 
-              if (Number(localOrderSale)) {
-                sale = `${(Number(saleNum ?? 0) + orderSum * (Number(localOrderSale) / 100)).toFixed(0)} ₽`;
-                summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
-              } else {
-                sale = `${saleNum.toFixed(0) ?? 0} ₽`;
-                summary = orderSum - saleNum;
-              }
+            saleNum += ordersPrice > (salePrice ?? 0) ? salePrice ?? 0 : ordersPrice;
+
+            if (Number(localOrderSale)) {
+              sale = priceFormatter(
+                (
+                  Number(saleNum ?? 0) +
+                  orderSum * (Number(localOrderSale) / 100)
+                ).toFixed(0),
+              );
+              summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
+            } else {
+              sale = priceFormatter(saleNum.toFixed(0) ?? 0);
+              summary = orderSum - saleNum;
             }
           }
-          break;
         }
-        case '2': {
-          for (const item of orders) {
-            if (
-              categoriesIdArr?.includes(String(item.categoryID)) &&
-              Number(item.canHaveSale) === 1
-            ) {
-              const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
-
-              saleNum += salePercent ? ordersPrice * salePercent : 0;
-
-              if (Number(localOrderSale)) {
-                sale = saleNum.toFixed(0) + ' ₽';
-                summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
-              } else {
-                sale = saleNum.toFixed(0) + ' ₽';
-
-                summary = orderSum - saleNum;
-              }
-            }
-          }
-          break;
-        }
-        default: {
-          if (Number(localOrderSale)) {
-            sale = `${localOrderSale} %`;
-            summary = orderSum - orderSum * (Number(localOrderSale) / 100);
-          } else {
-            sale = undefined;
-            summary = orderSum;
-          }
-          break;
-        }
+        break;
       }
-    }
-    if (subIdArr?.length !== 0) {
-      switch (promocodeType) {
-        case '1': {
-          for (const item of orders) {
-            if (
-              subIdArr?.includes(String(item.parentID)) &&
-              Number(item.canHaveSale) === 1
-            ) {
-              const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
+      case '2': {
+        let saleNum = 0;
 
-              if (ordersPrice > (salePrice ?? 0)) {
-                saleNum += salePrice ?? 0;
-              } else {
-                saleNum += ordersPrice;
-              }
+        for (const item of orders) {
+          if (
+            categoriesIdArr?.includes(String(item.categoryID)) &&
+            Number(item.canHaveSale) === 1
+          ) {
+            const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
 
-              if (Number(localOrderSale)) {
-                sale = `${(Number(saleNum ?? 0) + orderSum * (Number(localOrderSale) / 100)).toFixed(0)} ₽`;
-                summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
-              } else {
-                sale = `${saleNum.toFixed(0) ?? 0} ₽`;
-                summary = orderSum - saleNum;
-              }
+            saleNum += salePercent ? ordersPrice * (salePercent / 100) : 0;
+
+            if (Number(localOrderSale)) {
+              sale = priceFormatter(saleNum.toFixed(0));
+              summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
+            } else {
+              sale = priceFormatter(saleNum.toFixed(0));
+
+              summary = orderSum - saleNum;
             }
           }
-          break;
         }
-        case '2': {
-          for (const item of orders) {
-            if (
-              subIdArr?.includes(String(item.parentID)) &&
-              Number(item.canHaveSale) === 1
-            ) {
-              const ordersPrice = (item?.price ?? 0) * (item?.countInCart ?? 0);
-
-              saleNum += salePercent ? ordersPrice * salePercent : 0;
-
-              if (Number(localOrderSale)) {
-                sale = saleNum.toFixed(0) + ' ₽';
-                summary = orderSum - orderSum * (Number(localOrderSale) / 100) - saleNum;
-              } else {
-                sale = saleNum.toFixed(0) + ' ₽';
-
-                summary = orderSum - saleNum;
-              }
-            }
-          }
-          break;
+        break;
+      }
+      default: {
+        if (Number(localOrderSale)) {
+          sale = `${localOrderSale} %`;
+          summary = orderSum - orderSum * (Number(localOrderSale) / 100);
+        } else {
+          sale = undefined;
+          summary = orderSum;
         }
-        default: {
-          if (Number(localOrderSale)) {
-            sale = `${localOrderSale} %`;
-            summary = orderSum - orderSum * (Number(localOrderSale) / 100);
-          } else {
-            sale = undefined;
-            summary = orderSum;
-          }
-          break;
-        }
+        break;
       }
     }
   }
 
-  if (summary === undefined || summary === null) {
+  if (!summary) {
     if (Number(localOrderSale)) {
       sale = `${localOrderSale} %`;
       summary = orderSum - orderSum * (Number(localOrderSale) / 100);
@@ -276,7 +206,6 @@ export const calculateValues = (
 
   return {
     sale,
-    summary: summary?.toFixed(0),
-    saleNum,
+    summary: Number(summary) > 0 ? summary?.toFixed(0) : 0,
   };
 };

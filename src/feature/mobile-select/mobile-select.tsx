@@ -28,7 +28,7 @@ const MobileSelect: React.FC<IMobileSelectProps> = ({
       }}
       defaultValue={defaultValue}
     >
-      <div className='w-full border-b-[3px] border-t-[3px] border-primary/10 bg-bgSecondary px-4 py-3'>
+      <div className='w-full border-b-[3px] border-t-[3px] border-grey bg-white px-4 py-3'>
         {title && (
           <Typography variant='desc' className='text-xs  font-medium text-main'>
             {title}
@@ -38,7 +38,7 @@ const MobileSelect: React.FC<IMobileSelectProps> = ({
           <SelectValue className='outline-none' placeholder='Выберите ресторан' />
         </SelectTrigger>
       </div>
-      <SelectContent className='rounded-none border-0 bg-bgSecondary' sideOffset={10}>
+      <SelectContent className='rounded-none border-0 bg-white' sideOffset={10}>
         <SelectGroup>
           {items?.map((item, key) => (
             <SelectItem

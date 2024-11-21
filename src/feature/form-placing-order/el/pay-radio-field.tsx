@@ -44,7 +44,7 @@ const PayRadioField: React.FC<PayRadioFieldProps> = ({
           <DrawerTrigger
             {...field}
             className={cn(
-              'h-[50px] w-full rounded-xl border border-primary/10 bg-bgSecondary p-0 pr-3',
+              'h-[50px] w-full rounded-xl border border-black/10 p-0 pr-3',
               className,
               (open || focused) && 'border-main',
             )}
@@ -72,10 +72,7 @@ const PayRadioField: React.FC<PayRadioFieldProps> = ({
               </FormItem>
             </div>
           </DrawerTrigger>
-          <DrawerContent
-            className='z-[101] bg-bgSecondary px-4 pb-12'
-            classNameOverlay='z-[100]'
-          >
+          <DrawerContent className='z-[101] px-4 pb-12' classNameOverlay='z-[100]'>
             <Typography variant='h6' className='mb-5 mt-4'>
               Cпособ оплаты
             </Typography>
@@ -100,7 +97,7 @@ const PayRadioField: React.FC<PayRadioFieldProps> = ({
           <SelectTrigger
             {...field}
             className={cn(
-              'h-[60px] w-full rounded-xl border-primary/10 bg-bgSecondary p-0 pr-3',
+              'h-[60px] w-full rounded-xl border-black/10 p-0 pr-3',
               className,
               (open || focused) && 'border-main',
             )}
@@ -130,7 +127,7 @@ const PayRadioField: React.FC<PayRadioFieldProps> = ({
           </SelectTrigger>
           <SelectContent
             align={'start'}
-            className='z-[52] w-[366px] max-w-full border-none bg-bgSecondary p-3'
+            className='z-[52] w-[366px] max-w-full border-none bg-white p-3'
           >
             <RadioGroupPay
               data={data}

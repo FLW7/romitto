@@ -35,7 +35,7 @@ const CartAdditives = forwardRef<HTMLDivElement, IAdditivesProps>(
           ref={ref}
           data-tooltip-id='additives-tooltip'
           data-tooltip-content='Не забудьте добавить в заказ'
-          className={`rounded-xl bg-bgMain px-4 py-[18px] shadow-cartBlockShadow ${additivesError ? 'border-main' : 'border-grey'}`}
+          className={`rounded-xl bg-white px-4 py-[18px] shadow-cartBlockShadow ${additivesError ? 'border-main' : 'border-grey'}`}
         >
           <ul className='flex flex-col gap-[12px]'>
             {additives.map((item, key) => (

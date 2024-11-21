@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type MouseEvent } from 'react';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion, useAnimation } from 'framer-motion';
-import { Minus, Plus } from 'lucide-react';
+import { X } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { type z } from 'zod';
@@ -11,7 +11,6 @@ import { Macronutrients } from './el/macronutrients';
 import SizesSelect from './el/sizes-select';
 import Stats from './el/stats';
 
-import CartIcon from '@/assets/icons/detail-meal/cart.svg';
 import HeartRounded from '@/assets/icons/heart-rounded.svg';
 import NotCatalogImg from '@/assets/icons/not-catalog-img.svg';
 import TagPlate from '@/entities/tag-plate';
@@ -32,10 +31,10 @@ import { cn } from '@/shared/lib/utils';
 import { useAddress } from '@/shared/state/address';
 import { useAuth } from '@/shared/state/auth';
 import { useModal } from '@/shared/state/modal';
-import {
-  type ICartOrderItem,
-  type schemaPlateModificator,
-  type schemaPlateModificatorModifer,
+import type {
+  ICartOrderItem,
+  schemaPlateModificator,
+  schemaPlateModificatorModifer,
 } from '@/widgets/cart-widget/config';
 import { useCart, useCartOpen } from '@/widgets/cart-widget/state';
 export type TModifier = z.infer<typeof schemaPlateModificatorModifer>;
@@ -68,7 +67,7 @@ export const DetailMeal = () => {
   const { onOpen, data: selectedItem, isOpen, onClose } = useModal();
   const { isAuth } = useAuth();
   const { toast } = useToast();
-  const { addPlate, changePlateCount, deletePlate } = useCart();
+  const { addPlate } = useCart();
   const { address } = useAddress();
   const { data: catalog } = useGetCatalog();
   const cartOpen = useCartOpen();
@@ -224,7 +223,7 @@ export const DetailMeal = () => {
     e.stopPropagation();
     await mutateAsync({
       id: selectedItem?.id,
-      type: data?.plates?.some((plate) => Number(plate?.id) === Number(selectedItem?.id))
+      type: data?.plates?.some((plate) => plate?.id === selectedItem?.id)
         ? 'delete'
         : 'add',
     }).then(async () => {
@@ -423,90 +422,90 @@ export const DetailMeal = () => {
 
   return (
     <div
-      title={plateItem.name}
-      aria-description={plateItem.composition}
-      content={plateItem.composition}
       className={
-        'flex h-full flex-auto flex-col overflow-y-auto bg-cartBg md:rounded-3xl'
+        'flex h-full flex-auto flex-col overflow-y-auto bg-[#F3F4F8] md:rounded-[22px]'
       }
     >
-      {isAuth && (
+      <div className='absolute right-[10px] top-[7px] z-[1] flex flex-col items-center outline-none max-md:top-5'>
         <button
-          className={'absolute right-[10px] top-[7px] z-[1] outline-none max-md:hidden'}
-          onClick={favouriteHandler}
+          onClick={onClose}
+          className='flex h-[34px] w-[34px] items-center justify-center rounded-full bg-white shadow-userButtonShadow md:hidden'
         >
-          <HeartRounded
-            width={57}
-            height={57}
-            className={`${data?.plates.some((plate) => Number(plate?.id) === Number(selectedItem?.id)) ? '!fill-main' : '!fill-secondary'} `}
-          />
+          <X size={28} className='text-secondary' />
         </button>
-      )}
-      <div className={'md:flex md:overflow-hidden'}>
-        <div className='relative min-h-[375px] min-w-[65%]'>
-          {!loaded && plateItem?.pictures?.[0] && (
-            <div className='absolute left-0 h-full min-h-[375px] w-full min-w-[65%] animate-shimmer rounded-3xl bg-gradient-to-r from-black/0 via-primary/10 bg-[length:400%_100%]'></div>
-          )}
-          {plateItem?.pictures?.[0] ? (
-            <motion.div
-              initial={'hidden'}
-              animate={animationControls}
-              variants={animationVariants}
-              transition={{ ease: 'easeInOut', duration: 0.5 }}
-              className='relative aspect-square min-w-[65%]'
-            >
-              {plateItem?.tags && (
-                <div
-                  className={cn(
-                    'group/tags absolute left-0 top-0 z-[5] flex h-fit w-fit flex-wrap max-md:p-2 md:ml-3 md:mt-3',
-                  )}
-                >
-                  {plateItem?.tags?.map((tagID, key) => {
-                    const tag = catalog?.tagsInfo?.[Number(tagID)];
-
-                    return (
-                      <TagPlate
-                        key={Number(tagID)}
-                        plateId={plateItem.id + 111}
-                        indx={key}
-                        platePrice={Number(plateItem?.values?.[0]?.price ?? 0)}
-                        tag={tag}
-                      />
-                    );
-                  })}
-                </div>
-              )}
-              <Image
-                ref={imageRef}
-                src={
-                  plateItem?.pictures?.[0] +
-                  `&width=${(imageRef.current?.clientWidth ?? 0) + 200}&height=${(imageRef.current?.clientHeight ?? 0) + 200}`
-                }
-                alt={plateItem?.name}
-                width={620}
-                height={620}
-                quality={100}
-                priority
-                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                className={`aspect-square h-full w-full object-cover`}
-                onLoadingComplete={() => {
-                  setLoaded(true);
-                }}
-              />
-            </motion.div>
-          ) : (
-            <NotCatalogImg
-              className={`aspect-square h-full w-full min-w-[65%] object-cover`}
+        {isAuth && (
+          <button onClick={favouriteHandler}>
+            <HeartRounded
+              width={57}
+              height={57}
+              className={`${data?.plates.some((plate) => plate?.id === selectedItem?.id) ? 'fill-main' : 'fill-secondary'} `}
             />
-          )}
-        </div>
+          </button>
+        )}
+      </div>
+      <div className={'md:flex md:overflow-hidden'}>
+        {!loaded && plateItem?.pictures?.[0] && (
+          <div className='min-h-[375px] w-full min-w-[65%] animate-pulse rounded-[22px] bg-black/10 blur-[1px]'></div>
+        )}
+        {plateItem?.pictures?.[0] ? (
+          <motion.div
+            initial={'hidden'}
+            animate={animationControls}
+            variants={animationVariants}
+            transition={{ ease: 'easeInOut', duration: 0.5 }}
+            className='relative aspect-square min-w-[65%]'
+          >
+            {plateItem?.tags && (
+              <div
+                className={cn(
+                  'group/tags absolute left-0 top-0 z-[5] flex h-fit w-fit flex-wrap max-md:p-2 md:ml-3 md:mt-3',
+                )}
+              >
+                {plateItem?.tags?.map((tagID, key) => {
+                  const tag = catalog?.tagsInfo?.[Number(tagID)];
+
+                  return (
+                    <TagPlate
+                      key={Number(tagID)}
+                      plateId={plateItem.id + 111}
+                      indx={key}
+                      platePrice={Number(plateItem?.values?.[0]?.price ?? 0)}
+                      tag={tag}
+                    />
+                  );
+                })}
+              </div>
+            )}
+            <Image
+              ref={imageRef}
+              src={
+                plateItem?.pictures?.[0] +
+                `&width=${(imageRef.current?.clientWidth ?? 0) + 200}&height=${(imageRef.current?.clientHeight ?? 0) + 200}`
+              }
+              alt={plateItem?.name}
+              width={620}
+              height={620}
+              quality={100}
+              priority
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+              className={`aspect-square h-full w-full bg-black/10 object-cover`}
+              onLoadingComplete={() => {
+                setLoaded(true);
+              }}
+            />
+          </motion.div>
+        ) : (
+          <NotCatalogImg
+            className={`aspect-square h-full w-full min-w-[65%] object-cover`}
+          />
+        )}
         <div
           className={
-            'scrollbar-thin relative -mt-5 w-full overflow-x-hidden max-md:bg-bgDark md:mt-0 md:max-h-[656px] md:overflow-y-auto'
+            'scrollbar-thin relative -mt-5 w-full overflow-x-hidden max-md:bg-[#F3F4F8] md:mt-0 md:max-h-[656px] md:overflow-y-auto'
           }
         >
-          <div className='flex flex-col gap-[6px] bg-cartBg pb-[6px] max-md:pb-[82px] md:mx-2 md:mt-2 md:min-h-[calc(100%-90px)]'>
-            <div className='rounded-xl bg-bgMain px-4 py-[18px]'>
+          <div className='flex flex-col gap-[6px] pb-[6px] max-md:pb-[82px] md:mx-2 md:mt-2 md:min-h-[calc(100%-90px)]'>
+            <div className='rounded-xl bg-white px-4 py-[18px]'>
               <div className='mb-3'>
                 <Typography
                   variant={'h1'}
@@ -520,7 +519,7 @@ export const DetailMeal = () => {
                 >
                   {plateItem?.values?.[0]?.mass}
                 </Typography>
-                <Typography variant={'p'} className='mt-2 !text-sm !font-normal'>
+                <Typography variant={'p2'} className='mt-2 !text-sm !font-normal'>
                   {plateItem?.composition}
                 </Typography>
               </div>
@@ -572,7 +571,7 @@ export const DetailMeal = () => {
                   const counts = selectedModifiers[bundleIndex]?.counts;
 
                   return (
-                    <div key={i.id} className='rounded-xl bg-bgMain py-[18px]'>
+                    <div key={i.id} className='rounded-xl bg-white py-[18px]'>
                       <Modifier
                         i={i}
                         counts={counts ?? 0}
@@ -591,7 +590,7 @@ export const DetailMeal = () => {
             <Stats plateItem={plateItem} />
             <Recomendations {...selectedItem} />
           </div>
-          <div className='sticky bottom-[0] left-0 z-20 flex rounded-t-3xl bg-bgMain px-4 max-md:fixed max-md:w-full max-md:pb-[22px] max-md:pt-[10px] md:mx-2 md:h-[90px]'>
+          <div className='sticky bottom-[0] left-0 z-20 flex rounded-t-[22px] bg-white px-4 max-md:fixed max-md:w-full max-md:pb-[22px] max-md:pt-[10px] md:mx-2 md:h-[90px]'>
             <div className={'flex grow items-center gap-3'}>
               {/* <Counter
                 callBack={setCount}
@@ -599,73 +598,17 @@ export const DetailMeal = () => {
                 minValue={1}
                 className='min-h-[44px] min-w-[40%] md:min-w-[150px]'
               /> */}
-              {itemCount > 0 ? (
-                <div className='flex w-full items-center gap-2'>
-                  <div
-                    className={`flex h-[44px] w-full items-center justify-between rounded-full bg-main`}
-                  >
-                    <Button
-                      variant={'destructive'}
-                      size={'destructive'}
-                      className='pl-8'
-                      onClick={() => {
-                        itemCount > 1
-                          ? changePlateCount(
-                              plateItem.id,
-                              itemCount - 1,
-                              selectedModifiers,
-                              plateItem.values[Number(selectedMass ?? 0)].mass,
-                            )
-                          : deletePlate(
-                              plateItem.id,
-                              selectedModifiers,
-                              plateItem.values[Number(selectedMass ?? 0)].mass,
-                            );
-                      }}
-                    >
-                      <Minus color='white' />
-                    </Button>
-                    <Typography variant={'p'} className={'whitespace-nowrap text-white'}>
-                      {itemCount} x {priceFormatter(totalPrice)}
-                    </Typography>
-                    <Button variant={'destructive'} size={'destructive'} className='pr-8'>
-                      <Plus
-                        color='white'
-                        onClick={() => {
-                          changePlateCount(
-                            plateItem.id,
-                            itemCount + 1,
-                            selectedModifiers,
-                            plateItem.values[Number(selectedMass ?? 0)].mass,
-                          );
-                        }}
-                      />
-                    </Button>
-                  </div>
-                  <CartIcon
-                    className='h-[50px] w-[50px] min-w-[50px] cursor-pointer'
-                    onClick={() => {
-                      lgScreen ? router.push('/cart') : cartOpen.onOpen();
-                      onClose();
-                    }}
-                  />
-                </div>
-              ) : (
-                <Button
-                  className={`h-[44px] w-full md:px-12`}
-                  onClick={handleAddToBasket}
-                >
-                  <Typography
-                    variant={'desc'}
-                    className={
-                      'flex items-center gap-3 text-base font-semibold text-white'
-                    }
-                  >
-                    <Plus size={20} />
+              <Button className={`h-[44px] w-full md:px-12`} onClick={handleAddToBasket}>
+                {itemCount > 0 ? (
+                  <Typography variant={'p'} className={'text-white'}>
+                    {itemCount} x {priceFormatter(totalPrice)}
+                  </Typography>
+                ) : (
+                  <Typography variant={'p'} className={'text-white'}>
                     Добавить за {priceFormatter(totalPrice)}
                   </Typography>
-                </Button>
-              )}
+                )}
+              </Button>
             </div>
           </div>
         </div>

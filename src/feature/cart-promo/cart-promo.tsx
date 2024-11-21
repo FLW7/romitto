@@ -176,10 +176,10 @@ const CartPromo: React.FC<{ autoPromocodes?: IAutoPromocodes }> = ({
         )}
       </div>
       {(autoPromocodes?.promocodes?.length ?? 0) > 0 && (
-        <div className='absolute bottom-0 w-full'>
+        <div className='absolute top-[117px] w-full'>
           <Typography
             variant='p'
-            className='-mb-2 mt-5 flex gap-2 px-[22px] !text-base !font-semibold lg:px-[44px]'
+            className='-mb-2 mt-5 flex gap-2 px-[44px] !text-base !font-semibold'
           >
             {autoPromocodes?.title}
           </Typography>

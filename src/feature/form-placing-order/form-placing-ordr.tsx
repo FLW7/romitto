@@ -74,8 +74,6 @@ export const FormPlacingOrder = () => {
   };
 
   const closeConfirmOrder = () => {
-    console.log(1);
-
     setConfirmOrderOpen(false);
   };
 

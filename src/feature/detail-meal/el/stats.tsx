@@ -5,12 +5,12 @@ const Stats: React.FC<{ plateItem: ICartOrderItem }> = ({ plateItem }) => {
   return (
     <div
       className={
-        'flex h-[80px] items-center gap-1 rounded-xl bg-bgMain px-4 max-sm:py-[18px]'
+        'flex h-[80px] items-center gap-1 rounded-xl bg-white px-4 max-sm:py-[18px]'
       }
     >
       <div
         className={
-          'flex h-[53px] w-full flex-col items-center gap-1 rounded-lg bg-bgTetriary py-[6px]'
+          'flex h-[53px] w-full flex-col items-center gap-1 rounded-lg bg-[#F3F4F8] py-[6px]'
         }
       >
         <Typography variant={'p'} className={`!text-sm font-semibold`}>
@@ -22,7 +22,7 @@ const Stats: React.FC<{ plateItem: ICartOrderItem }> = ({ plateItem }) => {
       </div>
       <div
         className={
-          'flex h-[53px] w-full flex-col items-center gap-1 rounded-lg bg-bgTetriary py-[6px]'
+          'flex h-[53px] w-full flex-col items-center gap-1 rounded-lg bg-[#F3F4F8] py-[6px]'
         }
       >
         <Typography variant={'p'} className={`!text-sm font-semibold`}>
@@ -34,7 +34,7 @@ const Stats: React.FC<{ plateItem: ICartOrderItem }> = ({ plateItem }) => {
       </div>
       <div
         className={
-          'flex h-[53px] w-full flex-col items-center gap-1 rounded-lg bg-bgTetriary py-[6px]'
+          'flex h-[53px] w-full flex-col items-center gap-1 rounded-lg bg-[#F3F4F8] py-[6px]'
         }
       >
         <Typography variant={'p'} className={`!text-sm font-semibold`}>
@@ -46,7 +46,7 @@ const Stats: React.FC<{ plateItem: ICartOrderItem }> = ({ plateItem }) => {
       </div>
       <div
         className={
-          'flex h-[53px] w-full flex-col items-center gap-[2px] rounded-lg bg-bgTetriary py-[6px]'
+          'flex h-[53px] w-full flex-col items-center gap-[2px] rounded-lg bg-[#F3F4F8] py-[6px]'
         }
       >
         <Typography variant={'p'} className={`!text-sm font-semibold`}>

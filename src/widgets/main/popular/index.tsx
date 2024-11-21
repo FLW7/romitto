@@ -46,13 +46,13 @@ export const Popular = () => {
         {(isLoading || !data) &&
           ARR.map((el) => (
             <CardContent key={el} className={'aspect-square sm:h-[160px]'}>
-              <div className='h-full w-full animate-pulse rounded-xl bg-black/5' />
+              <div className='h-full w-full animate-pulse rounded-[12px] bg-black/5' />
             </CardContent>
           ))}
         {data?.map((el, index) => (
           <Link
             href={ROUTES.menu()}
-            className={'group relative overflow-hidden rounded-xl sm:h-fit'}
+            className={'group relative overflow-hidden rounded-[12px] sm:h-fit'}
             key={index}
             onClick={() => {
               sessionStorage.setItem(
@@ -84,13 +84,13 @@ export const Popular = () => {
                   alt='image'
                 />
               ) : (
-                <div className={'h-full w-full rounded-xl bg-black/5'} />
+                <div className={'h-full w-full rounded-[12px] bg-black/5'} />
               )}
             </div>
           </Link>
         ))}
         <Link
-          className={'relative hidden items-end rounded-xl bg-main sm:h-full md:flex'}
+          className={'relative hidden items-end rounded-[12px] bg-main sm:h-full md:flex'}
           href={ROUTES.menu()}
         >
           <Arrow className={'absolute right-4 top-4 h-6 w-6'} />

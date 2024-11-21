@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import './style.css';
 
 import { type IPromotionItem } from '@/entities/promotion-card/types';
 import PromotionView from '@/entities/promotion-view/promotion-view';

@@ -4,22 +4,23 @@ import { useEffect, useState } from 'react';
 import * as React from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 import { baseFormPrivateHouseSchema, baseFormSchema, type FormType } from './schema';
 
+import ArrowLeftIcon from '@/assets/icons/arrow-left.svg';
 import { CheckboxField } from '@/entities/checkbox-field';
 import { FullFormField } from '@/entities/form-field';
 import { useAddNewAddress } from '@/feature/form-add-address/model/use-add-new-address';
 import { useGetOrganisationMutate } from '@/feature/form-add-address/model/use-get-organisation-mutate';
 import { useGetPlaceByLoc } from '@/feature/form-add-address/model/use-get-place-by-loc';
 import { useDeleteMyAddress } from '@/feature/form-modal-choose-my-address/model/use-delete-my-address';
+import { DeliveryTabs } from '@/feature/form-placing-order/el/delivery-tabs';
 import InputAddress from '@/feature/input-address/input-address';
 import { Button } from '@/shared/components/button';
 import { Form } from '@/shared/components/form';
-import { MapTabs } from '@/shared/components/map-tabs';
+import { ScrollArea } from '@/shared/components/scroll-area';
 import Typography from '@/shared/components/typography';
 import { toast } from '@/shared/components/use-toast';
 import { MAP_DEFAULT } from '@/shared/const/map';
@@ -30,21 +31,19 @@ import { useMap } from '@/shared/state/map';
 import { useModal } from '@/shared/state/modal';
 import { type ICartOrderItem } from '@/widgets/cart-widget/config';
 import { useCart, useCartOpen } from '@/widgets/cart-widget/state';
-import InputAddressDataModal from '@/widgets/modal/input-address-data-modal';
 import InputAddressModal from '@/widgets/modal/input-address-modal';
 
 export const FormAddAddress: React.FC<{ addPlateItem?: ICartOrderItem }> = ({
   addPlateItem,
 }) => {
-  const isMobile = useMediaQuery('(max-width:768px)');
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [isActive2, setIsActive2] = useState<boolean>(false);
   const { setAddress } = useAddress();
-  const { data } = useModal();
-  const { setStep } = useDelivery();
+  const { data, onClose } = useModal();
   const {
     center: { lat, lng },
   } = useMap();
+  const { setStep } = useDelivery();
 
   const { mutate: handleDelete } = useDeleteMyAddress(data?.deleteId);
   const [formSchema, setFormSchema] = useState<any>(baseFormSchema);
@@ -55,17 +54,16 @@ export const FormAddAddress: React.FC<{ addPlateItem?: ICartOrderItem }> = ({
   const form = useForm<FormType>({
     defaultValues: {
       isPrivateHouse: Boolean(address?.LastIsPrivateHouse ?? false),
-      apt: address?.LastApt ?? '',
-      doorNumber: address.LastDoorNumber ?? '',
-      entreance: address?.LastEntreance ?? '',
-      floor: address?.LastFloor ?? '',
+      apt: address?.LastApt ?? undefined,
+      doorNumber: address.LastDoorNumber ?? undefined,
+      entreance: address?.LastEntreance ?? undefined,
+      floor: address?.LastFloor ?? undefined,
     },
     resolver: zodResolver(formSchema),
     mode: 'onChange',
   });
 
-  const { setError, setValue, formState, clearErrors, watch, resetField, getValues } =
-    form;
+  const { setError, setValue, formState, clearErrors, watch, resetField } = form;
   const isPrivateHouse = watch('isPrivateHouse');
 
   const lgScreen = useMediaQuery('(max-width: 1024px)');
@@ -159,11 +157,6 @@ export const FormAddAddress: React.FC<{ addPlateItem?: ICartOrderItem }> = ({
     e.preventDefault();
     setIsActive(true);
   };
-  const inputDataClick = (e: any) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setIsActive2(true);
-  };
 
   useEffect(() => {
     if (MAP_DEFAULT.center[0] !== lat && MAP_DEFAULT.center[1] !== lng) {
@@ -184,137 +177,105 @@ export const FormAddAddress: React.FC<{ addPlateItem?: ICartOrderItem }> = ({
     }
   }, [isPrivateHouse]);
 
-  useEffect(() => {
-    console.log(getValues('entreance'));
-
-    const addressString = [getValues('entreance'), getValues('floor'), getValues('apt')]
-      .filter((item) => item !== '' && item !== ' ' && item !== undefined)
-      .join(', ');
-
-    isPrivateHouse
-      ? setValue('addressFullData', 'Частный дом')
-      : setValue('addressFullData', addressString);
-  }, [isPrivateHouse, getValues('apt'), getValues('floor'), getValues('entreance')]);
-
-  console.log(formState.errors?.entreance);
-
   return (
     <Form {...form}>
       <form
         id={'addAddress'}
         onSubmit={form.handleSubmit(onSubmit)}
-        className={
-          'relative flex h-full flex-col overflow-hidden rounded-t-3xl max-md:h-[266px]'
-        }
+        className={'relative flex h-full flex-col'}
       >
-        {!isMobile && (
-          <div className={'mb-3 sm:mb-0'}>
-            <MapTabs />
-          </div>
-        )}
-
-        <div className={'mb-5 flex items-center gap-2 sm:mt-5'}>
-          <Button
-            variant={'destructive'}
-            size={'destructive'}
-            type={'button'}
-            onClick={() => {
+        <div className={'mb-3 sm:mb-0'}>
+          <DeliveryTabs
+            step={'delivery'}
+            deliveryClick={() => {
               setStep('delivery');
             }}
+            pickupClick={() => {
+              setStep('pickup');
+            }}
+          />
+        </div>
+
+        <div className={'mb-5 hidden items-center sm:mt-2 sm:flex'}>
+          <Button
+            className={' !py-2 !pl-0 !pr-4 sm:flex'}
+            variant={'link'}
+            type={'button'}
+            onClick={() => {
+              onClose();
+            }}
           >
-            <ChevronLeft size={24} className='stroke-primary' />
+            <ArrowLeftIcon className={'h-4 w-4'} />
           </Button>
           <Typography variant={'h5'}>{data?.title ?? 'Новый адрес'}</Typography>
         </div>
 
-        {isMobile ? (
-          <div className='flex w-full flex-col gap-y-2'>
-            <div onClick={inputClick} className={'text-start'}>
+        <ScrollArea className='h-[38vh]'>
+          {isMobile ? (
+            <div onClick={inputClick} className={'w-full text-start'}>
               <FullFormField
                 isClear
                 error={formState?.errors?.address?.message}
                 disabled={loading}
                 label={'Город, улица, дом'}
-                className='h-[60px]'
                 name={'address'}
                 onInput={inputClick}
               />
             </div>
-            <div onClick={inputDataClick} className={'text-start'}>
-              <FullFormField
-                error={
-                  formState?.errors?.apt?.message ??
-                  formState?.errors?.entreance?.message ??
-                  formState?.errors?.floor?.message
-                }
-                disabled={loading}
-                label={'Подъезд, этаж, квартира'}
-                className='h-[60px]'
-                name='addressFullData'
-                onInput={inputDataClick}
-              />
-            </div>
-          </div>
-        ) : (
-          <>
+          ) : (
             <InputAddress mutate={mutate} />
-            <CheckboxField
-              name={'isPrivateHouse'}
-              label={'Частный дом'}
-              className={'my-5 text-primary'}
-              disabled={loading}
+          )}
+
+          <CheckboxField
+            name={'isPrivateHouse'}
+            label={'Частный дом'}
+            className={'my-4'}
+            disabled={loading}
+          />
+          <div className={'grid grid-cols-2 gap-2 max-sm:pb-10 sm:gap-3'}>
+            <FullFormField
+              isClear
+              disabled={isPrivateHouse || loading}
+              label={'Подъезд'}
+              name={'entreance'}
             />
-            <div className={'grid grid-cols-2 gap-2 max-sm:pb-10 sm:gap-3'}>
-              <FullFormField
-                isClear
-                disabled={isPrivateHouse || loading}
-                label={'Подъезд'}
-                name={'entreance'}
-              />
-              <FullFormField
-                isClear
-                disabled={isPrivateHouse || loading}
-                label={'Код двери'}
-                name={'doorNumber'}
-              />
-              <FullFormField
-                isClear
-                disabled={isPrivateHouse || loading}
-                label={'Этаж'}
-                name={'floor'}
-              />
-              <FullFormField
-                isClear
-                disabled={isPrivateHouse || loading}
-                label={'Квартира'}
-                name={'apt'}
-              />
-              <FullFormField
-                isClear
-                disabled={loading}
-                label={'Комментарий'}
-                name={'commentory'}
-                fieldClassName={'col-span-2'}
-              />
-            </div>
-          </>
-        )}
+            <FullFormField
+              isClear
+              disabled={isPrivateHouse || loading}
+              label={'Код двери'}
+              name={'doorNumber'}
+            />
+            <FullFormField
+              isClear
+              disabled={isPrivateHouse || loading}
+              label={'Этаж'}
+              name={'floor'}
+            />
+            <FullFormField
+              isClear
+              disabled={isPrivateHouse || loading}
+              label={'Квартира'}
+              name={'apt'}
+            />
+            <FullFormField
+              isClear
+              disabled={loading}
+              label={'Комментарий'}
+              name={'commentory'}
+              fieldClassName={'col-span-2'}
+            />
+          </div>
+        </ScrollArea>
 
         <div
           className={
-            'gap-2 max-md:fixed max-md:bottom-5 max-md:left-0 max-md:w-full max-md:px-4 max-md:pb-0 max-md:pt-3 md:mt-auto'
+            'mt-3 gap-2 bg-white max-sm:absolute max-sm:bottom-0 max-sm:left-0 max-sm:w-full max-sm:pt-3 sm:mt-auto'
           }
         >
           <Button
             id={'addAddressButton'}
             className={'w-full'}
-            disabled={
-              loading ||
-              !isPolygon ||
-              !!formState.errors?.entreance ||
-              !!formState.errors?.floor ||
-              !!formState.errors?.apt
-            }
+            disabled={loading || !isPolygon || !!formState.errors?.address?.message}
           >
             {data?.deleteId ? 'Изменить' : 'Добавить'}
           </Button>
@@ -324,16 +285,6 @@ export const FormAddAddress: React.FC<{ addPlateItem?: ICartOrderItem }> = ({
           isActive={isActive}
           setIsActive={setIsActive}
           mutate={mutate}
-        />
-        <InputAddressDataModal
-          isActive={isActive2}
-          setIsActive={setIsActive2}
-          isPrivateHouse={isPrivateHouse}
-          loading={loading}
-          formState={formState}
-          isPolygon={isPolygon}
-          deleteId={data?.deleteId}
-          onSubmit={form.handleSubmit(onSubmit)}
         />
       </form>
     </Form>

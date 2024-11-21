@@ -1,8 +1,8 @@
 .giftWrapper {
-  @apply overflow-visible rounded-xl bg-bgMain pt-[18px] shadow-cartBlockShadow lg:mx-[22px];
+  @apply overflow-visible rounded-xl bg-white pt-[18px] shadow-cartBlockShadow lg:mx-[22px];
 }
 .promoInputWrapper {
-  @apply relative flex items-center gap-x-[16px] !rounded-full border border-primary/[.06] bg-bgSecondary;
+  @apply relative flex items-center gap-x-[16px] !rounded-full border border-black/[.06] bg-white;
 }
 .promoInput {
   @apply h-[46px] !rounded-full border-none focus-visible:ring-0 focus-visible:ring-offset-0;

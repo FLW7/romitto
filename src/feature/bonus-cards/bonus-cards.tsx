@@ -4,11 +4,14 @@
 import CardBronze from '@/assets/icons/bonus-bronze-card.svg';
 import CardGold from '@/assets/icons/bonus-gold-card.svg';
 import CardSilver from '@/assets/icons/bonus-silver-card.svg';
+import { Button } from '@/shared/components/button';
 import Typography from '@/shared/components/typography';
+import { useAuth } from '@/shared/state/auth';
+import { useModal } from '@/shared/state/modal';
 
 const BonusCards = () => {
-  // const { onOpen } = useModal();
-  // const { isAuth } = useAuth();
+  const { onOpen } = useModal();
+  const { isAuth } = useAuth();
 
   const cards = [
     <CardBronze key={3} width={312} height={312} />,
@@ -16,24 +19,9 @@ const BonusCards = () => {
     <CardSilver key={1} width={312} height={312} />,
   ];
 
-  // const { mutateAsync, isPending } = useCreatePrimeHillData();
-
-  // const getCardHandler = async () => {
-  //   if (isAuth) {
-  //     await mutateAsync().then((data) => {
-  //       if (data.cardLink && data.cardLink?.length > 0) {
-  //         window.open(data.cardLink, '_blank');
-  //       } else {
-  //         onOpen('orderReject', {
-  //           title: 'Произошла ошибка',
-  //           message: 'попробуйте еще раз',
-  //         });
-  //       }
-  //     });
-  //   } else {
-  //     onOpen('login');
-  //   }
-  // };
+  const getCardHandler = async () => {
+    onOpen('login', { isGetCard: true });
+  };
 
   return (
     <div className='flex flex-col items-center justify-center px-4'>
@@ -46,13 +34,11 @@ const BonusCards = () => {
       <div className='my-8 flex flex-wrap justify-center gap-5'>
         {cards.map((item) => item)}
       </div>
-      {/* <Button
-        className='w-[340px] max-sm:w-full'
-        onClick={getCardHandler}
-        disabled={isPending}
-      >
-        {isPending ? <Loader className='animate-spin' /> : 'Получить карту'}
-      </Button> */}
+      {!isAuth && (
+        <Button className='w-[340px] max-sm:w-full' onClick={getCardHandler}>
+          Получить карту
+        </Button>
+      )}
     </div>
   );
 };

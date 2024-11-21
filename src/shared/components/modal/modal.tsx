@@ -63,7 +63,7 @@ const Modal: React.FC<ModalProps> = ({
         <div
           className={cn(
             className,
-            `relative grid w-full  transform rounded-3xl bg-white shadow-lg transition-all ease-in-out ${
+            `relative grid w-full  transform rounded-[22px] bg-white shadow-lg transition-all ease-in-out ${
               isOpen ? 'translate-y-0 transition-all' : 'translate-y-[100vh]'
             }`,
           )}

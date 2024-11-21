@@ -1,5 +1,3 @@
-import './style.css';
-
 const ContactContentItem: React.FC<{ text?: string }> = ({ text }) => {
   return (
     text && (

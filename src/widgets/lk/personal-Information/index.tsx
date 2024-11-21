@@ -7,13 +7,11 @@ import { FormPersonalInformation } from '@/feature/form-personal-information';
 export function PersonalInformation() {
   return (
     <div className={styles.container}>
-      <LkCardWrapper
-        className={'p-4 shadow-mobCardLk md:min-h-[420px] lg:bg-bgSecondary'}
-      >
+      <LkCardWrapper className={'p-4 shadow-mobCardLk md:min-h-[420px]'}>
         <FormPersonalInformation />
       </LkCardWrapper>
 
-      <LkCardWrapper className='lg:bg-bgSecondary'>
+      <LkCardWrapper>
         <FormMyAddresses />
       </LkCardWrapper>
     </div>

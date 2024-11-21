@@ -8,9 +8,7 @@ const Header = () => {
   const isMobile = useMediaQuery('(max-width:769px)');
 
   return (
-    <div
-      className={'flex items-center bg-bgSecondary px-4 py-[11px] shadow-sidebarCatalog'}
-    >
+    <div className={'flex items-center px-4 py-[11px] shadow-sidebarCatalog'}>
       <LogoIcon className={'h-logoSidebar w-logoSidebar'} />
       {isMobile && (
         <button

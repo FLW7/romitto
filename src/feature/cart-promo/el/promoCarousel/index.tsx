@@ -65,7 +65,7 @@ const PromoCarousel: React.FC<{
 
   return (
     <Carousel>
-      <CarouselContent className='pl-[22px] lg:pl-11'>
+      <CarouselContent className='pl-11'>
         {promocodes?.map((item, key) => (
           <CarouselItem
             key={key}

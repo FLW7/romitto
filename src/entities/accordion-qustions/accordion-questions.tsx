@@ -17,11 +17,21 @@ const AccordionQuestions: React.FC<{
           return (
             item.title &&
             item.descr && (
-              <AccordionItem key={key} value={key.toString()} className='bg-bgSecondary'>
+              <AccordionItem key={key} value={key.toString()} className='bg-white'>
                 <AccordionTrigger className='text-start'>{item.title}</AccordionTrigger>
                 <AccordionContent>
-                  <article className='prose max-w-full'>
-                    {<div dangerouslySetInnerHTML={{ __html: item.descr }}></div>}
+                  <article
+                    className='prose max-w-[480px] whitespace-normal
+                  '
+                  >
+                    {
+                      <div
+                        style={{ maxWidth: '100%' }}
+                        dangerouslySetInnerHTML={{
+                          __html: item.descr.replaceAll('&nbsp;', ' '),
+                        }}
+                      ></div>
+                    }
                   </article>
                   {/* <div>{parse(item.descr)}</div> */}
                 </AccordionContent>

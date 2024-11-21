@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Label } from '@/shared/components/label';
 import { RadioGroup, RadioGroupItem } from '@/shared/components/radio-group';
-import { cn } from '@/shared/lib/utils';
 
 interface RadioGroupPayProps {
   checked: string | undefined;
@@ -42,13 +41,7 @@ const RadioGroupPay: React.FC<RadioGroupPayProps> = ({ checked, setChecked, data
               value={val}
               id={`option-${item.paymentType}`}
             />
-            <Label
-              htmlFor={`option-${item.paymentType}`}
-              className={cn(
-                'font-normal',
-                checked === val ? 'text-main' : 'text-primary',
-              )}
-            >
+            <Label htmlFor={`option-${item.paymentType}`} className='font-normal'>
               {val}
             </Label>
           </div>

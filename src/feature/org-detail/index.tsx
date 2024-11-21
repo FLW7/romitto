@@ -5,8 +5,8 @@ import Image from 'next/image';
 import styles from './style.module.css';
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left.svg';
-import PhoneIcon from '@/assets/icons/call-fill.svg';
 import ClockIcon from '@/assets/icons/clock.svg';
+import PhoneIcon from '@/assets/icons/phone-solid.svg';
 import Typography from '@/shared/components/typography';
 import { phoneMask } from '@/shared/lib/phone-mask';
 import { useModal } from '@/shared/state/modal';
@@ -24,8 +24,8 @@ export const OrgDetail = ({ org }: Props) => {
   };
 
   return (
-    <div className={'sm:overflow-hidden  sm:rounded-3xl '}>
-      <div className={'sticky top-0 z-10 flex gap-4 bg-bgMain px-6 py-4 sm:hidden'}>
+    <div className={'sm:overflow-hidden  sm:rounded-[22px] '}>
+      <div className={'sticky top-0 z-10 flex gap-4 bg-white px-6 py-4 sm:hidden'}>
         <button type={'button'} onClick={handleBack} className={'outline-none'}>
           <ArrowLeftIcon className={'h-4 w-4 fill-secondary'} />
         </button>
@@ -51,8 +51,8 @@ export const OrgDetail = ({ org }: Props) => {
         </Typography>
 
         <div className={'mb-4 flex gap-2'}>
-          <div className={'center h-5  w-5 rounded-full '}>
-            <PhoneIcon className={'h-5  w-5'} />
+          <div className={'center h-5  w-5 rounded-full bg-main '}>
+            <PhoneIcon />
           </div>
 
           <Typography variant={'desc'} className={'text-secondary'}>

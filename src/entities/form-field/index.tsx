@@ -99,7 +99,7 @@ export const FullFormField: FC<FullFormFieldProperties> = ({
           {error && (
             <Typography
               variant={'desc'}
-              className={'mt-2 text-xs font-semibold !text-error'}
+              className={'ml-4 mt-0.5 max-h-[8px] text-xs font-semibold text-error'}
             >
               {error}
             </Typography>

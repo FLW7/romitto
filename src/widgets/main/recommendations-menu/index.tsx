@@ -41,7 +41,7 @@ export const RecommendationsMenu: React.FC<{ items: TCartRecCard[] }> = ({ items
                     '!mr-3 max-w-[300px] basis-[20%] pl-0 max-[1300px]:basis-[25%] max-lg:basis-1/3 max-[850px]:basis-[100%] max-md:ml-3 max-md:first:ml-4 md:mr-5'
                   }
                 >
-                  <CardContent className='my-4 overflow-hidden rounded-3xl shadow-productCart'>
+                  <CardContent className='my-4 overflow-hidden rounded-[22px] shadow-productCart'>
                     <CartRecCard
                       item={item}
                       checked={orders?.some((order) => {
@@ -62,7 +62,7 @@ export const RecommendationsMenu: React.FC<{ items: TCartRecCard[] }> = ({ items
                     '!mr-3 max-w-[300px] basis-[20%] pl-0 max-[1300px]:basis-[25%] max-lg:basis-1/3 max-[850px]:basis-[100%] max-md:ml-3 max-md:first:ml-4 md:mr-5'
                   }
                 >
-                  <CardContent className='my-4 overflow-hidden rounded-3xl shadow-productCart'>
+                  <CardContent className='my-4 overflow-hidden rounded-[22px] shadow-productCart'>
                     <CartRecCard
                       item={item}
                       checked={orders?.some((order) => {

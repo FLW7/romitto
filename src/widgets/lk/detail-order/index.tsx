@@ -126,7 +126,7 @@ export const DetailOrder = ({ id }: Props) => {
 
       {!isNoRating && (
         <div
-          className={'mb-4 flex flex-col gap-3 rounded-xl border border-primary/10 p-4'}
+          className={'mb-4 flex flex-col gap-3 rounded-[12px] border border-black/10 p-4'}
         >
           <div className={'flex items-center gap-0.5'}>
             {Array.from({ length: (data?.Rating?.Stars ?? 0) - 1 }).map((_, index) => (
@@ -142,7 +142,7 @@ export const DetailOrder = ({ id }: Props) => {
 
       <div
         className={
-          'sticky bottom-0 flex flex-col-reverse justify-between gap-2 bg-bgMain px-4 pt-4 md:flex-row md:px-0'
+          'sticky bottom-0 flex flex-col-reverse justify-between gap-2 bg-white px-4 pt-4 md:flex-row md:px-0'
         }
       >
         <Button

@@ -96,7 +96,7 @@ export function StoriesItem({ setBgImage }: Props) {
         <CarouselContent className='!m-0  flex items-center'>
           {data?.stories?.map((_, index) => (
             <CarouselItem key={index} className='grid basis-full !p-0'>
-              <div className={'relative rounded-xl'}>
+              <div className={'relative rounded-[12px]'}>
                 {activeStories?.[activeIndex]?.picture && (
                   <Image
                     loading={'eager'}

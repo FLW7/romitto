@@ -3,9 +3,9 @@
 }
 
 .info {
-  @apply mt-8 rounded-xl bg-bgMain px-4 pb-6 pt-3 shadow-cardLk max-md:mt-6;
+  @apply mt-8 rounded-xl px-4 pb-6 pt-3 shadow-cardLk max-md:mt-6;
 }
 
 .text {
-  @apply border-b-2 border-primary/10 py-3 text-secondary;
+  @apply border-b-2 border-lightGray py-3 text-secondary;
 }

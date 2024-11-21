@@ -174,7 +174,7 @@ const Carousel = React.forwardRef<
                     className={cn(
                       'inline-block h-[12px] w-[12px] rounded-full transition-colors',
                       {
-                        'border-main border-primary/10 bg-main': selectedIndex === index,
+                        'border-black/10 border-main bg-main': selectedIndex === index,
                         'bg-lightGray': selectedIndex !== index,
                       },
                     )}
@@ -288,7 +288,7 @@ const CarouselPrevious = React.forwardRef<
         variant={variant}
         size={size}
         className={cn(
-          'absolute  h-[50px] w-[50px] rounded-full border-primary bg-bgSecondary shadow-cardLk hover:bg-bgSecondary',
+          'absolute  h-[50px] w-[50px] rounded-full border-white bg-white shadow-cardLk hover:bg-white',
           !canScrollPrev && 'hidden',
           orientation === 'horizontal'
             ? '-left-6 top-1/2 -translate-y-1/2'
@@ -324,7 +324,7 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        'absolute  h-[50px] w-[50px] rounded-full border-primary bg-bgSecondary shadow-cardLk hover:bg-bgSecondary',
+        'absolute  h-[50px] w-[50px] rounded-full border-white bg-white shadow-cardLk hover:bg-white',
         !canScrollNext && 'hidden',
         orientation === 'horizontal'
           ? '-right-6 top-1/2 -translate-y-1/2'

@@ -36,9 +36,7 @@ export const Tabs = ({
   return (
     <div
       className={cn(
-        'no-visible-scrollbar relative flex h-[34px] max-h-[34px] min-h-[34px]',
-        'flex-row items-center justify-start overflow-auto overflow-y-hidden',
-        'rounded-full bg-counterBg p-[2px] [perspective:1000px] sm:overflow-visible',
+        'no-visible-scrollbar relative flex h-[34px] max-h-[34px] min-h-[34px] flex-row items-center justify-start overflow-auto overflow-y-hidden rounded-full bg-cartBg p-[2px] [perspective:1000px] sm:overflow-visible',
         containerClassName,
       )}
     >
@@ -61,7 +59,7 @@ export const Tabs = ({
               layoutId='clickedbutton'
               transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
               className={cn(
-                'absolute inset-0 rounded-full bg-bgSecondary shadow-sizeTabShadow dark:bg-black',
+                'absolute inset-0 rounded-full bg-white shadow-sizeTabShadow dark:bg-black',
                 activeTabClassName,
               )}
             />

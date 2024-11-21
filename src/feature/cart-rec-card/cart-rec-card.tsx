@@ -61,7 +61,7 @@ const CartRecCard: React.FC<ICartRecCardProps> = ({
   return (
     <div
       className={cn(
-        'mt-5 flex h-[104px] gap-[11px] overflow-hidden rounded-3xl bg-bgSecondary shadow-productCart',
+        'mt-5 flex h-[104px] gap-[11px] overflow-hidden rounded-[22px] bg-white shadow-productCart',
         className,
       )}
       onClick={() => {
@@ -73,12 +73,11 @@ const CartRecCard: React.FC<ICartRecCardProps> = ({
           ref={imageRef}
           src={
             item?.thumbnailPicture +
-            `&width=${Number(imageRef.current?.clientWidth ?? 0) + 200}&height=${Number(imageRef.current?.clientHeight ?? 0) + 200}`
+            `&width=${imageRef.current?.clientWidth}&height=${imageRef.current?.clientWidth}`
           }
-          quality={100}
           width={104}
           height={104}
-          className='aspect-square h-full min-w-[104px] object-cover'
+          className='aspect-square object-cover'
           alt='rec-img'
         />
       ) : (

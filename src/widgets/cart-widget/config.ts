@@ -116,7 +116,6 @@ export const schemaAdditiveItem = z.object({
   maxCount: z.number(),
   disabled: z.boolean().optional(),
   price: z.number().optional(),
-  picture: z.string().optional(),
 });
 
 type ICartOrderItem = z.infer<typeof schemaCartOrderItem>;

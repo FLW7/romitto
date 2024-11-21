@@ -8,7 +8,7 @@ const DeliveryCard: React.FC<{
   additionalText?: string;
 }> = ({ title, desc, additionalText }) => {
   return (
-    <div className='flex w-full flex-col items-center rounded-lg bg-bgSecondary p-7 text-center shadow-cardLk'>
+    <div className='flex w-full flex-col items-center rounded-lg p-7 text-center shadow-cardLk'>
       <Typography variant='desc' className='text-primary max-lg:text-base lg:text-lg'>
         {title}
       </Typography>

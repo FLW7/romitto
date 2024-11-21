@@ -1,5 +1,5 @@
 .carouselCard {
-  @apply mt-5 flex !h-[104px] gap-2 overflow-hidden rounded-3xl bg-bgSecondary shadow-cardLk;
+  @apply mt-5 flex !h-[104px] gap-2 overflow-hidden rounded-[22px] bg-white shadow-cardLk;
 }
 
 .carouselCard__title {

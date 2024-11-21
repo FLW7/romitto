@@ -61,7 +61,7 @@ export const ModifierCard = ({
   return (
     <div
       className={cn(
-        'relative flex flex-col overflow-hidden rounded-xl bg-bgSecondary shadow-modsShadow',
+        'relative flex flex-col overflow-hidden rounded-xl bg-white shadow-modsShadow',
         checked ? 'border border-main' : 'cursor-pointer',
       )}
       onClick={() => {

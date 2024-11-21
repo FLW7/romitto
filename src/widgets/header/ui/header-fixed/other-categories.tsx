@@ -37,8 +37,8 @@ const OtherCategories: React.FC<IOtherCategoriesProps> = ({ categories }) => {
         <Typography
           variant='desc'
           className={cn(
-            'flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap bg-categoryButton px-categoryX py-categoryY text-base font-semibold leading-[17px] !text-categoryButtonText duration-100 hover:!text-categoryButtonTextActive',
-            activeName && 'bg-categoryButtonActive !text-categoryButtonTextActive',
+            'flex cursor-pointer items-center gap-2 whitespace-nowrap pl-0 text-base font-semibold leading-[17px] text-primary duration-100 hover:text-main',
+            activeName && '!text-main',
           )}
         >
           {activeName || 'Ещё'}
@@ -46,34 +46,36 @@ const OtherCategories: React.FC<IOtherCategoriesProps> = ({ categories }) => {
         </Typography>
       </HoverCardTrigger>
       <HoverCardContent
-        sideOffset={10}
+        sideOffset={-30}
         align='start'
-        className='flex w-fit flex-col gap-4 rounded-3xl border-none bg-bgSecondary px-6 py-5 shadow-categoriesHoverShadow'
+        className='cursor-pointer border-none bg-none p-0 pt-10 shadow-none'
       >
-        {categories?.map((item) => {
-          return (
-            <div
-              key={item.id}
-              className={cn(
-                'cursor-pointer whitespace-nowrap text-base font-semibold leading-[17px] text-primary duration-100 hover:text-main',
-                Number(activeCategory) === Number(item.id) &&
-                  pathname === '/' &&
-                  '!text-main',
-              )}
-              onClick={() => {
-                // isCloseSearch && onClose?.();
-                if (pathname === '/') {
-                  scrollToSection(String(item.id));
-                } else {
-                  router.push('/');
-                  sessionStorage.setItem('cat', String(item.id));
-                }
-              }}
-            >
-              {item.name}
-            </div>
-          );
-        })}
+        <div className='flex w-fit flex-col gap-4 rounded-[22px] border-none bg-white px-6 py-5 shadow-categoriesHoverShadow'>
+          {categories?.map((item) => {
+            return (
+              <div
+                key={item.id}
+                className={cn(
+                  'cursor-pointer whitespace-nowrap text-base font-semibold leading-[17px] text-primary duration-100 hover:text-main',
+                  Number(activeCategory) === Number(item.id) &&
+                    pathname === '/' &&
+                    '!text-main',
+                )}
+                onClick={() => {
+                  // isCloseSearch && onClose?.();
+                  if (pathname === '/') {
+                    scrollToSection(String(item.id));
+                  } else {
+                    router.push('/');
+                    sessionStorage.setItem('cat', String(item.id));
+                  }
+                }}
+              >
+                {item.name}
+              </div>
+            );
+          })}
+        </div>
       </HoverCardContent>
     </HoverCard>
   );

@@ -7,7 +7,7 @@ import CartGiftItem from '@/entities/cart-gift-item/cart-gift-item';
 import CartOrderItem from '@/feature/cart-order-item/cart-order-item';
 
 const CartOrdersList: React.FC<{ min?: boolean }> = ({ min }) => {
-  const { orders, gifts, PromoGifts } = useCart();
+  const { orders, gifts, GiftName } = useCart();
 
   return (
     orders?.length > 0 && (
@@ -28,20 +28,7 @@ const CartOrdersList: React.FC<{ min?: boolean }> = ({ min }) => {
             />
           );
         })}
-        {PromoGifts?.map((item, key) => {
-          const { id, title, picture } = item;
-
-          return (
-            <CartGiftItem
-              deleteBtn={false}
-              key={key}
-              id={Number(id)}
-              name={title}
-              picture={picture}
-            />
-          );
-        })}
-        {/* {GiftName && <CartGiftItem name={GiftName} />} */}
+        {GiftName && <CartGiftItem name={GiftName} />}
       </ul>
     )
   );

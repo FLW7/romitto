@@ -17,7 +17,7 @@ export function LkCardWrapper({
   return (
     <div
       className={cn(
-        ' flex h-full flex-col justify-center md:rounded-3xl md:px-[50px] md:py-[40px] md:shadow-cardLk',
+        ' flex h-full flex-col justify-center md:rounded-[22px] md:px-[50px] md:py-[40px] md:shadow-cardLk',
         className,
       )}
     >

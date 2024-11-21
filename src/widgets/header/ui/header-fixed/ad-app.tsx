@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { X } from 'lucide-react';
+import Link from 'next/link';
 
 import AdLogoIcon from '@/assets/icons/logo-ad.svg';
 import { APP_STORE_LINK, COMPANY_NAME_SHORT, GOOGLE_PLAY_LINK } from '@/global-config';
@@ -26,7 +27,7 @@ const AdApp = () => {
 
   return (
     !closed && (
-      <div className='flex h-10 w-full items-center bg-adAppBg bg-gradient-to-l px-4 py-[6px]'>
+      <div className='flex h-10 w-full items-center bg-addAppBg px-4 py-[6px]'>
         <Button
           variant='destructive'
           className='mr-[14px] aspect-square h-5 w-5 rounded-full bg-white/10 p-[3px]'
@@ -44,15 +45,11 @@ const AdApp = () => {
               {COMPANY_NAME_SHORT} - доставка еды
             </Typography>
           </div>
-          <Button
-            variant={'primary'}
-            className='px-4 py-1 !text-xs !font-semibold leading-[17px] text-main'
-            onClick={() =>
-              (window.location.href = os === 'ios' ? APP_STORE_LINK : GOOGLE_PLAY_LINK)
-            }
-          >
-            открыть
-          </Button>
+          <Link href={os === 'ios' ? APP_STORE_LINK : GOOGLE_PLAY_LINK}>
+            <Button className='bg-white px-4 py-1 !text-xs !font-semibold leading-[17px] text-primary'>
+              открыть
+            </Button>
+          </Link>
         </div>
       </div>
     )

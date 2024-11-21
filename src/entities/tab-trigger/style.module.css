@@ -1,3 +1,3 @@
 .tabTrigger {
-  @apply w-full justify-start whitespace-normal rounded-xl text-start text-base font-normal text-primary shadow-none hover:bg-bgSecondary data-[state=active]:font-semibold data-[state=active]:shadow-none;
+    @apply w-full data-[state=active]:font-semibold whitespace-normal text-start justify-start data-[state=active]:border-l-[5px] data-[state=active]:text-main text-primary text-base font-normal border-main data-[state=active]:bg-grey rounded-none shadow-none data-[state=active]:shadow-none px-6 py-[19px]
 }

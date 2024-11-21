@@ -1,3 +1,5 @@
+import EventsList from '../events-list/events-list';
+
 import PromotionsList from '@/feature/promotions-list/promotions-list';
 import { useGetPromotion } from '@/shared/hooks/query/use-get-promotions';
 
@@ -6,7 +8,7 @@ const PromotionsBlock = () => {
 
   return (
     <div>
-      {/* <EventsList /> */}
+      <EventsList />
       {data?.news && data?.news?.length > 0 && (
         <PromotionsList title='Акции' items={data?.news} />
       )}

@@ -38,13 +38,12 @@ export const MapControls = ({ map, className }: Properties) => {
           onClick={() => {
             changeZoom(id);
           }}
-          className='max-md:hidden'
         >
           {id ? <PlusIcon /> : <MinusIcon />}
         </ButtonMap>
       ))}
 
-      <ButtonMap onClick={handleGetPosition} className={'pt-1 md:mt-5'}>
+      <ButtonMap onClick={handleGetPosition} className={'mt-5 pt-1'}>
         <NavigateIcon width={24} height={24} />
       </ButtonMap>
     </div>

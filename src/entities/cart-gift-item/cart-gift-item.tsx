@@ -17,8 +17,7 @@ const CartGiftItem: React.FC<{
   picture?: string;
   weight?: number;
   giftDefaultPicture?: boolean;
-  deleteBtn?: boolean;
-}> = ({ id, name, picture, weight, deleteBtn = true }) => {
+}> = ({ id, name, picture, weight, giftDefaultPicture = false }) => {
   const { deleteGift, removePromocode } = useCart();
 
   const deleteHandler = () => {
@@ -46,11 +45,9 @@ const CartGiftItem: React.FC<{
           >
             {name}
           </Typography>
-          {deleteBtn && (
-            <Button className='h-fit p-0' variant={'ghost'} onClick={deleteHandler}>
-              <X color='#C0C0C0' size={20} className='transition hover:brightness-75' />
-            </Button>
-          )}
+          <Button className='h-fit p-0' variant={'ghost'} onClick={deleteHandler}>
+            <X color='#C0C0C0' size={20} className='transition hover:brightness-75' />
+          </Button>
         </div>
         <div className={styles.basketItem__actions}>
           <Typography

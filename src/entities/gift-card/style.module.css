@@ -1,9 +1,9 @@
 .giftCard {
-  @apply rounded-xl relative flex h-[240px] w-[160px] flex-col p-[12px];
+  @apply relative flex h-[240px] w-[160px] flex-col rounded-xl p-[12px];
 }
 
 .giftCard__icon {
-  @apply rounded-lg mb-[15px] flex h-[100px] w-[136px] items-center justify-center border border-dashed border-primary bg-white/[0.3];
+  @apply mb-[15px] flex h-[100px] w-[136px] items-center justify-center rounded-lg border border-dashed border-white bg-white/[0.3];
 }
 
 .giftCard__text {

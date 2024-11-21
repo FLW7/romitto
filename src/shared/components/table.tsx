@@ -35,7 +35,7 @@ const TableBody = React.forwardRef<
 >(({ className, ...properties }, reference) => (
   <tbody
     ref={reference}
-    className={cn('[&>*:nth-child(odd)]:bg-bgMain', className)}
+    className={cn('[&>*:nth-child(odd)]:bg-grey', className)}
     {...properties}
   />
 ));
@@ -78,7 +78,7 @@ const TableHead = React.forwardRef<
   <th
     ref={reference}
     className={cn(
-      'h-12 bg-bgSecondary px-4 text-left align-middle text-[14px] font-medium text-secondary [&:has([role=checkbox])]:pr-0',
+      'h-12 px-4 text-left align-middle text-[14px] font-medium text-secondary [&:has([role=checkbox])]:pr-0',
       className,
     )}
     {...properties}

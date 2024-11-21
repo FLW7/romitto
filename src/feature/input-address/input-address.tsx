@@ -77,7 +77,6 @@ const InputAddress = ({ setIsActive, mutate }: Props) => {
         <FullFormField
           isClear
           fieldClassName={'grow'}
-          className='!h-16'
           error={formState?.errors?.address?.message as string | undefined}
           isLoading={getSuggests.isLoading || getSuggests.isFetching}
           label={'Город, улица, дом'}

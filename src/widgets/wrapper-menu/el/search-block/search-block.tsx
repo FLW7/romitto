@@ -15,7 +15,7 @@ const SearchBlock = () => {
     <>
       <div className='relative mx-4 my-5 lg:hidden' onClick={toggleSearch}>
         <Input
-          className='pointer-events-none h-11 rounded-full border border-primary/10 bg-bgTetriary'
+          className='pointer-events-none h-11 rounded-full border border-black/10 bg-white'
           placeholder='Найти...'
         />
         <SearchIcon

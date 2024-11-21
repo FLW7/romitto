@@ -9,7 +9,7 @@ export function Card({ onClick, ...order }: CardProperties) {
   return (
     <button
       className={
-        'flex w-full items-stretch  justify-between bg-bgSecondary p-4 text-start shadow-cardLk'
+        'flex w-full items-stretch  justify-between bg-white p-4 text-start shadow-cardLk'
       }
       onClick={onClick}
     >

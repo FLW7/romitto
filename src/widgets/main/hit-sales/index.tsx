@@ -41,7 +41,7 @@ export const HitSales = () => {
                   key={el}
                   className='grid h-full w-full basis-1/2 grid-cols-1  lg:basis-1/3 xl:basis-1/4'
                 >
-                  <div className='h-full w-full animate-pulse rounded-xl bg-black/5' />
+                  <div className='h-full w-full animate-pulse rounded-[12px] bg-black/5' />
                 </CarouselItem>
               ))}
 

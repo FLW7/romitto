@@ -72,7 +72,7 @@ export const ModifierCardPure = ({
       </div>
 
       {/* Элемент с пунктирной линией */}
-      <div className='mr-1 h-[13px] flex-grow self-end border-b-[1px] border-dashed border-primary/20' />
+      <div className='mr-1 h-[13px] flex-grow self-end border-b-[1px] border-dashed border-[#DFE1EA]' />
 
       {!checked || Number(item.maxAmount) === 1 ? (
         <PlusButtonMod

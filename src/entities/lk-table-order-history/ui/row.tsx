@@ -11,7 +11,7 @@ export function Row(order: OrderProperties) {
   const { day, month } = getDateAndMonth(order.dateCreated);
 
   return (
-    <TableRow className='text-primary'>
+    <TableRow>
       <TableCell>{`Заказ #${order.orderID} ${day}.${month}`}</TableCell>
       <TableCell>{priceFormatter(order.salePrice)}</TableCell>
       <TableCell>{order.deliveryType === '1' ? 'Доставка' : 'Самовывоз'}</TableCell>

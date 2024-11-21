@@ -61,16 +61,6 @@ const Search: FC<SearchProps> = ({ toggleSearch }) => {
     }
   };
 
-  useEffect(() => {
-    document.body.classList.add('no-scroll');
-    document.body.classList.add('no-scroll--normal');
-
-    return () => {
-      document.body.classList.remove('no-scroll');
-      document.body.classList.remove('no-scroll--normal');
-    };
-  }, []);
-
   return (
     <>
       <motion.div
@@ -93,7 +83,7 @@ const Search: FC<SearchProps> = ({ toggleSearch }) => {
                   width={18}
                   height={18}
                   onClick={toggleSearch}
-                  className='cursor-pointer stroke-white'
+                  className='cursor-pointer'
                 />
                 <div className={'relative flex grow'}>
                   <SearchIcon

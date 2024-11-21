@@ -8,7 +8,7 @@ const CloseButtonMobile = () => {
   return (
     <X
       size={24}
-      className='cursor-pointer stroke-primary max-sm:hidden'
+      className='cursor-pointer max-sm:hidden'
       onClick={() => {
         onClose();
       }}

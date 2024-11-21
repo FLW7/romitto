@@ -65,7 +65,7 @@ export const findOrder = (
 
     if (
       (originMods === undefined || originMods.length === 0) &&
-      String(mass) === String(item.values[0].mass)
+      mass === item.values[0].mass
     ) {
       if (Number(item.id) === Number(id) && itemMods === undefined) {
         return item;
@@ -74,7 +74,7 @@ export const findOrder = (
       const sameId = Number(item.id) === Number(id);
       const sameLength = itemMods?.length === originMods?.length;
       const sameMods = originMods?.every((item) => itemMods?.includes(item));
-      const sameMass = String(mass) === String(item.values[0].mass);
+      const sameMass = mass === item.values[0].mass;
 
       if (sameLength && sameMods && sameId && sameMass) {
         return item;

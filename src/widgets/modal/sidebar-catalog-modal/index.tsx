@@ -15,7 +15,7 @@ const SidebarCatalogModal = () => {
         side={isMobile ? 'left' : 'right'}
         hideCloseButton
         className={
-          'scrollbar-thin flex h-[100vh] w-10/12 flex-auto flex-col overflow-auto bg-bgMain !p-0'
+          'scrollbar-thin flex h-[100vh] w-10/12 flex-auto flex-col overflow-auto !p-0'
         }
       >
         <SidebarCatalog />

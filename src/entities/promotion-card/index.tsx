@@ -23,7 +23,7 @@ const PromotionCard: React.FC<IPromotionCardProps> = ({ item, type }) => {
   const { name, image, html_preview } = item;
 
   return (
-    <Card className='flex w-full flex-col gap-x-[19px] overflow-hidden rounded-xl border-none bg-bgSecondary text-primary shadow-cardLk'>
+    <Card className='flex w-full flex-col gap-x-[19px] overflow-hidden rounded-xl border-none shadow-cardLk'>
       <Image
         src={image}
         alt='promotion-img'
@@ -31,7 +31,7 @@ const PromotionCard: React.FC<IPromotionCardProps> = ({ item, type }) => {
         height={185}
         className='max-h-[180px] min-w-full object-cover'
       />
-      <div className='flex h-full flex-col justify-between p-4'>
+      <div className='flex h-full flex-col justify-between py-4 pr-4'>
         <CardHeader>
           <CardTitle className='text-lg font-semibold'>{name}</CardTitle>
           <CardDescription className='mt-3 line-clamp-3 max-w-full break-words text-base font-medium text-secondary'>

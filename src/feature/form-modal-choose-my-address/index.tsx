@@ -1,11 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-import { Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { Empty } from './el/empty';
-
 import { AddressField } from '@/entities/address-field';
+import { Empty } from '@/feature/form-modal-choose-my-address/el/empty';
 import { useChooseMyAddress } from '@/feature/form-modal-choose-my-address/model/use-choose-my-address';
 import { useDeleteMyAddress } from '@/feature/form-modal-choose-my-address/model/use-delete-my-address';
 import { useGetMyAddress } from '@/feature/form-modal-choose-my-address/model/use-get-my-address';
@@ -121,22 +119,19 @@ export const FormModalChooseMyAddress: React.FC<{ addPlateItem?: ICartOrderItem 
   }, [activeId]);
 
   return (
-    <div className={'relative flex h-full flex-col sm:justify-between sm:gap-4'}>
+    <div className={'flex h-full flex-col sm:justify-between sm:gap-10'}>
       <div className={'space-y-4'}>
         <div className={'flex items-center justify-between'}>
-          <div className={'flex grow justify-between'}>
-            <Typography variant={'desc'} className='text-xl font-semibold'>
-              Мои адреса
-            </Typography>
+          <div className={'flex grow justify-between sm:mt-4'}>
+            <Typography variant={'h6'}>Мои адреса</Typography>
             <Button
               variant={'link'}
-              className={'hidden items-center gap-1 !p-0 !no-underline md:flex'}
+              className={'hidden !p-0 md:block'}
               type={'button'}
               onClick={() => {
                 setStep('addAddress');
               }}
             >
-              <Plus size={24} />
               Добавить адрес
             </Button>
           </div>
@@ -152,14 +147,14 @@ export const FormModalChooseMyAddress: React.FC<{ addPlateItem?: ICartOrderItem 
             Добавить адрес
           </Button>
         </div>
-        {/*  */}
+
         <div
           className={
-            'scrollbar-thin h-[calc(600px-20px-28px-44px-72px-20px-48px)] grow overflow-auto pb-20 max-md:h-[300px] sm:space-y-4'
+            'scrollbar-thin max-h-[calc(39vh)] grow overflow-auto pb-16 sm:max-h-[360px] sm:space-y-4'
           }
         >
           {!data?.length && <Empty />}
-          <div className={'flex flex-col space-y-4 pr-4'} ref={ref}>
+          <div className={'flex flex-col space-y-4  pr-4 '} ref={ref}>
             {data?.map((address) => (
               <AddressField
                 id={address.id}
@@ -183,13 +178,14 @@ export const FormModalChooseMyAddress: React.FC<{ addPlateItem?: ICartOrderItem 
       {!!data?.length && (
         <div
           className={
-            'gap-2 max-sm:absolute max-sm:bottom-[0px] max-sm:left-0 max-sm:w-full max-sm:pt-3 sm:mt-auto'
+            'gap-2 bg-white px-4 pb-3 max-sm:absolute max-sm:bottom-[0px] max-sm:left-0 max-sm:w-full max-sm:pt-3 sm:mt-auto'
           }
         >
           <Button
-            className={'block w-full sm:mt-0'}
-            onClick={handleSelect}
             id={step + 'Button'}
+            className={'w-full sm:mt-0 md:block'}
+            type={'button'}
+            onClick={handleSelect}
           >
             Выбрать
           </Button>

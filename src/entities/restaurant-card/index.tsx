@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 import IconPhone from '@/assets/icons/phone-solid.svg';
 import Typography from '@/shared/components/typography';
+import { phoneMask } from '@/shared/lib/phone-mask';
 import { type IOrganizationItem } from '@/widgets/restaurants/rest-lists/type';
 
 type Props = IOrganizationItem;
@@ -14,7 +15,7 @@ export const RestaurantCard = (props: Props) => {
 
   return (
     <div className='group relative flex h-full w-[343px] flex-col rounded-[16px] p-4 shadow-lg   sm:w-[480px] sm:p-5'>
-      <div className='relative mb-3 h-[161px] w-full overflow-hidden rounded-xl sm:h-[210px] '>
+      <div className='relative mb-3 h-[161px] w-full overflow-hidden rounded-[12px] sm:h-[210px] '>
         <Image
           src={thumbnailPicture}
           className='bg-black/5 object-cover transition-transform duration-300 group-hover:scale-110'
@@ -42,7 +43,7 @@ export const RestaurantCard = (props: Props) => {
           }
         >
           <Typography variant={'p2'} className={' font-semibold'}>
-            {phone}
+            {phoneMask(phone)}
           </Typography>
 
           <button className={'center h-11 w-11 rounded-full bg-main'}>

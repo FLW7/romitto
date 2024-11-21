@@ -64,7 +64,7 @@ const ChooseGift: React.FC<ChooseGiftProps> = ({ giftStep, setGiftStep }) => {
     <ResponsiveDialog
       open={isModalOpen}
       onClose={closeModalChange}
-      className={`z-[51] bg-bgDark ${giftsWithSteps && giftStep < giftLevelsArr.length ? 'max-h-[90vh] max-md:h-[90vh]' : 'max-h-[80vh] max-md:h-[80vh]'} max-md:mb-[30px] `}
+      className={`z-[51] ${giftsWithSteps && giftStep < giftLevelsArr.length ? 'max-h-[90vh] max-md:h-[90vh]' : 'max-h-[80vh] max-md:h-[80vh]'} max-md:mb-[30px] `}
       classNameOverlay='z-[50]'
     >
       <div className={styles.container}>

@@ -27,19 +27,16 @@ export function LkTableOrderHistory({
   };
 
   return (
-    <LkCardWrapper
-      className={'max-h-[500px] overflow-y-auto lg:bg-bgSecondary'}
-      loading={loading}
-    >
+    <LkCardWrapper className={'max-h-[500px] overflow-y-auto'} loading={loading}>
       <Table>
         <TableHeader>
-          <TableRow className='text-primary'>
+          <TableRow>
             {titlesArr.map((title) => (
               <TableHead key={title}>{title}</TableHead>
             ))}
           </TableRow>
         </TableHeader>
-        <TableBody className='bg-bgSecondary'>
+        <TableBody>
           {tableData?.map((order, index) => (
             <Row
               key={index}

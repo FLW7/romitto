@@ -3,7 +3,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import PhoneIcon from '@/assets/icons/call-fill.svg';
+import PhoneIcon from '@/assets/icons/phone-solid.svg';
 import Typography from '@/shared/components/typography';
 import { getOnlyNumbers, phoneMask } from '@/shared/lib/phone-mask';
 import { cn } from '@/shared/lib/utils';
@@ -23,7 +23,7 @@ export const RestCard = ({ item, onClick, isActive, id }: RestCardProps) => {
     <div
       id={'rest_' + id}
       className={cn(
-        'flex flex-col gap-3 rounded-xl shadow-cardLk transition-colors  lg:flex-row lg:p-4 lg:px-6 lg:py-5 lg:shadow-none lg:hover:bg-main/10',
+        'flex flex-col gap-3 rounded-[12px] shadow-cardLk transition-colors  lg:flex-row lg:p-4 lg:px-6 lg:py-5 lg:shadow-none lg:hover:bg-main/10',
         isActive && 'bg-main/10',
       )}
     >
@@ -71,8 +71,8 @@ export const RestCard = ({ item, onClick, isActive, id }: RestCardProps) => {
           {phone}
         </Typography>
 
-        <button className={'center h-9 w-9 rounded-full'}>
-          <PhoneIcon className={'h-9 w-9'} />
+        <button className={'center h-[36px] w-[36px] rounded-full bg-main '}>
+          <PhoneIcon className={'h-6 w-6'} />
         </button>
       </Link>
     </div>

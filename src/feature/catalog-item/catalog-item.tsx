@@ -4,8 +4,7 @@ import { RenderSubCategories } from './render-subcategories';
 import { RenderSubCategoriesWithAll } from './render-subcategories-all';
 
 import { ProductCard } from '@/entities/product-card';
-import { CATEGORIES_SIDEBAR, SUBCATEGORIES_ALL } from '@/global-config';
-import { cn } from '@/shared/lib/utils';
+import { SUBCATEGORIES_ALL } from '@/global-config';
 import { type ICartOrderItem } from '@/widgets/cart-widget/config';
 
 interface ICategoryItem {
@@ -62,10 +61,9 @@ const CatalogItem: React.FC<{
         ? renderSubCategoriesFunc()
         : null}
       <div
-        className={cn(
-          'mt-[30px] grid grid-cols-2 max-md:mt-4 md:grid-cols-3 ',
-          CATEGORIES_SIDEBAR ? 'gap-5 max-lg:gap-3' : 'gap-3 lg:grid-cols-4',
-        )}
+        className={
+          'mt-[30px] grid grid-cols-2 gap-3 max-md:mt-4 md:grid-cols-3 lg:grid-cols-4'
+        }
       >
         {category?.plates?.map((plate, key) => {
           const currentAllSubcategories = category?.plates

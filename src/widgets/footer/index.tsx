@@ -16,13 +16,13 @@ export const Footer = () => {
     pathname !== '/cart' && (
       <>
         {isMobile && pathname === '/' && (
-          <div className={'sticky bottom-0 z-10 bg-bgSecondary lg:static'}>
+          <div className={'sticky bottom-0 z-10 bg-white lg:static'}>
             <MobFixNavigation />
           </div>
         )}
         <div
           className={
-            'border-primary/10 bg-bgFooter max-lg:px-4 max-lg:py-9 lg:gap-20 lg:border-t'
+            'border-black/10 bg-white max-lg:px-4 max-lg:py-9 lg:gap-20 lg:border-t'
           }
         >
           <div className='container-xl mx-auto flex w-full items-center justify-between !px-4 max-lg:flex-col lg:py-6'>

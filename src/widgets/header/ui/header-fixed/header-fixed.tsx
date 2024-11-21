@@ -71,7 +71,11 @@ const HeaderFixed: FC<HeaderFixedProps> = ({ isCloseSearch = false, onClose }) =
               </Link>
             </div>
 
-            <CategoriesList isCloseSearch={isCloseSearch} onClose={onClose} />
+            <CategoriesList
+              isCloseSearch={isCloseSearch}
+              onClose={onClose}
+              isFixed={isFixed}
+            />
           </div>
 
           {catalog && (

@@ -8,11 +8,7 @@ interface CardProps {
 }
 export const Card = ({ plate }: CardProps) => {
   return (
-    <div
-      className={
-        'flex overflow-hidden bg-bgSecondary shadow-cardLk md:h-[128px] md:rounded-xl'
-      }
-    >
+    <div className={'flex overflow-hidden shadow-cardLk md:h-[128px] md:rounded-[12px]'}>
       <Image
         src={plate.thumbnailPicture}
         width={120}

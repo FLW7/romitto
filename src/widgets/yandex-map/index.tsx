@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 
 import { YMaps, Map, Polygon } from '@pbe/react-yandex-maps';
 
@@ -22,7 +22,7 @@ interface YandexMapProperties {
   defaultStep?: StepFormType;
 }
 
-const YandexMap = ({ zoom, defaultStep }: YandexMapProperties) => {
+const YandexMap = memo(({ zoom, defaultStep }: YandexMapProperties) => {
   const { address } = useAddress();
   const { step } = useDelivery();
   const { setMap, map, isMove, setCenter } = useYandexMap();
@@ -49,7 +49,7 @@ const YandexMap = ({ zoom, defaultStep }: YandexMapProperties) => {
   return (
     <YMaps>
       <Map
-        className={'relative !h-full'}
+        className={'relative h-full'}
         modules={['templateLayoutFactory', 'layout.ImageWithContent']}
         defaultState={{
           center: [
@@ -62,7 +62,6 @@ const YandexMap = ({ zoom, defaultStep }: YandexMapProperties) => {
         instanceRef={setMap}
         height='100%'
         width='100%'
-        style={{ width: '100&', height: '100%' }}
       >
         {data &&
           (step === 'addAddress' || step === 'delivery' || step === 'rest') &&
@@ -84,7 +83,7 @@ const YandexMap = ({ zoom, defaultStep }: YandexMapProperties) => {
         {/* <Placemark geometry={[test.lat, test.lng]} /> */}
         <MapControls
           map={map}
-          className={'right-4 top-32 md:bottom-[70px] md:top-auto'}
+          className={'right-5 top-5  md:bottom-[70px] md:top-auto'}
         />
         {selectStep === 'addAddress' && <CenterPlacemark isMove={isMove} />}
         {(selectStep === 'pickup' || selectStep === 'booking') && (
@@ -95,6 +94,6 @@ const YandexMap = ({ zoom, defaultStep }: YandexMapProperties) => {
       </Map>
     </YMaps>
   );
-};
+});
 
 export default YandexMap;

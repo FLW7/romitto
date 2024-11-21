@@ -18,7 +18,7 @@ export const Suggests = forwardRef<HTMLDivElement, SuggestsProps>(
       <div
         ref={ref}
         className={
-          'absolute top-[68px] z-10 w-full  rounded-xl border-primary/10 py-1 sm:border sm:bg-white sm:p-1 sm:shadow-xl'
+          'absolute top-[68px] z-10 w-full  rounded-[12px] border-black/10 py-1 sm:border sm:bg-white sm:p-1 sm:shadow-xl'
         }
       >
         <ul className={'scrollbar-thin max-h-[400px] overflow-y-auto md:max-h-[274px]'}>
@@ -29,7 +29,7 @@ export const Suggests = forwardRef<HTMLDivElement, SuggestsProps>(
               }}
               key={el.place_id}
               className={
-                'cursor-pointer rounded-xl px-4 py-2 transition-colors hover:bg-black/5'
+                'cursor-pointer rounded-[12px] px-4 py-2 transition-colors hover:bg-black/5'
               }
             >
               <Typography variant={'p2'} className={'font-medium'}>

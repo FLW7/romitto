@@ -30,69 +30,27 @@ const SummaryBlock: React.FC<{ localOrderSale: string | undefined }> = ({
     PromoCategoryId,
     orders,
     bonus,
-    promoIsCombined,
-    promos,
   } = useCart();
 
   const { address } = useAddress();
   const [sale, setSale] = useState<string>();
-  const [summary, setSummary] = useState<number>(orderSum);
+  const [summary, setSummary] = useState<string>();
 
   useEffect(() => {
-    if (promoIsCombined === '0') {
-      const { sale, summary } = calculateValues(
-        PromocodeType,
-        SalePrice,
-        SalePercent,
-        orderSum,
-        localOrderSale,
-        PromoPlateId,
-        PromoCategoryId,
-        '',
-        orders,
-      );
+    const { sale, summary } = calculateValues(
+      PromocodeType,
+      SalePrice,
+      SalePercent,
+      orderSum,
+      localOrderSale,
+      PromoPlateId,
+      PromoCategoryId,
+      orders,
+    );
 
-      setSale(sale);
-
-      setSummary(Number(summary) - (decreaseBonus ?? 0));
-    } else {
-      let allSale = 0;
-
-      for (const item of promos) {
-        const { saleNum } = calculateValues(
-          String(item.PromocodeType),
-          item.SalePrice,
-          item.SalePercent,
-          orderSum,
-          localOrderSale,
-          item.plateIds,
-          item.categoryId,
-          item.subCategory,
-          orders,
-        );
-
-        if (saleNum) {
-          allSale += saleNum;
-        }
-      }
-
-      setSummary(Number(orderSum) - Number(allSale) - (decreaseBonus ?? 0));
-
-      setSale(String(priceFormatter(allSale)));
-    }
-  }, [
-    SalePercent,
-    orderSum,
-    SalePrice,
-    PromocodeType,
-    decreaseBonus,
-    localOrderSale,
-    PromoPlateId,
-    PromoCategoryId,
-    orders,
-    promoIsCombined,
-    promos,
-  ]);
+    setSale(sale);
+    setSummary(summary.toString());
+  }, [localOrderSale, PromocodeType, address.LastAddressType]);
 
   const { formState } = useFormContext();
 

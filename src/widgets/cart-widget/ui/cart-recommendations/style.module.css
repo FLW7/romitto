@@ -3,5 +3,5 @@
 }
 
 .carouselTitle {
-  @apply px-[16px] font-semibold text-primary;
+  @apply px-[16px] font-semibold text-secondary;
 }

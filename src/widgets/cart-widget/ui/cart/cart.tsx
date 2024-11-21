@@ -18,9 +18,7 @@ import CartGift from '@/entities/cart-gift/cart-gift';
 import CartGiftPromo from '@/entities/cart-gift-promo/cart-gift-promo';
 import CartHeader from '@/entities/cart-header/cart-header';
 import CartDeliveryPrice from '@/feature/cart-delivery-price';
-import CartPoints from '@/feature/cart-points/cart-points';
 import CartPromo from '@/feature/cart-promo/cart-promo';
-import Typography from '@/shared/components/typography';
 import { toast } from '@/shared/components/use-toast';
 import { useGetProfile } from '@/shared/hooks/query/profile';
 import { useGetMinDeliveryPrice } from '@/shared/hooks/query/use-get-min-delivery-price';
@@ -45,13 +43,11 @@ export const Cart: React.FC = () => {
     setPriceForAddition,
     setPriceForCutlery,
     orderSum,
-    orders,
     setDeliveryPrice,
     clearGifts,
     gifts,
     PromoGifts,
     PromoGiftsAvailiable,
-    promocode,
   } = useCart();
   const { data: profile } = useGetProfile();
 
@@ -133,24 +129,12 @@ export const Cart: React.FC = () => {
     <>
       <div className={styles.sheetContentOverflow}>
         <div className='flex min-h-[calc(100%-205px)] flex-col gap-y-[6px] lg:pt-6'>
-          <div className='rounded-b-xl max-lg:bg-bgMain max-lg:p-4 max-lg:shadow-cartBlockShadow lg:px-[22px]'>
+          <div className='rounded-b-xl max-lg:bg-white max-lg:p-4 max-lg:shadow-cartBlockShadow lg:px-[22px]'>
             <CartHeader />
-            {orders.length === 0 && (
-              <div className='mb-10 mt-5'>
-                <Typography variant='desc' className='text-xl font-semibold'>
-                  Тут пока пусто
-                </Typography>
-                <Typography variant='desc' className='text-sm font-normal'>
-                  Добавьте блюда, а мы приготовим ваш заказ
-                </Typography>
-              </div>
-            )}
             <div className='mb-3 lg:mb-[6px]'>
               <CartDeliveryPrice deliveryMinPrice={delivery?.orderMinPrice} />
             </div>
-            {availableGifts?.length > 0 && !promocode && (
-              <CartGift setGiftStep={setGiftStep} />
-            )}
+            {availableGifts?.length > 0 && <CartGift setGiftStep={setGiftStep} />}
           </div>
           <div className='flex flex-col gap-[6px] lg:px-[22px]'>
             <CartOrdersList />
@@ -171,13 +155,11 @@ export const Cart: React.FC = () => {
           <CartPromo autoPromocodes={delivery?.autoPromocodes} />
           {recommendations.length > 0 && (
             <CartRecommendations
-              className='rounded-xl bg-bgMain py-[18px] lg:mx-[22px]'
               classNameItem='basis-[70%]'
               items={recommendations}
-              title='Что-нибудь еще?'
+              title='Рекомендуем к покупке'
             />
           )}
-          <CartPoints />
         </div>
         <CartFooter
           setAdditivesError={setAdditivesError}

@@ -22,7 +22,7 @@ const HeaderMobile = () => {
   return (
     <>
       {getCookie('adApp') !== '0' && <AdApp />}
-      <div className='sticky top-0 z-10 flex w-full items-center bg-bgMain px-4 py-[14px] shadow-headerMobile'>
+      <div className='sticky top-0 z-10 flex w-full items-center bg-white px-4 py-[14px] shadow-headerMobile'>
         <div className='flex w-full items-center justify-between gap-10'>
           <div className='flex items-center'>
             <Button

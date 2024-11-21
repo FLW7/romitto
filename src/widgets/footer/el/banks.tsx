@@ -10,7 +10,7 @@ export const Banks = () => {
   return (
     <div
       className={
-        'container-xl mx-auto flex w-full justify-end border-t border-primary/10 py-[15px] max-lg:flex max-lg:justify-center max-md:py-5'
+        'container-xl mx-auto flex w-full justify-end border-t border-black/10 py-[15px] max-lg:flex max-lg:justify-center max-md:py-5'
       }
     >
       <div className='flex flex-wrap items-center justify-center gap-x-8 gap-y-3 max-lg:max-w-[343px]'>

@@ -18,12 +18,11 @@ export function LkHeader() {
         {LkConfig.title}
       </Typography>
 
-      <div className='flex items-center gap-3 md:hidden'>
+      <div className={'flex items-center gap-3 md:hidden'}>
         <ChevronLeft
           size={24}
-          className='stroke-primary'
           onClick={() => {
-            router.push('/');
+            router.back();
           }}
         />
         <Typography variant={'h1'}>{LkConfig.mobTitle}</Typography>

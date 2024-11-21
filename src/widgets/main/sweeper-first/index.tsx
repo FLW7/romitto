@@ -16,7 +16,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/shared/components/carousel';
-import Typography from '@/shared/components/typography';
 import { useGetCatalog } from '@/shared/hooks/query/use-get-catalog';
 
 const ARR = [1, 2, 3, 4, 5];
@@ -49,17 +48,6 @@ export const SweeperFirst = () => {
   return (
     (banners?.length ?? 0) > 0 && (
       <section className='group relative mt-7 flex flex-col md:px-3 lg:mt-10'>
-        <div className='mb-[15px] flex items-end gap-3 px-4'>
-          <Typography variant='h2' className='!text-[26px] max-sm:!text-lg'>
-            Акции
-          </Typography>
-          <Link
-            href={'/promotions'}
-            className='!text-base !font-semibold text-main max-md:!text-sm'
-          >
-            Посмотреть все
-          </Link>
-        </div>
         <Carousel
           setApi={setApi}
           opts={{
@@ -78,8 +66,8 @@ export const SweeperFirst = () => {
             {(load || isError) &&
               ARR.map((el) => (
                 <CarouselItem key={el} className={'grid grid-cols-1 sm:pl-5'}>
-                  <CardContent className='group relative mx-auto h-[330px] basis-1/2 overflow-hidden rounded-3xl max-lg:h-[180px]'>
-                    <div className='h-full w-full animate-pulse rounded-3xl bg-black/5' />
+                  <CardContent className='group relative mx-auto h-[330px] basis-1/2 overflow-hidden rounded-[22px] max-lg:h-[180px]'>
+                    <div className='h-full w-full animate-pulse rounded-[22px] bg-black/5' />
                   </CardContent>
                 </CarouselItem>
               ))}

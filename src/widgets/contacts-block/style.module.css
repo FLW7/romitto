@@ -1,7 +1,7 @@
 .rightBlock {
-  @apply w-[980px] rounded-xl border-2 border-primary/10 p-0;
+    @apply w-[980px] rounded-xl border-2 border-grey p-0
 }
 
 .tabsContentBlock {
-  @apply mt-0 flex flex-col gap-6 px-6 py-[18px] data-[state=inactive]:p-0;
+    @apply mt-0 flex flex-col gap-6 px-6 py-[18px] data-[state=inactive]:p-0
 }

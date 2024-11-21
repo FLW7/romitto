@@ -26,8 +26,10 @@ const HeaderLocation = () => {
   );
 
   useEffect(() => {
+    console.log(delivery);
+
     void refetch();
-  }, [address.LastPolygonID]);
+  }, [address]);
 
   const handleClick = () => {
     setStep(step);
@@ -68,7 +70,7 @@ const HeaderLocation = () => {
           >
             {address.LastAddressName ?? 'Адрес доставки или самовывоз'}
           </Typography>
-          <ChevronDown size={14} className='inline stroke-primary' />
+          <ChevronDown size={14} className='inline' />
         </div>
         <div className='flex gap-[5px]'>
           <Typography variant='desc' className='w-fit !text-xs text-secondary'>

@@ -16,7 +16,7 @@ const CartDeliveryPrice: React.FC<{ deliveryMinPrice?: string }> = ({
   return (
     address.LastAddressType === 1 &&
     Number(deliveryMinPrice ?? '0') > orderSum && (
-      <div className='flex w-full items-center justify-between rounded-xl bg-bgMain px-4 py-[11px] shadow-cartBlockShadow'>
+      <div className='flex w-full items-center justify-between rounded-xl bg-white px-4 py-[11px] shadow-cartBlockShadow'>
         <div className='flex items-center gap-3'>
           <div className='relative flex h-[38px] w-[38px] items-center justify-center'>
             <div
@@ -24,13 +24,13 @@ const CartDeliveryPrice: React.FC<{ deliveryMinPrice?: string }> = ({
               style={{
                 clipPath: 'circle(50%)',
                 background: `conic-gradient(
-              #E31E24 ${progress * 3.6}deg,
-              #393939  ${progress * 3.6}deg
+              #FBBB1F ${progress * 3.6}deg,
+              #f3f4f8 ${progress * 3.6}deg
             )`,
               }}
             />
 
-            <div className='z-[1] flex h-[32px] w-[32px] items-center justify-center rounded-full bg-bgTetriary'>
+            <div className='z-[1] flex h-[32px] w-[32px] items-center justify-center rounded-full bg-lightGray'>
               <BoxIcon className='h-6 w-6' />
             </div>
           </div>

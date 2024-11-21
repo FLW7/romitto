@@ -9,7 +9,7 @@ import { useModal } from '@/shared/state/modal';
 
 const Login = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const { isOpen, type, onClose } = useModal();
+  const { isOpen, type, onClose, data } = useModal();
   const isModalOpen = isOpen && type === 'login';
   const isLoginCode = isOpen && type === 'loginCode';
 
@@ -18,7 +18,7 @@ const Login = () => {
       <Sheet open={isModalOpen || isLoginCode} onOpenChange={onClose}>
         <SheetContent side={'left'}>
           {isModalOpen && <FormLoginPhone />}
-          {isLoginCode && <FormLoginCode />}
+          {isLoginCode && <FormLoginCode isBonus={data.isGetCard} />}
         </SheetContent>
       </Sheet>
     );
@@ -27,11 +27,11 @@ const Login = () => {
   return (
     <Dialog open={isModalOpen || isLoginCode} onOpenChange={onClose}>
       <DialogContent
-        className={'z-[52] mx-auto max-w-lg bg-bgMain p-0 text-black'}
+        className={'z-[52] mx-auto max-w-lg bg-white p-0 text-black'}
         classNameOverlay='z-[51]'
       >
         {isModalOpen && <FormLoginPhone />}
-        {isLoginCode && <FormLoginCode />}
+        {isLoginCode && <FormLoginCode isBonus={data.isGetCard} />}
       </DialogContent>
     </Dialog>
   );
