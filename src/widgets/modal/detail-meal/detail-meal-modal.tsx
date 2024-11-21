@@ -16,8 +16,10 @@ const DetailMealModal = () => {
   const [vh, setVh] = useState(600);
 
   useEffect(() => {
-    setVh(window.innerHeight * 0.01);
-    console.log(1);
+    if (window && isOpen) {
+      setVh(window.innerHeight * 0.01);
+      console.log(1);
+    }
   }, [window.innerHeight, isOpen]);
 
   if (isMobile) {
