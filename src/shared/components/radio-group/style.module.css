@@ -1,0 +1,7 @@
+.square {
+  @apply aspect-square h-9 w-9 rounded-[11px]  bg-lightGrey2 text-primary focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-main;
+}
+
+.round {
+  @apply aspect-square h-[22px] w-[22px] rounded-full border text-primary focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+}

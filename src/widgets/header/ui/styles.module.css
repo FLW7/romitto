@@ -1,0 +1,94 @@
+.wrapper {
+  @apply mx-auto flex max-w-[1304px] flex-col px-4;
+}
+/* lg:max-w-[1100px] xl:max-w-[1304px] 2xl:max-w-[1480px] */
+
+.wrapper_fixed {
+  @apply mx-auto flex h-auto flex-col;
+}
+/* xl:max-w-[1304px] 2xl:max-w-[1480px] */
+.links {
+  @apply flex cursor-pointer gap-4 p-4 pl-0 font-medium text-secondary lg:text-sm xl:text-base;
+}
+
+.categories {
+  @apply ml-[5px] flex h-11 cursor-pointer items-center justify-center pb-[1px] pl-0 pr-4 font-semibold;
+}
+
+.categories_fixed {
+  @apply ml-[5px] flex h-11 cursor-pointer items-center justify-center pb-[1px] pr-[13px] font-semibold;
+}
+
+.search {
+  @apply mb-[5px] h-[20px] cursor-pointer pr-2;
+}
+
+.user {
+  @apply flex w-[80px] flex-col items-center justify-center stroke-black hover:!stroke-main hover:!text-main;
+}
+
+.user:hover .user__icon {
+  animation: shake 300ms ease-out;
+}
+.basket_logo_wrapper:hover .basket__icon {
+  animation: shake 300ms ease-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  90% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+
+.flash_icon_wrapper {
+  @apply flex items-center justify-center pt-2;
+}
+
+.basket_logo_wrapper {
+  @apply flex w-[80px] flex-col items-center justify-center text-wrap stroke-black hover:!stroke-main hover:!text-main;
+}
+
+.value_icon {
+  @apply max-w-[70px] cursor-pointer truncate pt-2;
+}
+
+.flex_between_center_wrapper {
+  @apply flex items-center justify-between;
+}
+
+.header_fix {
+  @apply fixed left-0 top-0 z-40 max-h-[135px] w-screen transform-gpu items-center justify-center bg-bgMain/90 backdrop-blur-md backdrop-filter transition-all duration-1000 ease-in-out;
+}
+
+.header_search {
+  @apply fixed left-0 top-0 z-[35] flex h-full w-screen items-center justify-center overflow-y-scroll bg-bgMain bg-opacity-75 backdrop-blur-md backdrop-filter;
+}
+
+.header {
+  @apply w-full transform-gpu bg-bgHeader transition-all duration-1000 ease-in-out;
+}
+
+.dialog_content {
+  @apply absolute top-0 m-0 h-screen w-screen border-none border-primary bg-bgMain p-0;
+}
+
+.sticky_container {
+  @apply mx-auto flex flex-col justify-around px-4;
+}
+
+.header_sticky_backdrop {
+  @apply sticky top-0 z-[10] w-full transform-gpu bg-bgMain bg-opacity-75 backdrop-blur-2xl backdrop-filter transition-all duration-1000 ease-in-out;
+}
+
+.hideScroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

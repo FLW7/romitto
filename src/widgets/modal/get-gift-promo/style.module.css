@@ -1,0 +1,15 @@
+.container {
+  @apply px-[67px] max-md:mt-4 max-md:w-full max-md:px-4 md:pt-[44px];
+}
+
+.header {
+  @apply flex w-full justify-center md:px-[20px] lg:px-[83px];
+}
+
+.itemsList {
+  @apply mx-auto my-1 flex w-full flex-wrap gap-3 max-md:my-5 max-md:grid max-md:grid-cols-2;
+}
+
+.closeBtn {
+  @apply h-[50px] w-[343px] max-md:mt-[30px] max-md:w-full max-md:rounded-none;
+}

@@ -1,0 +1,15 @@
+.lineThrough {
+  position: relative;
+}
+
+.lineThrough::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 30%;
+  width: 110%;
+  height: 0.5px; /* Толщина линии */
+  background-color: white; /* Цвет линии будет таким же, как текст */
+  transform: rotate(-6deg); /* Поворот на 30 градусов */
+  transform-origin: left center; /* Определяем точку поворота */
+}

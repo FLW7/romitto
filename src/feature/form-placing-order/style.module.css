@@ -1,0 +1,27 @@
+.title {
+  @apply mb-8 max-md:ml-14 max-md:mt-[18px] max-md:text-xl md:text-center;
+}
+
+.adressBlock {
+  @apply rounded-xl border-2 border-primary/10 bg-bgSecondary p-4 max-md:mb-7;
+}
+
+.summaryBlock {
+  @apply h-fit w-full border-primary/10 bg-bgSecondary px-6 pb-6 pt-4 shadow-cardLk max-[1200px]:border-t-2 max-[1200px]:shadow-none max-md:px-4 min-[1200px]:rounded-xl;
+}
+
+.sumList {
+  @apply flex flex-col gap-y-[9px] border-b-[3px] border-primary/10 pb-[16px] max-md:pb-[12px];
+}
+
+.sumActions {
+  @apply mt-[16px] max-md:mt-[14px] max-md:flex max-md:items-center max-md:justify-between;
+}
+
+.sumActions__info {
+  @apply flex items-center justify-between max-md:w-full;
+}
+
+.sumActions__button {
+  @apply mt-4 w-full text-base font-semibold max-md:mt-0;
+}

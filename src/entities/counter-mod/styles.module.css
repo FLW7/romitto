@@ -1,0 +1,7 @@
+.counter {
+  @apply flex items-center gap-1;
+}
+
+.btn {
+  @apply !h-5 !w-5 rounded-[4px] bg-gradient-to-l from-main to-gradient p-0 disabled:opacity-50;
+}

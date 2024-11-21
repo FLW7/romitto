@@ -1,0 +1,3 @@
+.itemsList {
+  @apply flex flex-col gap-[12px] rounded-xl bg-bgMain p-4 shadow-cartBlockShadow;
+}

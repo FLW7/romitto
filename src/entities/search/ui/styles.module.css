@@ -1,0 +1,19 @@
+.wrapper {
+  @apply flex h-screen w-full flex-col items-center justify-between gap-10 bg-bgMain/80 backdrop-blur-md;
+}
+
+.content_search_wrapper {
+  @apply flex w-full flex-col items-center justify-center gap-10;
+}
+
+.header_search {
+  @apply fixed left-0 top-0 z-[35] flex h-full w-full items-center justify-center bg-opacity-75;
+}
+
+.card_catalog_sizes {
+  @apply sm:max-w-[620px] md:max-w-[900px] lg:max-w-[1024px] xl:max-w-[1220px] 2xl:max-w-[1480px];
+}
+
+.header_fix {
+  @apply fixed left-0 top-0 z-40 max-h-[135px] w-screen transform-gpu items-center justify-center bg-bgMain bg-opacity-75 backdrop-blur-3xl transition-all duration-1000 ease-in-out;
+}

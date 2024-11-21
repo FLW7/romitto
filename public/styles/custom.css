@@ -1,0 +1,17 @@
+.center {
+  @apply flex items-center justify-center;
+}
+.container-xl {
+  @apply max-w-[1304px] sm:px-[40px];
+}
+/* Выбираем iframe, который является прямым потомком тега body и содержит атрибут data-jivo-widget */
+jdiv [class*='wrap'] {
+  z-index: 10 !important;
+}
+
+/* Для мобильной версии */
+@media (max-width: 1024px) {
+  jdiv [class*='wrap'] {
+    bottom: 70px !important;
+  }
+}

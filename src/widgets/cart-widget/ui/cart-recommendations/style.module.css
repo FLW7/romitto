@@ -1,0 +1,7 @@
+.carouselItem {
+  @apply h-[200px] pr-[0px] first:pl-[16px] max-md:h-[150px];
+}
+
+.carouselTitle {
+  @apply px-[16px] font-semibold text-primary;
+}

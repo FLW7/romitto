@@ -1,0 +1,69 @@
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre,
+strong {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  list-style: none; /* добавляем сброс для маркеров списков */
+  color: white !important;
+}
+
+body {
+  line-height: 1;
+  color: white;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+  color: white;
+}
+
+ol,
+ul {
+  list-style: none; /* повторно указываем сброс для списков */
+  color: white;
+}
+
+blockquote,
+q {
+  quotes: none;
+  color: white;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: white;
+}

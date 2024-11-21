@@ -1,0 +1,11 @@
+.giftCard {
+  @apply rounded-xl relative flex h-[240px] w-[160px] flex-col p-[12px];
+}
+
+.giftCard__icon {
+  @apply rounded-lg mb-[15px] flex h-[100px] w-[136px] items-center justify-center border border-dashed border-primary bg-white/[0.3];
+}
+
+.giftCard__text {
+  @apply mb-[21px] text-center text-sm font-semibold text-white;
+}

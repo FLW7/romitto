@@ -1,0 +1,91 @@
+[class*='copyright'] {
+  @apply hidden;
+}
+
+[class*='placemark'] {
+  transition: transform 0.3s ease-in-out;
+}
+
+.placemark_marker {
+  --scale: 0;
+}
+
+.placemark_marker.isMove {
+  --scale: 1;
+}
+
+.placemark_marker:after {
+  content: '';
+  width: 7px;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 200ms;
+  transform: scale(var(--scale));
+}
+
+.cafe_point {
+  @apply -translate-x-1/2 -translate-y-full bg-gradient-to-l  from-white to-white shadow-xl;
+  cursor: pointer;
+  --color: main;
+  position: relative;
+  display: block;
+  padding: 10px 8px;
+  border-radius: 10px;
+  opacity: 0.7;
+}
+
+.delivery_point {
+  @apply -translate-x-1/2 -translate-y-full shadow;
+  cursor: pointer;
+  --color: rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: block;
+  background: white;
+  padding: 4px 4px;
+  border-radius: 100%;
+  border: 1px solid var(--color);
+}
+
+.delivery_point.active,
+.cafe_point.active {
+  opacity: 1;
+  @apply border border-main;
+}
+
+.cafe_point:after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid white;
+}
+
+.cafe_point.active:after {
+  @apply border-t-main;
+}
+
+.cafe_point.active:before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 8px solid;
+  @apply border-t-white;
+}

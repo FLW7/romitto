@@ -1,0 +1,3 @@
+.sumItem__value {
+  @apply flex items-center gap-x-[2px] text-sm font-normal;
+}

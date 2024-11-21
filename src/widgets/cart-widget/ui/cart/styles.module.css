@@ -1,0 +1,11 @@
+.sheetContent {
+  @apply min-w-[520px] border-none p-0 max-md:min-w-full;
+}
+
+.sheetClose {
+  @apply absolute -left-[45px] top-[44px] z-[100] cursor-pointer max-md:hidden;
+}
+
+.sheetContentOverflow {
+  @apply scrollbar-none h-[100%] overflow-y-auto overflow-x-hidden bg-cartBg focus-visible:border-none focus-visible:outline-none;
+}

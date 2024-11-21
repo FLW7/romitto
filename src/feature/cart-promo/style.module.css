@@ -1,0 +1,13 @@
+.giftWrapper {
+  @apply overflow-visible rounded-xl bg-bgMain pt-[18px] shadow-cartBlockShadow lg:mx-[22px];
+}
+.promoInputWrapper {
+  @apply relative flex items-center gap-x-[16px] !rounded-full border border-primary/[.06] bg-bgSecondary;
+}
+.promoInput {
+  @apply h-[46px] !rounded-full border-none focus-visible:ring-0 focus-visible:ring-offset-0;
+}
+
+.promoButton {
+  @apply p-0 pr-[12px] text-sm font-semibold text-main;
+}

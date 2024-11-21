@@ -1,0 +1,3 @@
+.header {
+  @apply mb-[34px] flex items-center justify-center gap-x-[16px];
+}

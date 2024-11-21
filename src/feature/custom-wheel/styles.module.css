@@ -1,0 +1,39 @@
+.center {
+  position: relative;
+  height: 50px;
+  margin: 0 10px;
+  border-radius: 8px;
+  @apply bg-main/10 text-secondary;
+}
+.selected {
+  @apply text-main;
+}
+.center:before,
+.year:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 80px;
+  height: 50px;
+  /*background: white;*/
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.center:before {
+  top: -51px;
+}
+
+.center:after {
+  bottom: -51px;
+}
+
+.li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 50px;
+  user-select: none;
+}

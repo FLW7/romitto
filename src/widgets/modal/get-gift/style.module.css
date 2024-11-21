@@ -1,0 +1,11 @@
+.title {
+  @apply mb-[8px] text-2xl font-semibold max-md:mb-[12px] max-md:text-xl;
+}
+
+.itemsList {
+  @apply mx-auto mt-[24px] flex max-w-[500px] justify-center gap-x-[9px] max-md:mt-[20px];
+}
+
+.item {
+  @apply mr-[9px] min-w-[160px] basis-1/3 pl-0;
+}

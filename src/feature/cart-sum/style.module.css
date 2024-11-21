@@ -1,0 +1,15 @@
+.sumList {
+  @apply flex flex-col gap-y-[9px] border-b border-primary/10 pb-[16px];
+}
+
+.sumActions {
+  @apply mt-[16px];
+}
+
+.sumActions__info {
+  @apply flex items-center justify-between;
+}
+
+.sumActions__button {
+  @apply mt-[20px] w-[100%] text-base font-semibold;
+}

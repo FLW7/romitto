@@ -1,0 +1,11 @@
+.arrow_style {
+  @apply absolute top-1/2 stroke-lightGrey3 transition-opacity duration-300 hover:stroke-black;
+}
+
+.arrow_pos_left {
+  @apply lg:left-[5%] xl:left-[8%] 2xl:left-[10.2%];
+}
+
+.arrow_pos_right {
+  @apply lg:right-[5%] xl:right-[8.1%] 2xl:right-[10.1%]
+}

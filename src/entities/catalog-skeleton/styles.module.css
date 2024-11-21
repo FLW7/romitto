@@ -1,0 +1,30 @@
+.wrapper {
+  @apply flex gap-x-[50px] max-w-[1600px] max-md:px-4
+}
+
+.plate {
+  @apply w-full min-h-[500px] h-full bg-lightGrey2;
+}
+
+.platesList {
+  @apply grid grid-cols-2 gap-3 lg:grid-cols-2 min-[1200px]:grid-cols-3 2xl:grid-cols-4 w-full md:pr-4;
+}
+
+.sidebar {
+  @apply sticky left-0 top-0 h-[100vh] w-[303px] bg-lightGrey2 max-md:hidden
+}
+
+.stories {
+  @apply flex gap-3 mb-8
+}
+
+.storyItem {
+  @apply w-[178px] h-[248px] max-md:w-[100px] max-md:h-[130px] bg-lightGrey2
+}
+
+.recommendations {
+  @apply flex gap-3 mb-8 overflow-x-hidden max-w-[100%]
+}
+.recommendationItem {
+  @apply w-[381px] min-w-[381px] h-[248px] min-h-[248px] max-md:w-[290px] max-md:h-[103px] max-md:min-w-[290px] max-md:min-h-[103px] bg-lightGrey2
+}

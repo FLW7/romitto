@@ -1,0 +1,15 @@
+.basketItem {
+  @apply flex gap-[12px] border-b border-primary/10 pb-[10px] last:border-none last:pb-0;
+}
+
+.basketItem__image {
+  @apply h-[93px] min-h-[93px] w-[93px] min-w-[93px] rounded-[8px] object-cover;
+}
+
+.basketItem__content {
+  @apply flex w-full flex-col justify-between gap-1;
+}
+
+.basketItem__actions {
+  @apply flex h-auto flex-wrap items-center justify-between gap-y-[10px];
+}

@@ -1,0 +1,3 @@
+.tooltipContainer .tooltip {
+  @apply bg-tooltipBg rounded-xl text-white;
+}

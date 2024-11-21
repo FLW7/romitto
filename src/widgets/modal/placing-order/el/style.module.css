@@ -1,0 +1,11 @@
+.container {
+  @apply px-[55px] pt-[54px] max-md:pt-4 md:pb-[60px];
+}
+
+.info {
+  @apply mt-8 rounded-xl bg-bgMain px-4 pb-6 pt-3 shadow-cardLk max-md:mt-6;
+}
+
+.text {
+  @apply border-b-2 border-primary/10 py-3 text-secondary;
+}

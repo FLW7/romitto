@@ -1,0 +1,7 @@
+.container {
+  @apply mb-12 grid grid-cols-1 gap-y-7 md:min-h-[420px] md:gap-10 lg:grid-cols-2;
+}
+
+.wrap_personal_information {
+  @apply p-4 shadow-mobCardLk;
+}
