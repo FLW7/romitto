@@ -17,8 +17,9 @@ const DetailMealModal = () => {
 
   useEffect(() => {
     if (window && isOpen) {
-      setVh(window.innerHeight * 0.01);
-      console.log(1);
+      setTimeout(() => {
+        setVh(window.innerHeight * 0.01);
+      }, 100);
     }
   }, [window.innerHeight, isOpen]);
 
