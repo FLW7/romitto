@@ -13,7 +13,7 @@ const DetailMealModal = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { isOpen, type, onClose } = useModal();
   const isModalOpen = isOpen && type === 'detailMeal';
-  const [vh, setVh] = useState(window.innerHeight * 0.01);
+  const [vh, setVh] = useState(600);
 
   useEffect(() => {
     setVh(window.innerHeight * 0.01);
