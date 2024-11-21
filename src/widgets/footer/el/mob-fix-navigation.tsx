@@ -28,13 +28,22 @@ export const MobFixNavigation = () => {
         {Number(address.LastAddressOrgID) > 0 && (
           <div className='flex items-center'>
             <CourierIcon className='mr-1 h-3 w-3' />
-            <Typography
-              variant='desc'
-              className='py-2 !text-xs !font-semibold leading-[16.8px]'
-            >
-              Стоимость доставки{' '}
-              <span className='ml-2'>{priceFormatter(deliveryPrice)}</span>
-            </Typography>
+            {Number(address.LastAddressType) === 1 ? (
+              <Typography
+                variant='desc'
+                className='py-2 !text-xs !font-semibold leading-[16.8px]'
+              >
+                Стоимость доставки{' '}
+                <span className='ml-2'>{priceFormatter(deliveryPrice)}</span>
+              </Typography>
+            ) : (
+              <Typography
+                variant='desc'
+                className='py-2 !text-xs !font-semibold leading-[16.8px]'
+              >
+                Самовывоз
+              </Typography>
+            )}
           </div>
         )}
         {ordersCount > 0 && (
